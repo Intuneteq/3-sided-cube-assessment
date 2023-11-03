@@ -26,7 +26,11 @@ type Props = {
   /** Inactive styling on Button */
   inactive?: boolean;
 
+  /** Href property for Link and Anchor */
   href?: string;
+
+  /** Button Text Size */
+  textSize?: string;
 };
 
 export default function Button({
@@ -38,6 +42,7 @@ export default function Button({
   disable,
   inactive,
   href,
+  textSize,
 }: Props) {
   let classes: Array<string> = [
     "transition",
@@ -56,6 +61,10 @@ export default function Button({
     width,
     height,
   ];
+
+  if (textSize) {
+    classes = [...classes, textSize];
+  }
 
   if (scheme === "primary") {
     classes = [
@@ -125,7 +134,10 @@ export default function Button({
   if (type === "anchor") {
     if (!href) throw new Error("Anchor tags must have the 'href' prop.");
 
-    if (!isURL(href)) throw new Error("Href prop must be a valid URL (e.g., http://example.com).");
+    if (!isURL(href))
+      throw new Error(
+        "Href prop must be a valid URL (e.g., http://example.com)."
+      );
 
     return (
       <a
