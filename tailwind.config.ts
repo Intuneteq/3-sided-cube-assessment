@@ -27,6 +27,11 @@ const config: Config = {
         light: "0px 1px 10px 0px rgba(26, 26, 25, 0.08)",
         strong: "0px 2px 10px 0px rgba(26, 26, 25, 0.24)",
       },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+        "bounce-slow": "bounce 2.5s linear infinite",
+        "fade-in": "fadeIn 1s ease-in-out",
+      },
     },
   },
   plugins: [],
