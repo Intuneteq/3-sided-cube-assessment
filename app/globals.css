@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-select {
+  -webkit-appearance: none;
+  border-radius: none;
+  appearance: none;
+  background-image: url("/down-arrow.svg");
+  background-repeat: no-repeat;
+  background-position: right 1.19rem center;
+  cursor: pointer;
+}

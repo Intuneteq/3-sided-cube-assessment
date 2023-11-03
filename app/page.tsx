@@ -1,14 +1,23 @@
 import Image from "next/image";
 
 import { poppins } from "@/fonts";
-import { Button, LoaderIcon } from "@/components/atoms";
+import { Button, FormInput, LoaderIcon } from "@/components/atoms";
 import Link from "next/link";
 import { StackCard } from "@/components/molecules";
 
 export default function Home() {
+  const options = [
+    "Select Option",
+    "Select Option",
+    "Select Option",
+    "Select Option",
+  ];
   return (
     <main className="flex justify-center items-center w-full min-h-screen gap-2 flex-col py-5">
-      <button disabled={true} className=" border-solid border-4 text-[0.875rem]">
+      <button
+        disabled={true}
+        className=" border-solid border-4 text-[0.875rem]"
+      >
         vv
       </button>
 
@@ -150,6 +159,34 @@ export default function Home() {
           next
         </Button>
       </StackCard>
+
+      <FormInput
+        type="text"
+        placeholder="First Name"
+        label="First Name"
+        name="firstName"
+      />
+      <FormInput
+        type="password"
+        placeholder="password"
+        label="Password"
+        name="password"
+      />
+      <FormInput
+        type="textarea"
+        placeholder="Lorem Ipsum"
+        label="Lorem Ipsum"
+        name="Lorem Ipsum"
+      />
+      <FormInput
+        type="select"
+        options={options}
+        placeholder="Country"
+        label="Country"
+        name="country"
+      />
+
+      {/* <input type="text" className=" focus:border" /> */}
     </main>
   );
 }
