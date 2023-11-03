@@ -6,7 +6,7 @@ import { isURL } from "@/lib/utility";
 
 type Props = {
   /** Type of HTML element - button element, anchor element or Next Link */
-  type: "button" | "link" | "anchor";
+  type: "button" | "submit" | "link" | "anchor";
 
   /** Button design type */
   scheme: "primary" | "secondary";
@@ -116,6 +116,14 @@ export default function Button({
   if (type === "button") {
     return (
       <button disabled={disable} className={classes.join(" ")}>
+        {children}
+      </button>
+    );
+  }
+
+  if (type === "submit") {
+    return (
+      <button type="submit" disabled={disable} className={classes.join(" ")}>
         {children}
       </button>
     );

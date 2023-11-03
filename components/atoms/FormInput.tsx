@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useForm } from "react-hook-form"
 
 import { poppins, anonymous_Pro } from "@/fonts";
 import { EyeClosedIcon } from ".";
@@ -14,9 +15,6 @@ type Props = {
   placeholder: string;
   label: string;
   name: string;
-  //   onChange: (
-  //     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  //   ) => void;
   options?: Array<string>;
 };
 
@@ -27,6 +25,8 @@ export default function FormInput({
   name,
   options,
 }: Props) {
+   const { register } = useForm()
+
   let inputClasses = [
     "placeholder:text-mid-grey",
     `${anonymous_Pro.className}`,
@@ -55,12 +55,12 @@ export default function FormInput({
         <textarea
           className={inputClasses.join(" ")}
           placeholder={placeholder}
-          name={name}
           id={name}
           aria-label={placeholder}
           aria-describedby={`error-${name}`}
           aria-labelledby={`label-${name}`}
           aria-placeholder={placeholder}
+          {...register(name)}
         />
       );
     }
@@ -72,13 +72,13 @@ export default function FormInput({
           <input
             type={type}
             placeholder={placeholder}
-            name={name}
             id={name}
             className={inputClasses.join(" ")}
             aria-label={placeholder}
             aria-describedby={`error-${name}`}
             aria-labelledby={`label-${name}`}
             aria-placeholder={placeholder}
+            {...register(name)}
           />
           <button className="absolute top-1/2 transform -translate-y-1/2 right-3">
             <EyeClosedIcon className="w-4 h-4 cursor-pointer" />
@@ -97,13 +97,13 @@ export default function FormInput({
         <div className="w-full">
           <select
             id={name}
-            name={name}
             autoComplete={name}
             className={inputClasses.join(" ")}
+            {...register(name)}
           >
             {options.map((option, index) => (
               // Yeah Yeah, I know this is supposed to be bad, but the options count is low so all is fine.
-              <option key={index} className=" bg-dark-grey min-h-[1.875rem]">
+              <option value={option} key={index} className=" bg-dark-grey min-h-[1.875rem]">
                 {option}
               </option>
             ))}
@@ -115,14 +115,13 @@ export default function FormInput({
     return (
       <input
         type={type}
-        placeholder={placeholder}
-        name={name}
         id={name}
         className={inputClasses.join(" ")}
         aria-label={placeholder}
         aria-describedby={`error-${name}`}
         aria-labelledby={`label-${name}`}
         aria-placeholder={placeholder}
+        {...register(name)}
       />
     );
   };

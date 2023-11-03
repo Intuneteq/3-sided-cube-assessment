@@ -160,31 +160,42 @@ export default function Home() {
         </Button>
       </StackCard>
 
-      <FormInput
-        type="text"
-        placeholder="First Name"
-        label="First Name"
-        name="firstName"
-      />
-      <FormInput
-        type="password"
-        placeholder="password"
-        label="Password"
-        name="password"
-      />
-      <FormInput
-        type="textarea"
-        placeholder="Lorem Ipsum"
-        label="Lorem Ipsum"
-        name="Lorem Ipsum"
-      />
-      <FormInput
-        type="select"
-        options={options}
-        placeholder="Country"
-        label="Country"
-        name="country"
-      />
+      <form action="">
+        <FormInput
+          type="text"
+          placeholder="First Name"
+          label="First Name"
+          name="firstName"
+        />
+        <FormInput
+          type="password"
+          placeholder="password"
+          label="Password"
+          name="password"
+        />
+        <FormInput
+          type="textarea"
+          placeholder="Lorem Ipsum"
+          label="Lorem Ipsum"
+          name="Lorem Ipsum"
+        />
+        <FormInput
+          type="select"
+          options={options}
+          placeholder="Country"
+          label="Country"
+          name="country"
+        />
+        <Button
+          scheme="primary"
+          type="submit"
+          width="w-[13.3125rem]"
+          height="h-[3.0625rem]"
+          textSize="text-[0.875rem]"
+        >
+          submit
+        </Button>
+      </form>
 
       {/* <input type="text" className=" focus:border" /> */}
     </main>
