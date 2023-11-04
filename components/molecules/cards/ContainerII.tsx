@@ -1,16 +1,34 @@
-import { Button, ProgressBar } from "@/components/atoms";
-import Image from "next/image";
 import React from "react";
-import { Sticker } from "..";
+import Image from "next/image";
+
+import { Sticker } from "../";
+import { Button, ProgressBar } from "@/components/atoms";
+
+import { anonymous_Pro, poppins, roboto } from "@/fonts";
 
 type Props = {
   children: React.ReactNode;
 
   /** Image path */
   img: string;
+
+  heading: string;
+
+  content: string;
+
+  /** Word in heading to decorate */
+  toDecorate?: string;
+
+  inputTitle: string;
 };
 
-export default function ContainerII({ children, img }: Props) {
+export default function ContainerII({
+  children,
+  img,
+  heading,
+  content,
+  inputTitle,
+}: Props) {
   return (
     <section className="w-full md:w-[50rem] min-h-[36.9375rem] md:py-10 bg-primary-white flex flex-col justify-start items-center">
       <div className="w-full mb-5 hidden md:block px-10">
@@ -31,7 +49,18 @@ export default function ContainerII({ children, img }: Props) {
           />
         </div>
       </div>
-      <article className="px-4 md:px-10 w-full">{children}</article>
+      <article className="px-4 md:px-10 w-full">
+        <h2 className={`${poppins.className} text-2xl font-bold`}>{heading}</h2>
+        <p
+          className={`${anonymous_Pro.className} mb-[2.12rem] text-secondary-dark text-base font-normal max-w-[37.5rem]`}
+        >
+          {content}
+        </p>
+        <p className={`${roboto.className} text-base font-bold mb-2`}>
+          <span className="text-secondary-pink">*</span> {inputTitle}
+        </p>
+        {children}
+      </article>
 
       {/* Action buttons only visible on Desktop */}
       <div className="justify-between items-center hidden md:flex px-4 md:px-10 w-full">
