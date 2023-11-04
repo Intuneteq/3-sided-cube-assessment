@@ -1,7 +1,6 @@
 import React from "react";
 
 import { StackCard } from "./";
-import { Button } from "../atoms";
 
 type Props = {
   children: React.ReactNode;

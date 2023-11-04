@@ -32,47 +32,6 @@ export default function SelectNominee() {
             hideLabel
           />
         </div>
-        <div className="justify-between items-center hidden md:flex">
-          <Button
-            scheme="secondary"
-            type="button"
-            width="w-[6.5rem]"
-            height="h-[3.125rem]"
-          >
-            Back
-          </Button>
-          <Button
-            scheme="primary"
-            type="button"
-            width="w-[13.9375rem]"
-            height="h-[3.125rem]"
-            disable
-            inactive
-          >
-            next
-          </Button>
-        </div>
-
-        <Sticker stack="horizontal">
-          <Button
-            scheme="secondary"
-            type="button"
-            width="w-[6.25rem]"
-            height="h-[3.08594rem]"
-            textSize="text-[0.875rem]"
-          >
-            Back
-          </Button>
-          <Button
-            scheme="primary"
-            type="button"
-            width="w-[13.3125rem]"
-            height="h-[3.0625rem]"
-            textSize="text-[0.875rem]"
-          >
-            next
-          </Button>
-        </Sticker>
       </div>
     </ContainerII>
   );

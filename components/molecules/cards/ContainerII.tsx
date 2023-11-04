@@ -1,6 +1,7 @@
-import { ProgressBar } from "@/components/atoms";
+import { Button, ProgressBar } from "@/components/atoms";
 import Image from "next/image";
 import React from "react";
+import { Sticker } from "..";
 
 type Props = {
   children: React.ReactNode;
@@ -31,6 +32,50 @@ export default function ContainerII({ children, img }: Props) {
         </div>
       </div>
       <article className="px-4 md:px-10 w-full">{children}</article>
+
+      {/* Action buttons only visible on Desktop */}
+      <div className="justify-between items-center hidden md:flex px-4 md:px-10 w-full">
+        <Button
+          scheme="secondary"
+          type="button"
+          width="w-[6.5rem]"
+          height="h-[3.125rem]"
+        >
+          Back
+        </Button>
+        <Button
+          scheme="primary"
+          type="button"
+          width="w-[13.9375rem]"
+          height="h-[3.125rem]"
+          disable
+          inactive
+        >
+          next
+        </Button>
+      </div>
+
+      {/* Action Buttons only visible on mobile */}
+      <Sticker stack="horizontal">
+        <Button
+          scheme="secondary"
+          type="button"
+          width="w-[6.25rem]"
+          height="h-[3.08594rem]"
+          textSize="text-[0.875rem]"
+        >
+          Back
+        </Button>
+        <Button
+          scheme="primary"
+          type="button"
+          width="w-[13.3125rem]"
+          height="h-[3.0625rem]"
+          textSize="text-[0.875rem]"
+        >
+          next
+        </Button>
+      </Sticker>
     </section>
   );
 }

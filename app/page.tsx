@@ -10,7 +10,7 @@ import { Metadata } from "next";
 import { Button, FormInput } from "@/components/atoms";
 import { ContainerII, Sticker } from "@/components/molecules";
 import { anonymous_Pro, poppins, roboto } from "@/fonts";
-import { Modal } from "@/components/organisms";
+import { Modal, SelectNominee } from "@/components/organisms";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <main className="flex justify-start md:justify-center items-center w-full md:min-h-screen gap-2 flex-col md:py-5">
-      
+      <SelectNominee />
     </main>
   );
 }
