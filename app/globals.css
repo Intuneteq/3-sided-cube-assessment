@@ -11,3 +11,7 @@
   background-position: right 1.19rem center;
   cursor: pointer;
 }
+
+.liner {
+  border: 1px solid red;
+}

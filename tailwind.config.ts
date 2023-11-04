@@ -23,6 +23,7 @@ const config: Config = {
       backgroundImage: {
         "primary-gradient":
           "linear-gradient(81deg, #A0FF1F 13.17%, #00ED71 86.83%)",
+          "background-image": 'url("/background-image.png"), linear-gradient(81deg, #A0FF1F 13.17%, #00ED71 86.83%)',
       },
       boxShadow: {
         light: "0px 1px 10px 0px rgba(26, 26, 25, 0.08)",
