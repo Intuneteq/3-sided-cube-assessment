@@ -16,7 +16,8 @@ export default function StackCard({ children, stack }: Props) {
     "flex",
     "justify-center",
     "items-center",
-    "gap-[0.86rem]"
+    "gap-[0.86rem]",
+    "bg-primary-white"
   ];
 
   if (stack === "horizontal") {
@@ -28,7 +29,7 @@ export default function StackCard({ children, stack }: Props) {
   }
 
   if (stack === "none") {
-    classes = classes.filter((item) => !item.includes("flex"));
+    // classes = classes.filter((item) => !item.includes("flex"));
   }
 
   return (

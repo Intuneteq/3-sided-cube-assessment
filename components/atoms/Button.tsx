@@ -11,10 +11,10 @@ type Props = {
   /** Button design type */
   scheme: "primary" | "secondary";
 
-  /** Button width */
+  /** Button width in tailwind class e.g w-8 */
   width: string;
 
-  /** Button Height */
+  /** Button Height in tailwind class e.g h-8 */
   height: string;
 
   /** React child component */

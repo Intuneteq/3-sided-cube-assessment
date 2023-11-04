@@ -10,7 +10,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        <div className="flex justify-center items-center pt-10 pb-20 px-20 md:bg-background-image">
+        <div className="flex justify-center items-center md:pt-10 pb-20 md:px-20 md:bg-background-image">
           {children}
         </div>
         <Footer />
