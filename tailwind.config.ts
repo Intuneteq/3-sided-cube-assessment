@@ -12,6 +12,7 @@ const config: Config = {
       "primary-pink": "#F70087",
       "primary-black": "#000000",
       "primary-white": "#FFFFFF",
+      "secondary-white": "#F3F3F3",
       "secondary-green": "#00ED71",
       "secondary-pink": "#F40256",
       "dark-grey": "#5B5B5B",
