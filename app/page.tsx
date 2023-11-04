@@ -10,6 +10,7 @@ import { Metadata } from "next";
 import { Button, FormInput } from "@/components/atoms";
 import { ContainerII, Sticker } from "@/components/molecules";
 import { anonymous_Pro, poppins, roboto } from "@/fonts";
+import { Modal } from "@/components/organisms";
 
 export const metadata: Metadata = {
   title: "Home",

@@ -3,3 +3,4 @@ export { default as Sticker } from "./Sticker";
 
 export { default as ContainerI } from "./cards/ContainerI";
 export { default as ContainerII } from "./cards/ContainerII";
+export { default as ModalCard } from "./cards/ModalCard";
