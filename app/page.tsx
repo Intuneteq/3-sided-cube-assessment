@@ -7,9 +7,9 @@
  */
 import { Metadata } from "next";
 
-import { Button } from "@/components/atoms";
-import { ContainerI, StackCard } from "@/components/molecules";
-import { anonymous_Pro, poppins } from "@/fonts";
+import { Button, FormInput } from "@/components/atoms";
+import { ContainerII, Sticker } from "@/components/molecules";
+import { anonymous_Pro, poppins, roboto } from "@/fonts";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -17,8 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  
+
   return (
-    <main className="flex justify-start md:justify-center items-center w-full min-h-screen gap-2 flex-col md:py-5">
+    <main className="flex justify-start md:justify-center items-center w-full md:min-h-screen gap-2 flex-col md:py-5">
       
     </main>
   );

@@ -8,7 +8,7 @@ type Props = {
 
 export default function ContainerI({ children, img }: Props) {
   return (
-    <article className="w-full md:w-[50rem] min-h-[36.9375rem] bg-primary-white md:shadow-light pb-10">
+    <section className="w-full md:w-[50rem] min-h-[36.9375rem] bg-primary-white md:shadow-light pb-10">
       <div className="w-full h-[13.47081rem] md:h-[19.0625rem] mb-8">
         <Image
           src={img}
@@ -23,6 +23,6 @@ export default function ContainerI({ children, img }: Props) {
         />
       </div>
       {children}
-    </article>
+    </section>
   );
 }

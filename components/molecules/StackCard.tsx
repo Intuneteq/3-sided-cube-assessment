@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
 
   /** Stack Direction */
-  stack: "none" | "vertical" | "horizontal";
+  stack: Stack;
 };
 
 export default function StackCard({ children, stack }: Props) {

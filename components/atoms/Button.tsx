@@ -11,10 +11,10 @@ type Props = {
   /** Button design type */
   scheme: "primary" | "secondary";
 
-  /** Button width in tailwind class e.g w-8 */
+  /** Button width in tailwind class e.g w-8 - If time permits, add regex validation */
   width: string;
 
-  /** Button Height in tailwind class e.g h-8 */
+  /** Button Height in tailwind class e.g h-8 - If time permits, add regex validation */
   height: string;
 
   /** React child component */
@@ -87,6 +87,7 @@ export default function Button({
     }
 
     if (inactive) {
+      classes = classes.filter((item) => !item.includes("bg-primary-black"));
       classes = [...classes, "bg-mid-grey", "text-white"];
     }
   }

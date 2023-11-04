@@ -13,6 +13,7 @@ const config: Config = {
       "primary-black": "#000000",
       "primary-white": "#FFFFFF",
       "secondary-white": "#F3F3F3",
+      "secondary-dark": "#444444",
       "secondary-green": "#00ED71",
       "secondary-pink": "#F40256",
       "dark-grey": "#5B5B5B",

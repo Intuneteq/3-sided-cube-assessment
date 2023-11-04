@@ -3,3 +3,5 @@ type Svg = {
   onClick?: () => void;
   stroke?: string;
 };
+
+type Stack = "none" | "vertical" | "horizontal"

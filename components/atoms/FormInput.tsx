@@ -16,6 +16,9 @@ type Props = {
   label: string;
   name: string;
   options?: Array<string>;
+
+  /** hide input label element */
+  hideLabel?: boolean
 };
 
 export default function FormInput({
@@ -24,6 +27,7 @@ export default function FormInput({
   label,
   name,
   options,
+  hideLabel
 }: Props) {
    const { register } = useForm()
 
@@ -127,9 +131,9 @@ export default function FormInput({
   };
 
   return (
-    <div className={`${poppins.className} flex flex-col mb-5 w-[26rem]`}>
+    <div className={`${poppins.className} flex flex-col mb-5 w-full`}>
       <label
-        className="text-base text-primary-black font-bold mb-[0.3rem] capitalize"
+        className={`text-base text-primary-black font-bold mb-[0.3rem] capitalize ${hideLabel && 'hidden'}`}
         htmlFor={label}
       >
         {label}
