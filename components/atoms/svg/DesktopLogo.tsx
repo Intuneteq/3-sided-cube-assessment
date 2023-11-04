@@ -4,8 +4,6 @@ export default function DesktopLogo({ className }: Svg) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      // width="239"
-      // height="37"
       viewBox="0 0 239 37"
       fill="none"
       className={className}

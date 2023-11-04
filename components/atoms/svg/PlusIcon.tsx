@@ -8,7 +8,7 @@ export default function PlusIcon({ className }: Svg) {
       fill="none"
       className={className}
     >
-      <g clip-path="url(#clip0_2811_4309)">
+      <g clipPath="url(#clip0_2811_4309)">
         <path
           d="M12.935 10.065V0H10.065V10.065H0V12.935H10.065V23H12.935V12.935H23V10.065H12.935Z"
           fill="#F8F8F8"
