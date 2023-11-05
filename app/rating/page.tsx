@@ -30,7 +30,7 @@ export default function Fair() {
             type="range"
             min={1}
             max={5}
-            value={4}
+            // value={4}
             step={1}
             className="w-full"
           />

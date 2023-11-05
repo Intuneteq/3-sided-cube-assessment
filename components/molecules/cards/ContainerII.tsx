@@ -59,24 +59,26 @@ export default function ContainerII({
 
         {/* Container Image */}
         <div className="md:px-10">
-          {/* <div className="w-full h-[13.47081rem] md:h-[11.6875rem] mb-8 liner"> */}
-            <Image
-              src={img}
-              alt="image"
-              sizes="(min-width: 780px) 719px, 100vw"
-              priority
-              width={800}
-              height={187}
-              className="w-full h-[13.47081rem] md:h-[11.6875rem] mb-8"
-            />
-          {/* </div> */}
+          <Image
+            src={img}
+            alt="image"
+            sizes="(min-width: 780px) 719px, 100vw"
+            priority
+            width={800}
+            height={187}
+            className="w-full h-[13.47081rem] md:h-[11.6875rem] mb-8"
+          />
         </div>
+
+        {/* Container Title and Content */}
         <article
           className={`px-4 md:px-10 w-full flex flex-col justify-start ${
             center ? "items-center text-center" : "items-start"
           }`}
         >
-          <h2 className={`${poppins.className} text-2xl font-bold uppercase max-w-[37.5rem]`}>
+          <h2
+            className={`${poppins.className} text-2xl font-bold uppercase max-w-[37.5rem]`}
+          >
             {heading}
           </h2>
           <p
@@ -86,7 +88,11 @@ export default function ContainerII({
           </p>
         </article>
 
-        <form action="" className="w-full px-4 md:px-10 flex flex-col justify-start items-center">
+        {/* Form Inputs and Buttons */}
+        <form
+          action=""
+          className="w-full px-4 md:px-10 flex flex-col justify-start items-center"
+        >
           {children}
 
           {/* Action buttons only visible on Desktop */}

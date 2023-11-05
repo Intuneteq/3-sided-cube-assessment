@@ -12,7 +12,7 @@ type Props = {
 
 export default function ReactionSmiley({ children, name }: Props) {
   return (
-    <button className="flex flex-col justify-center items-center  cursor-pointer">
+    <button type="button" className="flex flex-col justify-center items-center  cursor-pointer">
       <div className="w-[3.75rem] h-[3.75rem] bg-light-grey flex justify-center items-center">
         {children}
       </div>

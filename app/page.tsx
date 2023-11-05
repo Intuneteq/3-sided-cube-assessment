@@ -1,7 +1,5 @@
 /**
  * 1. Form UI incomplete
- * 2. Error UI
- * 3. Not found UI
  * 4. Select drop down fix
  * 5. Sticky button space issue
  */

@@ -14,7 +14,7 @@ export default function DesktopLogo({ className }: Svg) {
       />
       <mask
         id="mask0_2811_4237"
-        // style="mask-type:luminance"
+        style={{ maskType: 'luminance' }}
         maskUnits="userSpaceOnUse"
         x="47"
         y="10"
@@ -33,7 +33,7 @@ export default function DesktopLogo({ className }: Svg) {
         />
         <mask
           id="mask1_2811_4237"
-          // style="mask-type:luminance"
+          style={{ maskType: 'luminance' }}
           maskUnits="userSpaceOnUse"
           x="-8"
           y="-13"

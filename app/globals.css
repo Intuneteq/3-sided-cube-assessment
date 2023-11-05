@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .custom-select {
-  -webkit-appearance: none;
+  appearance: none;
   border-radius: none;
   appearance: none;
   background-image: url("/down-arrow.svg");
@@ -12,8 +12,23 @@
   cursor: pointer;
 }
 
-input[type="radio"] {
+select::-ms-expand {
+  display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
+}
+.custom-select option {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #C3C3C3;
+  border-radius: none;
+  height: 100px;
   
+}
+
+.custom-select option:hover {
+  background-color: yellow !important;
+}
+
+input[type="radio"] {
   appearance: none;
   /* For iOS < 15 to remove gradient background */
   background-color: #fff;
@@ -50,6 +65,27 @@ input[type="radio"]::before {
 input[type="radio"]:checked::before {
   transform: scale(1);
 }
+
+input[type="range"] {
+  appearance: none;
+  outline: none;
+  height: 0.5rem;
+  background: #c3c3c3;
+  /* overflow: hidden; */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #f70087;
+  cursor: pointer;
+}
+
+/* select::after {
+  border: 1px solid red;
+} */
 
 .liner {
   border: 1px solid red;
