@@ -7,5 +7,14 @@ export const metadata: Metadata = {
 };
 
 export default function Nominations() {
+  const nominations = []
+
+  if(!nominations.length) {
+    return (
+      <main>
+        
+      </main>
+    )
+  }
   return <main>Nominations</main>;
 }
