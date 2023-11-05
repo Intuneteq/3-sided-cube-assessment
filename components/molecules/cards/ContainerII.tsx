@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-import {  Sticker } from "../";
+import { Sticker } from "../";
 import { Button, ProgressBar } from "@/components/atoms";
 import { Modal } from "@/components/organisms";
 
@@ -42,7 +42,7 @@ export default function ContainerII({
   center,
   singleBtn,
   progress,
-  nextPage
+  nextPage,
 }: Props) {
   const [showModal, setShowModal] = useState(false);
 
@@ -144,7 +144,14 @@ export default function ContainerII({
           </Button>
         </Sticker>
       </section>
-      {showModal && <Modal onClick={() => setShowModal(false)} />}
+      {showModal && (
+        <Modal
+          confirmation="Yes, leave page"
+          heading="Are You sure?"
+          message="If you leave this page, you will lose any progress made."
+          onClick={() => setShowModal(false)}
+        />
+      )}
     </>
   );
 }
