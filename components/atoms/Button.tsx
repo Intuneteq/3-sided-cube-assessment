@@ -118,7 +118,7 @@ export default function Button({
 
   if (type === "button") {
     return (
-      <button onClick={onClick} disabled={disable} className={classes.join(" ")}>
+      <button type="button" onClick={onClick} disabled={disable} className={classes.join(" ")}>
         {children}
       </button>
     );

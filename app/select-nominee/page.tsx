@@ -20,7 +20,7 @@ export default async function SelectNominee() {
         content="  Please select a cube who you feel has done something honourable this
      month or just all round has a great work ethic."
         heading="I&rsquo;d like to nominate..."
-        img="/img2.png"
+        img="/select.png"
         progress="25%"
         nextPage="/reason"
       >

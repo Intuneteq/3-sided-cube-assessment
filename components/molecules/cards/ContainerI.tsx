@@ -19,19 +19,15 @@ type Props = {
 export default function ContainerI({ children, heading, content, img }: Props) {
   return (
     <section className="w-full md:w-[50rem] min-h-[36.9375rem] bg-primary-white md:shadow-light pb-10">
-      <div className="w-full h-[13.47081rem] md:h-[19.0625rem] mb-8">
-        <Image
-          src={img}
-          alt="image"
-          style={{
-            objectFit: "cover",
-          }}
-          sizes="29.875rem"
-          priority
-          width={800}
-          height={304}
-        />
-      </div>
+      <Image
+        src={img}
+        alt="image"
+        sizes="(min-width: 840px) 800px, 96.15vw"
+        priority
+        width={800}
+        height={305}
+        className="w-full h-[13.47081rem] md:h-[19.0625rem] mb-8"
+      />
       <div className="flex flex-col justify-center items-center text-primary-black px-4">
         <h1
           className={`${poppins.className} text-[2rem] font-bold uppercase text-center leading-[3rem]`}

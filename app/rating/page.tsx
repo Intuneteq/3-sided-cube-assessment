@@ -21,7 +21,7 @@ export default function Fair() {
       <ContainerII
         heading="IS HOW WE CURRENTLY RUN CUBE OF THE MONTH FAIR?"
         content="As you know, out the nominees chosen, we spin a wheel to pick the cube of the month. What’s your opinion on this method?"
-        img="/img3.png"
+        img="/ratings.png"
         progress="75%"
         nextPage="/overview"
       >

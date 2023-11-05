@@ -18,7 +18,7 @@ export default function Overview() {
         center
         singleBtn
         progress="95%"
-        nextPage="/"
+        nextPage="/submitted"
       >
         <div className="w-full flex flex-col gap-2 justify-center items-center mb-[2.12rem]">
           <OverviewCard title="Cube's name" content="David" />
