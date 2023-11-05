@@ -7,10 +7,8 @@
  */
 import { Metadata } from "next";
 
-import { Button, FormInput } from "@/components/atoms";
-import { ContainerII, Sticker } from "@/components/molecules";
-import { anonymous_Pro, poppins, roboto } from "@/fonts";
-import { Modal, SelectNominee } from "@/components/organisms";
+import { Button } from "@/components/atoms";
+import { ContainerI, StackCard } from "@/components/molecules";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -20,23 +18,40 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="flex justify-start md:justify-center items-center w-full md:min-h-screen gap-2 flex-col md:py-5">
-      <ContainerII
-        content="Please let us know why you think this cube deserves the ‘cube of the month’ title 🏆⭐"
-        toDecorate="DAVID"
-        heading="I’d like to nominate DAVID because..."
-        img="/img3.png"
-        inputTitle="Reasoning"
+      <ContainerI
+        heading="CUBE OF THE MONTH NOMINATIONS"
+        content=" At cube we’re passionate about recognising the great work that our
+    cubes do. Each month one of our cubes are crowned cube of the month
+    👑⭐. Please nominate who you think deserves this months title."
+        img="/img1.png"
       >
-        <div className="w-full">
-          <FormInput
-            type="textarea"
-            placeholder="Reasoning"
-            label="Reasoning"
-            name="reasoning"
-            hideLabel
-          />
+        {/* Desktop button */}
+        <div className="hidden md:block">
+          <Button
+            scheme="primary"
+            type="link"
+            width="w-[17.875rem]"
+            height="h-[3.125rem]"
+            href="/select-nominee"
+          >
+            Get started
+          </Button>
         </div>
-      </ContainerII>
+
+        <div className="md:hidden fixed bottom-0 left-0 right-0">
+          <StackCard stack="none">
+            <Button
+              scheme="primary"
+              type="link"
+              width="w-[17.875rem]"
+              height="h-[3.125rem]"
+              href="/"
+            >
+              Get started
+            </Button>
+          </StackCard>
+        </div>
+      </ContainerI>
     </main>
   );
 }

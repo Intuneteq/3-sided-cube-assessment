@@ -14,16 +14,47 @@ type Props = {
   /** Action confirmation - e.g "Yes" */
   confirmation: string;
 
+  confirmationBtnType: BtnType;
+
+  confirmationHref?: string;
+
+  confirmationOnClick?: () => void;
+
   /** Action Decline - e.g "No" */
   revert: string;
+
+  revertBtnType: BtnType;
+
+  revertHref?: string;
+
+  revertOnClick?: () => void;
 };
 
 export default function ModalCard({
   heading,
   message,
   confirmation,
+  confirmationBtnType,
+  confirmationHref,
   revert,
+  revertBtnType,
+  revertHref,
+  confirmationOnClick,
+  revertOnClick,
 }: Props) {
+  const needHref = ["link", "anchor"];
+
+  if (needHref.includes(confirmationBtnType) && !confirmationHref) {
+    throw new Error(
+      'Please provide an "Href" property when using a Link button.'
+    );
+  }
+
+  if (needHref.includes(revertBtnType) && !revertHref) {
+    throw new Error(
+      'Please provide an "Href" property when using a Link button.'
+    );
+  }
   return (
     <div className="relative bg-primary-white w-[31.25rem] h-[21.25rem] px-4 pt-4 flex flex-col justify-start items-start gap-[2.125rem]">
       <h3
@@ -40,17 +71,21 @@ export default function ModalCard({
         <StackCard stack="vertical">
           <Button
             scheme="secondary"
-            type="button"
+            type={confirmationBtnType}
             width="w-full"
             height="h-[3.08594rem]"
+            href={confirmationHref}
+            onClick={confirmationOnClick}
           >
             {confirmation}
           </Button>
           <Button
             scheme="secondary"
-            type="button"
+            type={revertBtnType}
+            href={revertHref}
             width="w-full"
             height="h-[3.08594rem]"
+            onClick={revertOnClick}
           >
             {revert}
           </Button>

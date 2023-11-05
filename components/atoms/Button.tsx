@@ -6,7 +6,7 @@ import { isURL } from "@/lib/utility";
 
 type Props = {
   /** Type of HTML element - button element, anchor element or Next Link */
-  type: "button" | "submit" | "link" | "anchor";
+  type: BtnType;
 
   /** Button design type */
   scheme: "primary" | "secondary";
@@ -31,6 +31,8 @@ type Props = {
 
   /** Button Text Size */
   textSize?: string;
+
+  onClick?: () => void;
 };
 
 export default function Button({
@@ -43,6 +45,7 @@ export default function Button({
   inactive,
   href,
   textSize,
+  onClick
 }: Props) {
   let classes: Array<string> = [
     "transition",
@@ -115,7 +118,7 @@ export default function Button({
 
   if (type === "button") {
     return (
-      <button disabled={disable} className={classes.join(" ")}>
+      <button onClick={onClick} disabled={disable} className={classes.join(" ")}>
         {children}
       </button>
     );

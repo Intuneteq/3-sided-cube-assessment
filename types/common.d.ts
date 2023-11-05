@@ -5,3 +5,5 @@ type Svg = {
 };
 
 type Stack = "none" | "vertical" | "horizontal"
+
+type BtnType = "button" | "submit" | "link" | "anchor";
