@@ -24,7 +24,7 @@ export default function Submitted() {
           height="h-[3.125rem]"
           // textSize="text-[0.5rem]"
         >
-         VIEW nominations
+          VIEW nominations
         </Button>
         <Button
           scheme="secondary"

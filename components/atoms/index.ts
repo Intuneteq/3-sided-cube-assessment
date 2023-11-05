@@ -20,3 +20,4 @@ export { default as Unfair } from "./svg/Unfair";
 export { default as NotSure } from "./svg/NotSure";
 export { default as Fair } from "./svg/Fair";
 export { default as VeryFair } from "./svg/VeryFair";
+export { default as EditIcon } from "./svg/EditIcon";

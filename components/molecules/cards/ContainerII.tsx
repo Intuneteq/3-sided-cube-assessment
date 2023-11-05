@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Sticker } from "../";
 import { Button, ProgressBar } from "@/components/atoms";
 
-import { anonymous_Pro, poppins, roboto } from "@/fonts";
+import { anonymous_Pro, poppins } from "@/fonts";
 
 type Props = {
   children: React.ReactNode;
@@ -18,6 +18,12 @@ type Props = {
 
   /** Word in heading to decorate */
   toDecorate?: string;
+
+  /** Center content - Default aligns to the left */
+  center?: boolean;
+
+  /** Single Button conatiner */
+  singleBtn?: boolean;
 };
 
 export default function ContainerII({
@@ -25,6 +31,8 @@ export default function ContainerII({
   img,
   heading,
   content,
+  center,
+  singleBtn,
 }: Props) {
   return (
     <section className="w-full md:w-[50rem] min-h-[36.9375rem] md:py-10 bg-primary-white flex flex-col justify-start items-center">
@@ -46,38 +54,57 @@ export default function ContainerII({
           />
         </div>
       </div>
-      <article className="px-4 md:px-10 w-full">
-        <h2 className={`${poppins.className} text-2xl font-bold`}>{heading}</h2>
+      <article
+        className={`px-4 md:px-10 w-full flex flex-col justify-start  ${
+          center ? "items-center text-center" : "items-start"
+        }`}
+      >
+        <h2 className={`${poppins.className} text-2xl font-bold uppercase`}>
+          {heading}
+        </h2>
         <p
           className={`${anonymous_Pro.className} mb-[2.12rem] text-secondary-dark text-base font-normal max-w-[37.5rem]`}
         >
           {content}
         </p>
-        
+
         {children}
       </article>
 
       {/* Action buttons only visible on Desktop */}
-      <div className="justify-between items-center hidden md:flex px-4 md:px-10 w-full">
-        <Button
-          scheme="secondary"
-          type="button"
-          width="w-[6.5rem]"
-          height="h-[3.125rem]"
-        >
-          Back
-        </Button>
-        <Button
-          scheme="primary"
-          type="button"
-          width="w-[13.9375rem]"
-          height="h-[3.125rem]"
-          disable
-          inactive
-        >
-          next
-        </Button>
-      </div>
+      {singleBtn ? (
+        <div className="w-full hidden md:flex justify-center items-center">
+          <Button
+            scheme="primary"
+            type="button"
+            width="w-[13.9375rem]"
+            height="h-[3.125rem]"
+          >
+            Submit
+          </Button>
+        </div>
+      ) : (
+        <div className="justify-between items-center hidden md:flex px-4 md:px-10 w-full">
+          <Button
+            scheme="secondary"
+            type="button"
+            width="w-[6.5rem]"
+            height="h-[3.125rem]"
+          >
+            Back
+          </Button>
+          <Button
+            scheme="primary"
+            type="button"
+            width="w-[13.9375rem]"
+            height="h-[3.125rem]"
+            disable
+            inactive
+          >
+            next
+          </Button>
+        </div>
+      )}
 
       {/* Action Buttons only visible on mobile */}
       <Sticker stack="horizontal">
@@ -97,7 +124,7 @@ export default function ContainerII({
           height="h-[3.0625rem]"
           textSize="text-[0.875rem]"
         >
-          next
+          Submit
         </Button>
       </Sticker>
     </section>

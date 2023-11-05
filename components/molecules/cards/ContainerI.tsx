@@ -1,6 +1,7 @@
-import { anonymous_Pro, poppins } from "@/fonts";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+
+import { anonymous_Pro, poppins } from "@/fonts";
 
 type Props = {
   children: React.ReactNode;
@@ -40,7 +41,7 @@ export default function ContainerI({ children, heading, content, img }: Props) {
         <p
           className={`${anonymous_Pro.className} max-w-[37.5rem] text-base font-normal text-center mb-8`}
         >
-         {content}
+          {content}
         </p>
 
         {children}

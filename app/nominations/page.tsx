@@ -1,12 +1,11 @@
-import React from 'react'
+import { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
-   title: "Nominations",
-   description: "Your Nominations List",
- };
+  title: "Nominations",
+  description: "Your Nominations List",
+};
 
 export default function Nominations() {
-  return (
-    <main>Nominations</main>
-  )
+  return <main>Nominations</main>;
 }

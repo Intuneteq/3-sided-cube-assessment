@@ -2,7 +2,6 @@ import React from "react";
 
 import { Button } from "@/components/atoms";
 import { ContainerI, StackCard } from "@/components/molecules";
-import { anonymous_Pro, poppins } from "@/fonts";
 
 export default function NominationIntro() {
   return (
