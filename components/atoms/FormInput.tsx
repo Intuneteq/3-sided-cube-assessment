@@ -51,9 +51,10 @@ export default function FormInput({
       inputClasses = [
         ...inputClasses,
         "outline-none",
-        "min-h-[9.9375rem]",
+        "md:h-[9.9375rem]",
         "resize-none",
         "overflow-hidden",
+        "h-[22rem]"
       ];
       return (
         <textarea
