@@ -8,12 +8,12 @@ export default function NotFound() {
 
   return (
     <ModalCard
-    heading="Error"
+    heading="PAGE NOT FOUND"
     message={"Could not find requested resource"}
-    confirmation="Back"
+    confirmation="Go Back"
     confirmationBtnType="button"
     confirmationOnClick={() => router.back()}
-    revert="Home"
+    revert="Go Home"
     revertBtnType="link"
     revertHref="/"
     error

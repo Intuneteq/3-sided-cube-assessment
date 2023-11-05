@@ -11,8 +11,9 @@ export const metadata: Metadata = {
   description: "Select your nominee",
 };
 
-export default function SelectNominee() {
+export default async function SelectNominee() {
   const options = ["one", "two"];
+  const submit = async () => {} 
   return (
     <main className="flex justify-start md:justify-center items-center w-full md:min-h-screen gap-2 flex-col md:py-5">
       <ContainerII
@@ -31,9 +32,9 @@ export default function SelectNominee() {
             <FormInput
               type="select"
               options={options}
-              placeholder="Country"
-              label="Country"
-              name="country"
+              placeholder="Nominee"
+              label="Nominee"
+              name="nominee"
               hideLabel
             />
           </div>

@@ -83,7 +83,7 @@ export default function FormInput({
             aria-describedby={`error-${name}`}
             aria-labelledby={`label-${name}`}
             aria-placeholder={placeholder}
-            {...register(name)}
+            {...register(name, { required: `${name} is required`})}
           />
           <button className="absolute top-1/2 transform -translate-y-1/2 right-3">
             <EyeClosedIcon className="w-4 h-4 cursor-pointer" />
@@ -140,6 +140,7 @@ export default function FormInput({
         {label}
       </label>
       {renderInput()}
+      
     </div>
   );
 }
