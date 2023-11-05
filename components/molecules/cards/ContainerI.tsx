@@ -1,12 +1,21 @@
+import { anonymous_Pro, poppins } from "@/fonts";
 import Image from "next/image";
 import React from "react";
 
 type Props = {
   children: React.ReactNode;
+
+  /** Container heading */
+  heading: string;
+
+  /** Container body content */
+  content: string;
+
+  /** Container Image */
   img: string;
 };
 
-export default function ContainerI({ children, img }: Props) {
+export default function ContainerI({ children, heading, content, img }: Props) {
   return (
     <section className="w-full md:w-[50rem] min-h-[36.9375rem] bg-primary-white md:shadow-light pb-10">
       <div className="w-full h-[13.47081rem] md:h-[19.0625rem] mb-8">
@@ -22,7 +31,20 @@ export default function ContainerI({ children, img }: Props) {
           height={304}
         />
       </div>
-      {children}
+      <div className="flex flex-col justify-center items-center text-primary-black px-4">
+        <h1
+          className={`${poppins.className} text-[2rem] font-bold uppercase text-center leading-[3rem]`}
+        >
+          {heading}
+        </h1>
+        <p
+          className={`${anonymous_Pro.className} max-w-[37.5rem] text-base font-normal text-center mb-8`}
+        >
+         {content}
+        </p>
+
+        {children}
+      </div>
     </section>
   );
 }
