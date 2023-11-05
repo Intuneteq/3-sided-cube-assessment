@@ -17,7 +17,8 @@ export default function Reason() {
         toDecorate="DAVID"
         heading="I’d like to nominate DAVID because..."
         img="/img3.png"
-        progress="25%"
+        progress="50%"
+        nextPage="/rating"
       >
         <div className="w-full">
           <p className={`${roboto.className} text-base font-bold mb-2`}>

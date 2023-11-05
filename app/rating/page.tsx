@@ -9,7 +9,6 @@ import {
   VeryFair,
 } from "@/components/atoms";
 import { ContainerII, MobileRating } from "@/components/molecules";
-import { poppins } from "@/fonts";
 
 export const metadata: Metadata = {
   title: "Select Fairness",
@@ -23,7 +22,8 @@ export default function Fair() {
         heading="IS HOW WE CURRENTLY RUN CUBE OF THE MONTH FAIR?"
         content="As you know, out the nominees chosen, we spin a wheel to pick the cube of the month. What’s your opinion on this method?"
         img="/img3.png"
-        progress="25%"
+        progress="75%"
+        nextPage="/overview"
       >
         <div className="w-full hidden md:block">
           <input

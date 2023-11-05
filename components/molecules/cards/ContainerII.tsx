@@ -30,6 +30,8 @@ type Props = {
 
   /** String in percentage. Add regex validation later */
   progress: string;
+
+  nextPage: string;
 };
 
 export default function ContainerII({
@@ -40,6 +42,7 @@ export default function ContainerII({
   center,
   singleBtn,
   progress,
+  nextPage
 }: Props) {
   const [showModal, setShowModal] = useState(false);
 
@@ -109,7 +112,7 @@ export default function ContainerII({
               type="link"
               width="w-[13.9375rem]"
               height="h-[3.125rem]"
-              href="/reason"
+              href={nextPage}
               // onClick={}
               // disable
               // inactive

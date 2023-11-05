@@ -20,6 +20,7 @@ export default function SelectNominee() {
       heading="I&rsquo;d like to nominate..."
       img="/img2.png"
       progress="25%"
+      nextPage="/reason"
     >
       <div className="flex-start w-full">
         <p className={`${roboto.className} text-base font-bold mb-2`}>
