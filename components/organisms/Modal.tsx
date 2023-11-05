@@ -1,16 +1,22 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import { ModalCard } from "../molecules";
 
-export default function Modal() {
-  useEffect(() => {
-    // Add the class to body when the modal is opened
-    document.body.classList.add("no-scroll");
+type Props = {
+  onClick: () => void;
+};
 
-    // Remove the class from body when the modal is unmounted or closed
+export default function Modal({ onClick }: Props) {
+  const router = useRouter();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
     return () => {
-      document.body.classList.remove("no-scroll");
+      document.body.style.overflow = "visible";
     };
   }, []);
 
@@ -20,7 +26,11 @@ export default function Modal() {
         heading="Are you sure?"
         message="If you leave this page, you will lose any progress made."
         confirmation="Yes, leave page"
+        confirmationBtnType="button"
+        confirmationOnClick={() => router.back()}
         revert="Cancel"
+        revertBtnType="button"
+        revertOnClick={onClick}
       />
     </div>
   );
