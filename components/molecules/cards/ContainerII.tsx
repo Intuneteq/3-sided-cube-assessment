@@ -18,8 +18,6 @@ type Props = {
 
   /** Word in heading to decorate */
   toDecorate?: string;
-
-  inputTitle: string;
 };
 
 export default function ContainerII({
@@ -27,7 +25,6 @@ export default function ContainerII({
   img,
   heading,
   content,
-  inputTitle,
 }: Props) {
   return (
     <section className="w-full md:w-[50rem] min-h-[36.9375rem] md:py-10 bg-primary-white flex flex-col justify-start items-center">
@@ -56,9 +53,7 @@ export default function ContainerII({
         >
           {content}
         </p>
-        <p className={`${roboto.className} text-base font-bold mb-2`}>
-          <span className="text-secondary-pink">*</span> {inputTitle}
-        </p>
+        
         {children}
       </article>
 

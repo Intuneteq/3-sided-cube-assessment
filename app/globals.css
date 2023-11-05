@@ -12,6 +12,11 @@
   cursor: pointer;
 }
 
+/* .input[type='range'] {
+ appearance: none;
+
+} */
+
 .liner {
   border: 1px solid red;
 }
