@@ -28,6 +28,8 @@ type Props = {
   revertHref?: string;
 
   revertOnClick?: () => void;
+
+  error?: boolean;
 };
 
 export default function ModalCard({
@@ -39,6 +41,7 @@ export default function ModalCard({
   revert,
   revertBtnType,
   revertHref,
+  error,
   confirmationOnClick,
   revertOnClick,
 }: Props) {
@@ -58,7 +61,11 @@ export default function ModalCard({
   return (
     <div className="relative bg-primary-white w-[31.25rem] h-[21.25rem] px-4 pt-4 flex flex-col justify-start items-start gap-[2.125rem]">
       <h3
-        className={`${poppins.className} text-primary-black text-lg font-bold uppercase`}
+        className={`${
+          poppins.className
+        } text-primary-black text-lg font-bold uppercase ${
+          error ? "text-[#FF0000]" : ""
+        }`}
       >
         {heading}
       </h3>

@@ -18,6 +18,7 @@ export default function Error({ error, reset }: Props) {
       revert="Home"
       revertBtnType="link"
       revertHref="/"
+      error
     />
   );
 }

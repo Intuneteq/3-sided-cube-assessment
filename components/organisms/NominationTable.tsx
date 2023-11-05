@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 
+import { Modal } from "./";
 import { DeleteIcon, EditIcon } from "../atoms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
-import { Modal } from ".";
 
 export default function NominationTable() {
   const [showModal, setShowModal] = useState(false);
