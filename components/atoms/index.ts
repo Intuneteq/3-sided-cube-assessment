@@ -21,3 +21,4 @@ export { default as NotSure } from "./svg/NotSure";
 export { default as Fair } from "./svg/Fair";
 export { default as VeryFair } from "./svg/VeryFair";
 export { default as EditIcon } from "./svg/EditIcon";
+export { default as EmptyContentIcon } from "./svg/EmptyContentIcon";
