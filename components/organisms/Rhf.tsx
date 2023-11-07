@@ -4,10 +4,14 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from 'next/navigation'
 
 import { Modal } from "./";
 import { Button, FormInput } from "../atoms";
 import { Sticker } from "../molecules";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getNominees, selectNominee } from "@/app/select-nominee/actions";
+import { groupOptions } from "@/lib/utility";
 
 type Props = {
   type: FormType;
@@ -17,8 +21,6 @@ type Props = {
   label: string;
 
   name: Inputs;
-
-  options?: Array<Option>;
 
   /** Single Button conatiner */
   singleBtn?: boolean;
@@ -47,10 +49,24 @@ export default function Rhf({
   name,
   singleBtn,
   nextPage,
-  options,
   hideLabel,
 }: Props) {
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter()
+
+  const queryClient = useQueryClient()
+
+  
+  const { data, error, isFetched } = useQuery({
+    queryKey: ["nominees"],
+    queryFn: getNominees,
+  });
+
+  if (error) throw new Error(error.message);
+
+  if(!data) throw new Error("No data");
+
+  const nominees = groupOptions(data);
 
   const form = useForm<FormValues>({
     resolver: createResolver(name),
@@ -61,8 +77,19 @@ export default function Rhf({
   const { errors } = formState;
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log('what', data)
- };
+    console.log('Submitting data:', data);
+  
+    // Set the form data in a query key
+    queryClient.setQueryData(["formData"], {
+      nominee: data.nominee,
+    });
+
+    console.log('next', nextPage);
+    
+  
+    router.push(`/reason`, { scroll: false });
+    // router.push(`/${nextPage}`, { scroll: false });
+  };
   
   return (
     <>
@@ -75,7 +102,7 @@ export default function Rhf({
             name={name}
             hideLabel={hideLabel}
             register={register}
-            options={options}
+            options={nominees}
             control={control}
             errors={errors}
           />

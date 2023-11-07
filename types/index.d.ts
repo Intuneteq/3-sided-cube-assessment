@@ -22,3 +22,9 @@ interface Option {
   value: string;
   label: string;
 }
+
+type Nominee = {
+  nominee_id: string;
+  first_name: string;
+  last_name: string;
+}

@@ -166,11 +166,15 @@ export default function FormInput({
                   placeholder="Select Options"
                   onClick={() => setShowDropDown(!showDropDown)}
                   className={inputClasses.join(" ")}
-                  value={field.value}
+                  value={
+                    field.value
+                      ? options.find((opt) => opt.value === field.value)?.label
+                      : ""
+                  }
                   readOnly
                 />
                 {showDropDown && (
-                  <div className="w-full flex flex-col items-center justify-center  gap-[0.06rem] absolute bg-primary-white">
+                  <div className="w-full max-h-[10.68rem] overflow-y-auto flex items-start flex-col justify-start gap-[0.06rem] absolute bg-primary-white">
                     {options.map((option, ind) => (
                       <button
                         key={ind}

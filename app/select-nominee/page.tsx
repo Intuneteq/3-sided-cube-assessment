@@ -10,14 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async function SelectNominee() {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
 
   return (
     <main className="flex justify-start md:justify-center items-center w-full md:min-h-screen gap-2 flex-col md:py-5">
@@ -30,9 +22,8 @@ export default async function SelectNominee() {
       >
         <div className="flex-start w-full">
           <Rhf
-            nextPage="/"
+            nextPage="/reason"
             type="select"
-            options={options}
             placeholder="Nominee"
             label="Cube&rsquo;s name"
             name="nominee"
