@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import { Modal } from "./";
 import { Button, FormInput } from "../atoms";
 import { Sticker } from "../molecules";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Modal } from ".";
 
 type Props = {
   type: FormType;
@@ -23,10 +24,17 @@ type Props = {
   /** Path url for next button */
   nextPage: string;
 
-  hideLabel?: boolean
+  hideLabel?: boolean;
 };
 
-export default function Rhf({ type, placeholder, label, name, singleBtn, nextPage }: Props) {
+export default function Rhf({
+  type,
+  placeholder,
+  label,
+  name,
+  singleBtn,
+  nextPage,
+}: Props) {
   const [showModal, setShowModal] = useState(false);
   const options = ["one", "two"];
 
@@ -41,11 +49,8 @@ export default function Rhf({ type, placeholder, label, name, singleBtn, nextPag
   console.log(watch("reasoning"));
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full "
-      >
-        {/* <div className="mb-8 max-w-[24.0625rem] liner-blue w-full"> */}
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+        <div className="mb-8">
           <FormInput
             type={type}
             placeholder={placeholder}
@@ -55,7 +60,7 @@ export default function Rhf({ type, placeholder, label, name, singleBtn, nextPag
             register={register}
             options={options}
           />
-        {/* </div> */}
+        </div>
 
         {/* Action buttons only visible on Desktop */}
         {singleBtn ? (
@@ -77,7 +82,7 @@ export default function Rhf({ type, placeholder, label, name, singleBtn, nextPag
               type="button"
               width="w-[6.5rem]"
               height="h-[3.125rem]"
-              //  onClick={() => setShowModal(true)}
+               onClick={() => setShowModal(true)}
             >
               Back
             </Button>

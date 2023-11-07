@@ -47,8 +47,6 @@ export default function ContainerII({
   progress,
   nextPage,
 }: Props) {
-
-
   return (
     <>
       <section className="w-full md:w-[50rem] min-h-[36.9375rem] md:py-10 bg-primary-white flex flex-col justify-start items-center">
@@ -89,13 +87,9 @@ export default function ContainerII({
         </article>
 
         <div className="w-full px-4 md:px-10 flex flex-col justify-start items-center">
-        {children}
-
+          {children}
         </div>
-
       </section>
-
-     
     </>
   );
 }

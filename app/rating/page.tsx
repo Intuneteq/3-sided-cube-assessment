@@ -1,14 +1,7 @@
 import { Metadata } from "next";
 
-import {
-  Fair as FairIcon,
-  ReactionSmiley,
-  VeryUnfair,
-  Unfair,
-  NotSure,
-  VeryFair,
-} from "@/components/atoms";
-import { ContainerII, MobileRating } from "@/components/molecules";
+import { ContainerII } from "@/components/molecules";
+import { Rhf } from "@/components/organisms";
 
 export const metadata: Metadata = {
   title: "Select Fairness",
@@ -25,51 +18,15 @@ export default function Fair() {
         progress="75%"
         nextPage="/overview"
       >
-        <div className="w-full hidden md:block">
-          <input
+        <div className="w-full">
+          <Rhf
+            nextPage="/"
             type="range"
-            min={1}
-            max={5}
-            // value={4}
-            step={1}
-            className="w-full"
+            placeholder="rating"
+            label="rating"
+            name="rating"
+            hideLabel
           />
-
-          <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
-            <ReactionSmiley name="Very Unfair">
-              <VeryUnfair className="w-[2.18763rem] h-[2.18763rem]" />
-            </ReactionSmiley>
-            <ReactionSmiley name="unfair">
-              <Unfair className="w-[2.18763rem] h-[2.18763rem]" />
-            </ReactionSmiley>
-            <ReactionSmiley name="not sure">
-              <NotSure className="w-[2.18763rem] h-[2.18763rem]" />
-            </ReactionSmiley>
-            <ReactionSmiley name="fair">
-              <FairIcon className="w-[2.18763rem] h-[2.18763rem]" />
-            </ReactionSmiley>
-            <ReactionSmiley name="very fair">
-              <VeryFair className="w-[2.18763rem] h-[2.18763rem]" />
-            </ReactionSmiley>
-          </div>
-        </div>
-
-        <div className="md:hidden flex flex-col items-center justify-center w-full gap-3">
-          <MobileRating rating="very unfair">
-            <VeryUnfair className="w-6 h-6" />
-          </MobileRating>
-          <MobileRating rating="unfair">
-            <Unfair className="w-6 h-6" />
-          </MobileRating>
-          <MobileRating rating="not sure">
-            <NotSure className="w-6 h-6" />
-          </MobileRating>
-          <MobileRating rating="fair">
-            <FairIcon className="w-6 h-6" />
-          </MobileRating>
-          <MobileRating rating="very fair">
-            <VeryFair className="w-6 h-6" />
-          </MobileRating>
         </div>
       </ContainerII>
     </main>

@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import { UseFormRegister, useForm } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 
-import { poppins, anonymous_Pro } from "@/fonts";
-import { EyeClosedIcon } from ".";
+import { EyeClosedIcon, Fair, NotSure, ReactionSmiley, Unfair, VeryFair, VeryUnfair } from "./";
+
+import { poppins, anonymous_Pro, roboto } from "@/fonts";
+import { MobileRating } from "../molecules";
 
 type Props = {
   type: FormType;
@@ -97,7 +99,12 @@ export default function FormInput({
       if (!options || !options.length)
         throw new Error("Select Options not populated");
 
-      inputClasses = [...inputClasses, "w-full", "custom-select", "max-w-[24.0625rem]"];
+      inputClasses = [
+        ...inputClasses,
+        "w-full",
+        "custom-select",
+        "max-w-[25.6875rem]",
+      ];
 
       return (
         <div className="w-full">
@@ -122,6 +129,59 @@ export default function FormInput({
       );
     }
 
+    if (type === "range") {
+      return (
+        <>
+          <div className="w-full hidden md:block">
+            <input
+              type={type}
+              min={1}
+              max={5}
+              // value={4}
+              step={1}
+              className="w-full"
+            />
+
+            <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
+              <ReactionSmiley name="Very Unfair">
+                <VeryUnfair className="w-[2.18763rem] h-[2.18763rem]" />
+              </ReactionSmiley>
+              <ReactionSmiley name="unfair">
+                <Unfair className="w-[2.18763rem] h-[2.18763rem]" />
+              </ReactionSmiley>
+              <ReactionSmiley name="not sure">
+                <NotSure className="w-[2.18763rem] h-[2.18763rem]" />
+              </ReactionSmiley>
+              <ReactionSmiley name="fair">
+                <Fair className="w-[2.18763rem] h-[2.18763rem]" />
+              </ReactionSmiley>
+              <ReactionSmiley name="very fair">
+                <VeryFair className="w-[2.18763rem] h-[2.18763rem]" />
+              </ReactionSmiley>
+            </div>
+          </div>
+
+          <div className="md:hidden flex flex-col items-center justify-center w-full gap-3">
+            <MobileRating rating="very unfair">
+              <VeryUnfair className="w-6 h-6" />
+            </MobileRating>
+            <MobileRating rating="unfair">
+              <Unfair className="w-6 h-6" />
+            </MobileRating>
+            <MobileRating rating="not sure">
+              <NotSure className="w-6 h-6" />
+            </MobileRating>
+            <MobileRating rating="fair">
+              <Fair className="w-6 h-6" />
+            </MobileRating>
+            <MobileRating rating="very fair">
+              <VeryFair className="w-6 h-6" />
+            </MobileRating>
+          </div>
+        </>
+      );
+    }
+
     return (
       <input
         type={type}
@@ -139,12 +199,12 @@ export default function FormInput({
   return (
     <div className={`${poppins.className} flex flex-col mb-5 w-full`}>
       <label
-        className={`text-base text-primary-black font-bold mb-[0.3rem] capitalize ${
+        className={`${roboto.className} text-base font-bold mb-2 ${
           hideLabel && "hidden"
         }`}
-        htmlFor={label}
+        htmlFor={name}
       >
-        {label}
+        <span className="text-secondary-pink">*</span> {label}
       </label>
       {renderInput()}
     </div>

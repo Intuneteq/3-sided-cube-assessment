@@ -26,20 +26,14 @@ export default async function SelectNominee() {
         nextPage="/reason"
       >
         <div className="flex-start w-full">
-          <p className={`${roboto.className} text-base font-bold mb-2`}>
-            <span className="text-secondary-pink">*</span> Cube&rsquo;s name
-          </p>
-          {/* <div className="mb-8 max-w-[24.0625rem]"> */}
-            <Rhf
-              nextPage="/"
-              type="select"
-              options={options}
-              placeholder="Nominee"
-              label="Nominee"
-              name="nominee"
-              hideLabel
-            />
-          {/* </div> */}
+          <Rhf
+            nextPage="/"
+            type="select"
+            options={options}
+            placeholder="Nominee"
+            label="Cube&rsquo;s name"
+            name="nominee"
+          />
         </div>
       </ContainerII>
     </main>
