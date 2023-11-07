@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { FormInput } from "@/components/atoms";
 import { ContainerII } from "@/components/molecules";
 import { roboto } from "@/fonts";
+import { Rhf } from "@/components/organisms";
 
 export const metadata: Metadata = {
   title: "Reason",
@@ -20,17 +21,25 @@ export default function Reason() {
         progress="50%"
         nextPage="/rating"
       >
-        <div className="w-full">
+        <div className="w-full liner">
           <p className={`${roboto.className} text-base font-bold mb-2`}>
             <span className="text-secondary-pink">*</span> Reasoning
           </p>
-          <FormInput
+          <Rhf
+           nextPage="/"
+           type="textarea"
+            placeholder="Reasoning"
+            label="Reasoning"
+            name="reasoning"
+            hideLabel
+           />
+          {/* <FormInput
             type="textarea"
             placeholder="Reasoning"
             label="Reasoning"
             name="reasoning"
             hideLabel
-          />
+          /> */}
         </div>
       </ContainerII>
     </main>

@@ -1,24 +1,26 @@
 "use client";
 
 import React from "react";
-import { useForm } from "react-hook-form"
+import { UseFormRegister, useForm } from "react-hook-form";
 
 import { poppins, anonymous_Pro } from "@/fonts";
 import { EyeClosedIcon } from ".";
 
-/**
- * You have an undone input form
- */
-
 type Props = {
-  type: "text" | "tel" | "email" | "password" | "textarea" | "select";
+  type: FormType;
+
   placeholder: string;
+
   label: string;
-  name: string;
+
+  name: Inputs;
+
   options?: Array<string>;
 
   /** hide input label element */
-  hideLabel?: boolean
+  hideLabel?: boolean;
+
+  register: UseFormRegister<FormValues>;
 };
 
 export default function FormInput({
@@ -27,10 +29,9 @@ export default function FormInput({
   label,
   name,
   options,
-  hideLabel
+  hideLabel,
+  register,
 }: Props) {
-   const { register } = useForm()
-
   let inputClasses = [
     "placeholder:text-mid-grey",
     `${anonymous_Pro.className}`,
@@ -54,7 +55,7 @@ export default function FormInput({
         "md:h-[9.9375rem]",
         "resize-none",
         "overflow-hidden",
-        "h-[22rem]"
+        "h-[22rem]",
       ];
       return (
         <textarea
@@ -83,7 +84,7 @@ export default function FormInput({
             aria-describedby={`error-${name}`}
             aria-labelledby={`label-${name}`}
             aria-placeholder={placeholder}
-            {...register(name, { required: `${name} is required`})}
+            {...register(name, { required: `${name} is required` })}
           />
           <button className="absolute top-1/2 transform -translate-y-1/2 right-3">
             <EyeClosedIcon className="w-4 h-4 cursor-pointer" />
@@ -96,7 +97,7 @@ export default function FormInput({
       if (!options || !options.length)
         throw new Error("Select Options not populated");
 
-      inputClasses = [...inputClasses, "w-full", "custom-select"];
+      inputClasses = [...inputClasses, "w-full", "custom-select", "max-w-[24.0625rem]"];
 
       return (
         <div className="w-full">
@@ -108,7 +109,11 @@ export default function FormInput({
           >
             {options.map((option, index) => (
               // Yeah Yeah, I know this is supposed to be bad, but the options count is low so all is fine.
-              <option value={option} key={index} className=" bg-dark-grey min-h-[1.875rem]">
+              <option
+                value={option}
+                key={index}
+                className=" bg-dark-grey min-h-[1.875rem]"
+              >
                 {option}
               </option>
             ))}
@@ -134,13 +139,14 @@ export default function FormInput({
   return (
     <div className={`${poppins.className} flex flex-col mb-5 w-full`}>
       <label
-        className={`text-base text-primary-black font-bold mb-[0.3rem] capitalize ${hideLabel && 'hidden'}`}
+        className={`text-base text-primary-black font-bold mb-[0.3rem] capitalize ${
+          hideLabel && "hidden"
+        }`}
         htmlFor={label}
       >
         {label}
       </label>
       {renderInput()}
-      
     </div>
   );
 }

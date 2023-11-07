@@ -22,7 +22,7 @@ export default function NotSure({ className }: Svg) {
         x2="26.001"
         y2="23.5039"
         stroke="#F8F8F8"
-        stroke-width="2"
+        strokeWidth="2"
         stroke-linecap="round"
       />
     </svg>

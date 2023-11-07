@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { Sticker } from "../";
 import { Button, ProgressBar } from "@/components/atoms";
-import { Modal } from "@/components/organisms";
+import { Modal, SelectNominee } from "@/components/organisms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
 
@@ -47,7 +47,7 @@ export default function ContainerII({
   progress,
   nextPage,
 }: Props) {
-  const [showModal, setShowModal] = useState(false);
+
 
   return (
     <>
@@ -88,85 +88,14 @@ export default function ContainerII({
           </p>
         </article>
 
-        {/* Form Inputs and Buttons */}
-        <form
-          action=""
-          className="w-full px-4 md:px-10 flex flex-col justify-start items-center"
-        >
-          {children}
+        <div className="w-full px-4 md:px-10 flex flex-col justify-start items-center">
+        {children}
 
-          {/* Action buttons only visible on Desktop */}
-          {singleBtn ? (
-            <div className="w-full hidden md:flex justify-center items-center">
-              <Button
-                scheme="primary"
-                type="link"
-                width="w-[13.9375rem]"
-                height="h-[3.125rem]"
-                href={nextPage}
-              >
-                Submit
-              </Button>
-            </div>
-          ) : (
-            <div className="justify-between items-center hidden md:flex w-full">
-              <Button
-                scheme="secondary"
-                type="button"
-                width="w-[6.5rem]"
-                height="h-[3.125rem]"
-                onClick={() => setShowModal(true)}
-              >
-                Back
-              </Button>
-              <Button
-                scheme="primary"
-                type="link"
-                width="w-[13.9375rem]"
-                height="h-[3.125rem]"
-                href={nextPage}
-                // onClick={}
-                // disable
-                // inactive
-              >
-                next
-              </Button>
-            </div>
-          )}
+        </div>
 
-          {/* Action Buttons only visible on mobile */}
-          <Sticker stack="horizontal">
-            <Button
-              scheme="secondary"
-              type="button"
-              width="w-[6.25rem]"
-              height="h-[3.08594rem]"
-              textSize="text-[0.875rem]"
-            >
-              Back
-            </Button>
-            <Button
-              scheme="primary"
-              type="button"
-              width="w-[13.3125rem]"
-              height="h-[3.0625rem]"
-              textSize="text-[0.875rem]"
-            >
-              Submit
-            </Button>
-          </Sticker>
-        </form>
       </section>
 
-      {/* Leave Page Modal */}
-      {showModal && (
-        <Modal
-          confirmation="Yes, leave page"
-          heading="Are You sure?"
-          message="If you leave this page, you will lose any progress made."
-          onClick={() => setShowModal(false)}
-        />
-      )}
+     
     </>
   );
 }

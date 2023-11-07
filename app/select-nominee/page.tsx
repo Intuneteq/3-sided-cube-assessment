@@ -5,6 +5,7 @@ import { FormInput } from "@/components/atoms";
 import { ContainerII } from "@/components/molecules";
 
 import { roboto } from "@/fonts";
+import { Rhf } from "@/components/organisms";
 
 export const metadata: Metadata = {
   title: "Select Nominee",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function SelectNominee() {
   const options = ["one", "two"];
-  const submit = async () => {} 
+  const submit = async () => {};
   return (
     <main className="flex justify-start md:justify-center items-center w-full md:min-h-screen gap-2 flex-col md:py-5">
       <ContainerII
@@ -28,8 +29,9 @@ export default async function SelectNominee() {
           <p className={`${roboto.className} text-base font-bold mb-2`}>
             <span className="text-secondary-pink">*</span> Cube&rsquo;s name
           </p>
-          <div className="mb-8 max-w-[24.0625rem]">
-            <FormInput
+          {/* <div className="mb-8 max-w-[24.0625rem]"> */}
+            <Rhf
+              nextPage="/"
               type="select"
               options={options}
               placeholder="Nominee"
@@ -37,7 +39,7 @@ export default async function SelectNominee() {
               name="nominee"
               hideLabel
             />
-          </div>
+          {/* </div> */}
         </div>
       </ContainerII>
     </main>
