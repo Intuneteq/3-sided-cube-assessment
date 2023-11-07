@@ -1,9 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { UseFormRegister } from "react-hook-form";
 
-import { EyeClosedIcon, Fair, NotSure, ReactionSmiley, Unfair, VeryFair, VeryUnfair } from "./";
+import {
+  EyeClosedIcon,
+  Fair,
+  NotSure,
+  ReactionSmiley,
+  Unfair,
+  VeryFair,
+  VeryUnfair,
+} from "./";
 
 import { poppins, anonymous_Pro, roboto } from "@/fonts";
 import { MobileRating } from "../molecules";
@@ -17,7 +25,7 @@ type Props = {
 
   name: Inputs;
 
-  options?: Array<string>;
+  options?: Array<Option>;
 
   /** hide input label element */
   hideLabel?: boolean;
@@ -34,6 +42,33 @@ export default function FormInput({
   hideLabel,
   register,
 }: Props) {
+  const [showDropDown, setShowDropDown] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  const handleOptionClick = (option: { value: string; label: string }) => {
+    setSelectedValue(option.label); // Set the selected value when an option is clicked
+    setShowDropDown(false); // Close the dropdown
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      selectRef.current &&
+      !selectRef.current.contains(event.target as Node)
+    ) {
+      setShowDropDown(false);
+    }
+  };
+  
+  useEffect(() => {
+    if (type === "select") {
+      window.addEventListener("click", handleClickOutside);
+      return () => {
+        window.removeEventListener("click", handleClickOutside);
+      };
+    }
+  }, [type]);
+
   let inputClasses = [
     "placeholder:text-mid-grey",
     `${anonymous_Pro.className}`,
@@ -105,26 +140,36 @@ export default function FormInput({
         "custom-select",
         "max-w-[25.6875rem]",
       ];
-
+      
       return (
-        <div className="w-full">
-          <select
-            id={name}
-            autoComplete={name}
+        <div
+          ref={selectRef}
+          className="h-auto  w-full max-w-[25.6875rem] bg-primary-white relative"
+        >
+          <input
+            readOnly
+            placeholder="Select Options"
+            defaultValue={options[0].label}
+            type="text"
+            onClick={() => setShowDropDown(!showDropDown)}
             className={inputClasses.join(" ")}
-            {...register(name)}
-          >
-            {options.map((option, index) => (
-              // Yeah Yeah, I know this is supposed to be bad, but the options count is low so all is fine.
-              <option
-                value={option}
-                key={index}
-                className=" bg-dark-grey min-h-[1.875rem]"
-              >
-                {option}
-              </option>
-            ))}
-          </select>
+            value={selectedValue}
+            {...register(name, { required: `${name} is required` })}
+          />
+          {showDropDown && (
+            <div className="w-full flex flex-col items-center justify-center  gap-[0.06rem] absolute bg-primary-white">
+              {options.map((option, ind) => (
+                <button
+                  type="button"
+                  key={ind}
+                  onClick={() => handleOptionClick(option)}
+                  className={`${anonymous_Pro.className} text-normal text-base w-full h-[2.625rem] bg-light-grey text-left py-[0.375rem] px-[0.75rem]`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       );
     }

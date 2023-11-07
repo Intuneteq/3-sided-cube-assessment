@@ -13,3 +13,8 @@ type Inputs = "nominee" | "reasoning" | "rating";
 type FormType = "text" | "tel" | "email" | "password" | "textarea" | "select" | "range";
 
 type FormValues = { [K in Inputs]: string };
+
+interface Option {
+  value: string;
+  label: string;
+}

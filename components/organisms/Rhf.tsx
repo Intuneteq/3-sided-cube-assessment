@@ -16,7 +16,7 @@ type Props = {
 
   name: Inputs;
 
-  options?: Array<string>;
+  options?: Array<Option>;
 
   /** Single Button conatiner */
   singleBtn?: boolean;
@@ -34,9 +34,11 @@ export default function Rhf({
   name,
   singleBtn,
   nextPage,
+  options,
+  hideLabel
 }: Props) {
   const [showModal, setShowModal] = useState(false);
-  const options = ["one", "two"];
+  
 
   const form = useForm<FormValues>();
 
@@ -56,7 +58,7 @@ export default function Rhf({
             placeholder={placeholder}
             label={label}
             name={name}
-            hideLabel
+            hideLabel={hideLabel}
             register={register}
             options={options}
           />

@@ -10,7 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default async function SelectNominee() {
-  const options = ["one", "two"];
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+    { value: "vanilla", label: "Vanilla" },
+    { value: "vanilla", label: "Vanilla" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
 
   return (
     <main className="flex justify-start md:justify-center items-center w-full md:min-h-screen gap-2 flex-col md:py-5">
