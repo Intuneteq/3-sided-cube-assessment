@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 
 import { Button } from "@/components/atoms";
-import { ContainerI, StackCard } from "@/components/molecules";
+import { StackCard } from "@/components/molecules";
+import { ContainerI } from "@/components/templates";
 
 export const metadata: Metadata = {
   title: "Submitted",

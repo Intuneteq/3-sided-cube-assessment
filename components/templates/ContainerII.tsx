@@ -1,11 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 
-import { Sticker } from "../";
-import { Button, ProgressBar } from "@/components/atoms";
-import { Modal, SelectNominee } from "@/components/organisms";
+import { ProgressBar } from "@/components/atoms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
 
@@ -32,9 +28,6 @@ type Props = {
 
   /** String in percentage. Add regex validation later */
   progress: string;
-
-  /** Path url for next button */
-  nextPage: string;
 };
 
 export default function ContainerII({
@@ -43,9 +36,7 @@ export default function ContainerII({
   heading,
   content,
   center,
-  singleBtn,
   progress,
-  nextPage,
 }: Props) {
   return (
     <>

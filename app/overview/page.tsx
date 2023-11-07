@@ -1,7 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
 
-import { ContainerII, OverviewCard } from "@/components/molecules";
+import { OverviewCard } from "@/components/molecules";
+import { ContainerII } from "@/components/templates";
 
 export const metadata: Metadata = {
   title: "Overview",
@@ -18,7 +19,6 @@ export default function Overview() {
         center
         singleBtn
         progress="95%"
-        nextPage="/submitted"
       >
         <div className="w-full flex flex-col gap-2 justify-center items-center mb-[2.12rem]">
           <OverviewCard title="Cube's name" content="David" />

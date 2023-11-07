@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
-import { ContainerII } from "@/components/molecules";
 import { Rhf } from "@/components/organisms";
+import { ContainerII } from "@/components/templates";
 
 export const metadata: Metadata = {
   title: "Select Fairness",
@@ -16,7 +16,6 @@ export default function Fair() {
         content="As you know, out the nominees chosen, we spin a wheel to pick the cube of the month. What’s your opinion on this method?"
         img="/ratings.png"
         progress="75%"
-        nextPage="/overview"
       >
         <div className="w-full">
           <Rhf

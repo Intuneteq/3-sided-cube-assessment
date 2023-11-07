@@ -1,11 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
 
-import { FormInput } from "@/components/atoms";
-import { ContainerII } from "@/components/molecules";
-
-import { roboto } from "@/fonts";
 import { Rhf } from "@/components/organisms";
+import { ContainerII } from "@/components/templates";
 
 export const metadata: Metadata = {
   title: "Select Nominee",
@@ -14,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function SelectNominee() {
   const options = ["one", "two"];
-  const submit = async () => {};
+
   return (
     <main className="flex justify-start md:justify-center items-center w-full md:min-h-screen gap-2 flex-col md:py-5">
       <ContainerII
@@ -23,7 +20,6 @@ export default async function SelectNominee() {
         heading="I&rsquo;d like to nominate..."
         img="/select.png"
         progress="25%"
-        nextPage="/reason"
       >
         <div className="flex-start w-full">
           <Rhf

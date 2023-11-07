@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
-import { ContainerII } from "@/components/molecules";
 import { Rhf } from "@/components/organisms";
+import { ContainerII } from "@/components/templates";
 
 export const metadata: Metadata = {
   title: "Reason",
