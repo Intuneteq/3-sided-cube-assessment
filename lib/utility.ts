@@ -5,14 +5,14 @@ export function isURL(str: string) {
   return urlPattern.test(str);
 }
 
-export function decorateWord(inputString: string, wordToWrap: string) {
-  console.log(wordToWrap);
-
-  return inputString.replace(
-    new RegExp(wordToWrap, "g"),
-    `<span style={color: "#FFFFF"} className="text-primary-pink">${wordToWrap}</span>`
+export const decorateWord = (text: string, toDecorate: string) => {
+  const regex = new RegExp(`\\b${toDecorate}\\b`, "g");
+  return text.replace(
+    regex,
+    `<span style="color: #F70087">${toDecorate}</span>`
   );
-}
+};
+
 
 export function groupOptions(nominees: Nominee[]): Option[] {
   const options = nominees.map((nominee) => {

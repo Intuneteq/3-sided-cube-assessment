@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -7,6 +7,7 @@ import { ProgressBar } from "@/components/atoms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
 import { useQueryClient } from "@tanstack/react-query";
+import { decorateWord } from "@/lib/utility";
 
 type Props = {
   children: React.ReactNode;
@@ -40,13 +41,19 @@ export default function ContainerII({
   content,
   center,
   progress,
+  toDecorate,
 }: Props) {
   const queryClient = useQueryClient();
 
   // Retrieve the form data from the query key
-  const formData = queryClient.getQueryData(["formData"])
+  const formData = queryClient.getQueryData<FormValues>(["formData"]);
   // Now, you can use the formData object in your page
   console.log("Form Data:", formData);
+
+  const decoratedContent = toDecorate
+    ? decorateWord(heading, toDecorate)
+    : heading;
+
   return (
     <>
       <section className="w-full md:w-[50rem] min-h-[36.9375rem] md:py-10 bg-primary-white flex flex-col justify-start items-center">
@@ -76,9 +83,8 @@ export default function ContainerII({
         >
           <h2
             className={`${poppins.className} text-2xl font-bold uppercase max-w-[37.5rem]`}
-          >
-            {heading}
-          </h2>
+            dangerouslySetInnerHTML={{ __html: decoratedContent }}
+          ></h2>
           <p
             className={`${anonymous_Pro.className} mb-[2.12rem] text-secondary-dark text-base font-normal max-w-[37.5rem]`}
           >

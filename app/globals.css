@@ -66,29 +66,29 @@ input[type="radio"]:checked::before {
   transform: scale(1);
 }
 
-input[type="range"] {
+/* input[type="range"] {
   appearance: none;
   outline: none;
   height: 0.5rem;
   background: #c3c3c3;
-  /* overflow: hidden; */
-}
+  overflow: hidden;
+} */
 
-input[type="range"]::-webkit-slider-thumb {
+/* input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
   background: #f70087;
   cursor: pointer;
-}
+} */
 
 /* select::after {
   border: 1px solid red;
 } */
 
 .liner {
-  border: 1px solid red;
+  border: 1px solid red !important;
 }
 
 .liner-blue {
