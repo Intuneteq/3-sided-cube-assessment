@@ -23,7 +23,7 @@ export default function Fair() {
             type="range"
             placeholder="rating"
             label="rating"
-            name="rating"
+            name="Rating"
             hideLabel
           />
         </div>

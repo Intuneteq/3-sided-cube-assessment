@@ -19,6 +19,7 @@ const config: Config = {
       "dark-grey": "#5B5B5B",
       "mid-grey": "#C3C3C3",
       "light-grey": "#F8F8F8",
+      "error": "#DC3545"
     },
     extend: {
       backgroundImage: {

@@ -42,13 +42,13 @@ export default function Rhf({
 
   const form = useForm<FormValues>();
 
-  const { handleSubmit, formState, register, watch } = form;
+  const { handleSubmit, formState, register, watch, control } = form;
 
   const { errors } = formState;
 
   const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
 
-  console.log(watch("reasoning"));
+  console.log(watch(name));
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
@@ -61,6 +61,8 @@ export default function Rhf({
             hideLabel={hideLabel}
             register={register}
             options={options}
+            control={control}
+            errors={errors}
           />
         </div>
 

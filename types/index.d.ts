@@ -8,7 +8,7 @@ type Stack = "none" | "vertical" | "horizontal"
 
 type BtnType = "button" | "submit" | "link" | "anchor";
 
-type Inputs = "nominee" | "reasoning" | "rating";
+type Inputs = "Nominee" | "Reasoning" | "Rating";
 
 type FormType = "text" | "tel" | "email" | "password" | "textarea" | "select" | "range";
 

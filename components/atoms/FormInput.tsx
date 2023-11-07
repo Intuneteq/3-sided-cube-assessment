@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { UseFormRegister } from "react-hook-form";
+import {
+  Control,
+  UseFormRegister,
+  Controller,
+  FieldErrors,
+} from "react-hook-form";
 
 import {
   EyeClosedIcon,
@@ -12,25 +17,34 @@ import {
   VeryFair,
   VeryUnfair,
 } from "./";
-
-import { poppins, anonymous_Pro, roboto } from "@/fonts";
 import { MobileRating } from "../molecules";
 
+import { poppins, anonymous_Pro, roboto } from "@/fonts";
+
 type Props = {
+  /** Form type */
   type: FormType;
 
+  /** Input Placeholder */
   placeholder: string;
 
+  /** Input Label */
   label: string;
 
+  /** Input name */
   name: Inputs;
 
+  /** Select options */
   options?: Array<Option>;
 
   /** hide input label element */
   hideLabel?: boolean;
 
   register: UseFormRegister<FormValues>;
+
+  control: Control<FormValues, any>;
+
+  errors?: FieldErrors<FormValues>;
 };
 
 export default function FormInput({
@@ -41,15 +55,12 @@ export default function FormInput({
   options,
   hideLabel,
   register,
+  control,
+  errors,
 }: Props) {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
   const selectRef = useRef<HTMLDivElement>(null);
-
-  const handleOptionClick = (option: { value: string; label: string }) => {
-    setSelectedValue(option.label); // Set the selected value when an option is clicked
-    setShowDropDown(false); // Close the dropdown
-  };
+  console.log("errors", errors);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -59,7 +70,7 @@ export default function FormInput({
       setShowDropDown(false);
     }
   };
-  
+
   useEffect(() => {
     if (type === "select") {
       window.addEventListener("click", handleClickOutside);
@@ -103,7 +114,7 @@ export default function FormInput({
           aria-describedby={`error-${name}`}
           aria-labelledby={`label-${name}`}
           aria-placeholder={placeholder}
-          {...register(name)}
+          {...register(name, { required: `${name} is required` })}
         />
       );
     }
@@ -131,8 +142,7 @@ export default function FormInput({
     }
 
     if (type === "select") {
-      if (!options || !options.length)
-        throw new Error("Select Options not populated");
+      if (!options || !options.length) throw new Error("Nominee not populated");
 
       inputClasses = [
         ...inputClasses,
@@ -140,36 +150,46 @@ export default function FormInput({
         "custom-select",
         "max-w-[25.6875rem]",
       ];
-      
+
       return (
-        <div
-          ref={selectRef}
-          className="h-auto  w-full max-w-[25.6875rem] bg-primary-white relative"
-        >
-          <input
-            readOnly
-            placeholder="Select Options"
-            defaultValue={options[0].label}
-            type="text"
-            onClick={() => setShowDropDown(!showDropDown)}
-            className={inputClasses.join(" ")}
-            value={selectedValue}
-            {...register(name, { required: `${name} is required` })}
+        <div className="w-full">
+          <Controller
+            name={name}
+            control={control}
+            rules={{ required: `${name} is required` }}
+            render={({ field }) => (
+              <div
+                ref={selectRef}
+                className="h-auto w-full max-w-[25.6875rem] bg-primary-white relative"
+              >
+                <input
+                  type="text"
+                  placeholder="Select Options"
+                  onClick={() => setShowDropDown(!showDropDown)}
+                  className={inputClasses.join(" ")}
+                  value={field.value}
+                  readOnly
+                />
+                {showDropDown && (
+                  <div className="w-full flex flex-col items-center justify-center  gap-[0.06rem] absolute bg-primary-white">
+                    {options.map((option, ind) => (
+                      <button
+                        key={ind}
+                        type="button"
+                        onClick={() => {
+                          field.onChange(option.value);
+                          setShowDropDown(false);
+                        }}
+                        className={`${anonymous_Pro.className} text-normal text-base w-full h-[2.625rem] bg-light-grey text-left py-[0.375rem] px-[0.75rem]`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           />
-          {showDropDown && (
-            <div className="w-full flex flex-col items-center justify-center  gap-[0.06rem] absolute bg-primary-white">
-              {options.map((option, ind) => (
-                <button
-                  type="button"
-                  key={ind}
-                  onClick={() => handleOptionClick(option)}
-                  className={`${anonymous_Pro.className} text-normal text-base w-full h-[2.625rem] bg-light-grey text-left py-[0.375rem] px-[0.75rem]`}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          )}
         </div>
       );
     }
@@ -252,6 +272,13 @@ export default function FormInput({
         <span className="text-secondary-pink">*</span> {label}
       </label>
       {renderInput()}
+      {errors && errors[name]?.message && (
+        <small
+          className={`${poppins.className} mt-[0.25rem] text-[0.875rem] text-error`}
+        >
+          {errors[name]?.message}
+        </small>
+      )}
     </div>
   );
 }
