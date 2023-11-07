@@ -19,7 +19,7 @@ export default function Fair() {
       >
         <div className="w-full">
           <Rhf
-            nextPage="/overview"
+            nextPage="overview"
             type="range"
             placeholder="rating"
             label="rating"

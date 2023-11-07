@@ -22,7 +22,7 @@ export default async function SelectNominee() {
       >
         <div className="flex-start w-full">
           <Rhf
-            nextPage="/reason"
+            nextPage="reason"
             type="select"
             placeholder="Nominee"
             label="Cube&rsquo;s name"

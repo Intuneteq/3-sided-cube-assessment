@@ -20,7 +20,7 @@ export default function Reason() {
       >
         <div className="w-full">
           <Rhf
-            nextPage="/rating"
+            nextPage="rating"
             type="textarea"
             placeholder="Reasoning"
             label="Reasoning"

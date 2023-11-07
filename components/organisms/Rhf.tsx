@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 import { Modal } from "./";
 import { Button, FormInput } from "../atoms";
 import { Sticker } from "../molecules";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getNominees, selectNominee } from "@/app/select-nominee/actions";
+import { getNominees } from "@/app/select-nominee/actions";
 import { groupOptions } from "@/lib/utility";
 
 type Props = {
@@ -35,9 +35,11 @@ type Props = {
 
 // Dynamic resolver function based on the name
 const createResolver = (name: keyof FormValues) => {
-  const schema = yup.object({
-    [name]: yup.string().required(),
-  }).required();
+  const schema = yup
+    .object({
+      [name]: yup.string().required(),
+    })
+    .required();
 
   return yupResolver(schema) as any;
 };
@@ -52,11 +54,10 @@ export default function Rhf({
   hideLabel,
 }: Props) {
   const [showModal, setShowModal] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-  
   const { data, error, isFetched } = useQuery({
     queryKey: ["nominees"],
     queryFn: getNominees,
@@ -64,7 +65,7 @@ export default function Rhf({
 
   if (error) throw new Error(error.message);
 
-  if(!data) throw new Error("No data");
+  if (!data) throw new Error("No data");
 
   const nominees = groupOptions(data);
 
@@ -77,20 +78,19 @@ export default function Rhf({
   const { errors } = formState;
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log('Submitting data:', data);
-  
+    console.log("Submitting data:", data);
+
     // Set the form data in a query key
-    queryClient.setQueryData(["formData"], {
-      nominee: data.nominee,
+    queryClient.setQueryData(["formData"], (cachedData: FormValues) => {
+      return {
+        ...cachedData,
+        ...data,
+      };
     });
 
-    console.log('next', nextPage);
-    
-  
-    router.push(`/reason`, { scroll: false });
-    // router.push(`/${nextPage}`, { scroll: false });
+    router.push(`/${nextPage}`, { scroll: false });
   };
-  
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
