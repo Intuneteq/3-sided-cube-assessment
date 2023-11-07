@@ -35,7 +35,7 @@ export default async function SelectNominee() {
             options={options}
             placeholder="Nominee"
             label="Cube&rsquo;s name"
-            name="Nominee"
+            name="nominee"
           />
         </div>
       </ContainerII>

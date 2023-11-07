@@ -24,7 +24,7 @@ export default function Reason() {
             type="textarea"
             placeholder="Reasoning"
             label="Reasoning"
-            name="Reasoning"
+            name="reasoning"
           />
         </div>
       </ContainerII>

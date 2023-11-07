@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import * as yup from "Yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Modal } from "./";
@@ -27,6 +29,14 @@ type Props = {
   hideLabel?: boolean;
 };
 
+const schema = yup
+  .object({
+    nominee: yup.string().required(),
+    reasoning: yup.string().required(),
+    rating: yup.string().required(),
+  })
+  .required();
+
 export default function Rhf({
   type,
   placeholder,
@@ -35,12 +45,13 @@ export default function Rhf({
   singleBtn,
   nextPage,
   options,
-  hideLabel
+  hideLabel,
 }: Props) {
   const [showModal, setShowModal] = useState(false);
-  
 
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  });
 
   const { handleSubmit, formState, register, watch, control } = form;
 
@@ -86,7 +97,7 @@ export default function Rhf({
               type="button"
               width="w-[6.5rem]"
               height="h-[3.125rem]"
-               onClick={() => setShowModal(true)}
+              onClick={() => setShowModal(true)}
             >
               Back
             </Button>
@@ -96,9 +107,6 @@ export default function Rhf({
               width="w-[13.9375rem]"
               height="h-[3.125rem]"
               href={nextPage}
-              // onClick={}
-              // disable
-              // inactive
             >
               next
             </Button>
