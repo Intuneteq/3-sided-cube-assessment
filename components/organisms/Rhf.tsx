@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import * as yup from "Yup";
+import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import { Modal } from "./";
 import { Button, FormInput } from "../atoms";
@@ -27,15 +27,18 @@ type Props = {
   nextPage: string;
 
   hideLabel?: boolean;
+
+  // formAction: any;
 };
 
-const schema = yup
-  .object({
-    nominee: yup.string().required(),
-    reasoning: yup.string().required(),
-    rating: yup.string().required(),
-  })
-  .required();
+// Dynamic resolver function based on the name
+const createResolver = (name: keyof FormValues) => {
+  const schema = yup.object({
+    [name]: yup.string().required(),
+  }).required();
+
+  return yupResolver(schema) as any;
+};
 
 export default function Rhf({
   type,
@@ -50,16 +53,17 @@ export default function Rhf({
   const [showModal, setShowModal] = useState(false);
 
   const form = useForm<FormValues>({
-    resolver: yupResolver(schema),
+    resolver: createResolver(name),
   });
 
-  const { handleSubmit, formState, register, watch, control } = form;
+  const { handleSubmit, formState, register, control } = form;
 
   const { errors } = formState;
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
-
-  console.log(watch(name));
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    console.log('what', data)
+ };
+  
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">

@@ -63,7 +63,7 @@ export default function ModalCard({
       <h3
         className={`${
           poppins.className
-        } text-primary-black text-lg font-bold uppercase ${
+        } text-primary-black text-lg font-bold uppercase liner ${
           error ? "text-[#FF0000]" : ""
         }`}
       >

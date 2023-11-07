@@ -60,7 +60,6 @@ export default function FormInput({
 }: Props) {
   const [showDropDown, setShowDropDown] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
-  console.log("errors", errors);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (

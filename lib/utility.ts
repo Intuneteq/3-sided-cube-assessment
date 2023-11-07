@@ -1,4 +1,4 @@
-import yup from "Yup";
+
 
 export function isURL(str: string) {
   // Regular expression for a URL
@@ -15,3 +15,4 @@ export function decorateWord(inputString: string, wordToWrap: string) {
     `<span style={color: "#FFFFF"} className="text-primary-pink">${wordToWrap}</span>`
   );
 }
+

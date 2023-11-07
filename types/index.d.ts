@@ -10,7 +10,11 @@ type BtnType = "button" | "submit" | "link" | "anchor";
 
 type Inputs = "nominee" | "reasoning" | "rating";
 
-type FormValues = { [K in Inputs]: string };
+type FormValues = {
+  nominee: string;
+  reasoning: string;
+  rating: string;
+};;
 
 type FormType = "text" | "tel" | "email" | "password" | "textarea" | "select" | "range";
 
