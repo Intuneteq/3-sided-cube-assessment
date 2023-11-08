@@ -8,19 +8,21 @@ export function isURL(str: string) {
 export const decorateNominee = (
   text: string,
   toDecorate: string,
-  nominee_id: string,
-  nominees: Nominee[]
+  nominee: Nominee
 ) => {
-  const nominee = nominees.find((item) => item.nominee_id === nominee_id);
-
-  if (!nominee) return text;
-
   const regex = new RegExp(`\\b${toDecorate}\\b`, "g");
   return text.replace(
     regex,
     `<span style="color: #F70087">${nominee.first_name}</span>`
   );
 };
+
+export function findNominee(
+  nominees: Nominee[],
+  nominee_id: string
+): Nominee | undefined {
+  return nominees.find((item) => item.nominee_id === nominee_id);
+}
 
 export function groupOptions(nominees: Nominee[]): Option[] {
   const options = nominees.map((nominee) => {

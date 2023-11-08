@@ -3,6 +3,7 @@ import { Metadata } from "next";
 
 import { OverviewCard } from "@/components/molecules";
 import { ContainerII } from "@/components/templates";
+import { Button } from "@/components/atoms";
 
 export const metadata: Metadata = {
   title: "Overview",
@@ -17,7 +18,6 @@ export default function Overview() {
         heading="nomination overview"
         content="Thank you for taking the time to nominate a fellow cube. Please check your answers before submitting."
         center
-        singleBtn
         progress="95%"
       >
         <div className="w-full flex flex-col gap-2 justify-center items-center mb-[2.12rem]">
@@ -30,6 +30,16 @@ export default function Overview() {
             title="Thoughts on Current Process"
             content="Very Fair"
           />
+        </div>
+        <div >
+          <Button
+            scheme="primary"
+            type="button"
+            width="w-[13.9375rem]"
+            height="h-[3.125rem]"
+          >
+            Submit
+          </Button>
         </div>
       </ContainerII>
     </main>

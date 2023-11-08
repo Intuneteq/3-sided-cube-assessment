@@ -11,7 +11,7 @@ import { Button, FormInput } from "../atoms";
 import { Sticker } from "../molecules";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getNominees } from "@/app/select-nominee/actions";
-import { groupOptions } from "@/lib/utility";
+import { findNominee, groupOptions } from "@/lib/utility";
 
 type Props = {
   type: FormType;
@@ -79,6 +79,18 @@ export default function Rhf({
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     console.log("Submitting data:", data);
+
+    if (data.nominee) {
+      const nominees = queryClient.getQueryData<Nominee[]>(["nominees"]);
+
+      if (!nominees) return;
+
+      const nominee = findNominee(nominees, data.nominee);
+
+      queryClient.setQueryData(["nominee"], (cachedData: Nominee) => {
+        return { ...cachedData, ...nominee };
+      });
+    }
 
     // Set the form data in a query key
     queryClient.setQueryData(["formData"], (cachedData: FormValues) => {

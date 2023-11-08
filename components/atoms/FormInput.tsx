@@ -63,8 +63,6 @@ export default function FormInput({
   const selectRef = useRef<HTMLDivElement>(null);
 
   const handleButtonClick = (value: number) => {
-    console.log('value', value);
-    
     setInputValue(value);
   };
 

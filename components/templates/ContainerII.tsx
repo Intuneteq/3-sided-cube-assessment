@@ -2,12 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { ProgressBar } from "@/components/atoms";
 
-import { anonymous_Pro, poppins } from "@/fonts";
-import { useQueryClient } from "@tanstack/react-query";
 import { decorateNominee } from "@/lib/utility";
+import { anonymous_Pro, poppins } from "@/fonts";
 
 type Props = {
   children: React.ReactNode;
@@ -44,14 +44,12 @@ export default function ContainerII({
   toDecorate,
 }: Props) {
   const queryClient = useQueryClient();
-  
-  const formData = queryClient.getQueryData<FormValues>(["formData"]);
 
-  const nominees = queryClient.getQueryData<Nominee[]>(["nominees"]);
+  const nominee = queryClient.getQueryData<Nominee>(["nominee"]);
 
   const decoratedContent =
-    formData?.nominee && nominees && toDecorate
-      ? decorateNominee(heading, toDecorate, formData.nominee, nominees)
+    nominee && toDecorate
+      ? decorateNominee(heading, toDecorate, nominee)
       : heading;
 
   return (
