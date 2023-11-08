@@ -1,3 +1,5 @@
+import { ProcessValues } from "./constants";
+
 export function isURL(str: string) {
   // Regular expression for a URL
   const urlPattern = /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(:\d{1,5})?[/\w .-]*$/i;
@@ -33,4 +35,26 @@ export function groupOptions(nominees: Nominee[]): Option[] {
   });
 
   return options;
+}
+
+export function processValue(value: number) {
+  switch (value) {
+    case 1:
+      return ProcessValues.VERY_UNFAIR;
+
+    case 2:
+      return ProcessValues.UNFAIR;
+
+    case 3:
+      return ProcessValues.NOT_SURE;
+
+    case 4:
+      return ProcessValues.FAIR;
+
+    case 5:
+      return ProcessValues.VERY_FAIR;
+
+    default:
+      return ProcessValues.VERY_UNFAIR;
+  }
 }

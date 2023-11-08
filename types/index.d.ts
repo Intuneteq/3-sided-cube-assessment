@@ -4,7 +4,7 @@ type Svg = {
   stroke?: string;
 };
 
-type Stack = "none" | "vertical" | "horizontal"
+type Stack = "none" | "vertical" | "horizontal";
 
 type BtnType = "button" | "submit" | "link" | "anchor";
 
@@ -14,9 +14,16 @@ type FormValues = {
   nominee: string;
   reasoning: string;
   rating: string;
-};;
+};
 
-type FormType = "text" | "tel" | "email" | "password" | "textarea" | "select" | "range";
+type FormType =
+  | "text"
+  | "tel"
+  | "email"
+  | "password"
+  | "textarea"
+  | "select"
+  | "range";
 
 interface Option {
   value: string;
@@ -27,4 +34,4 @@ type Nominee = {
   nominee_id: string;
   first_name: string;
   last_name: string;
-}
+};

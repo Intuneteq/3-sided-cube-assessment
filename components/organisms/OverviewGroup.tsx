@@ -5,21 +5,25 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { OverviewCard } from "../molecules";
 
+import { processValue } from "@/lib/utility";
+
 export default function OverviewGroup() {
   const queryClient = useQueryClient();
 
-  const formData = queryClient.getQueryData<FormValues>(["formData"]);
+  const nominee = queryClient.getQueryData<Nominee>(["nominee"]);
 
-  // const nominees = queryClient.getQueryData<Nominee[]>(["nominees"]);
+  const formValue = queryClient.getQueryData<FormValues>(["formData"]);
+
+  if (!nominee || !formValue) throw new Error("Nominee not Found");
 
   return (
     <div className="w-full flex flex-col gap-2 justify-center items-center mb-[2.12rem]">
-      <OverviewCard title="Cube's name" content="David" />
+      <OverviewCard title="Cube's name" content={nominee.first_name} />
+      <OverviewCard title="Reasoning" content={formValue.reasoning} />
       <OverviewCard
-        title="Reasoning"
-        content="David always goes above and beyond with all the work that he does. He’s also a lovey person to work with!"
+        title="Thoughts on Current Process"
+        content={processValue(parseInt(formValue.rating))}
       />
-      <OverviewCard title="Thoughts on Current Process" content="Very Fair" />
     </div>
   );
 }

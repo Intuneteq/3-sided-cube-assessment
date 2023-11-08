@@ -20,6 +20,7 @@ import {
 import { MobileRating } from "../molecules";
 
 import { poppins, anonymous_Pro, roboto } from "@/fonts";
+import { ProcessValues } from "@/lib/constants";
 
 type Props = {
   /** Form type */
@@ -212,8 +213,8 @@ export default function FormInput({
               max={5}
               step={1}
               className="w-full"
-              // name={name} 
-              {...register(name)} 
+              // name={name}
+              {...register(name)}
               value={inputValue}
               onChange={(e) => setInputValue(parseInt(e.target.value))}
             />
@@ -221,7 +222,7 @@ export default function FormInput({
             <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
               <ReactionSmiley
                 onClick={() => handleButtonClick(1)}
-                name="Very Unfair"
+                name={ProcessValues.VERY_UNFAIR}
                 value={1}
                 inputValue={inputValue}
               >
@@ -229,7 +230,7 @@ export default function FormInput({
               </ReactionSmiley>
               <ReactionSmiley
                 onClick={() => handleButtonClick(2)}
-                name="unfair"
+                name={ProcessValues.UNFAIR}
                 value={2}
                 inputValue={inputValue}
               >
@@ -237,7 +238,7 @@ export default function FormInput({
               </ReactionSmiley>
               <ReactionSmiley
                 onClick={() => handleButtonClick(3)}
-                name="not sure"
+                name={ProcessValues.NOT_SURE}
                 value={3}
                 inputValue={inputValue}
               >
@@ -245,7 +246,7 @@ export default function FormInput({
               </ReactionSmiley>
               <ReactionSmiley
                 onClick={() => handleButtonClick(4)}
-                name="fair"
+                name={ProcessValues.FAIR}
                 value={4}
                 inputValue={inputValue}
               >
@@ -253,7 +254,7 @@ export default function FormInput({
               </ReactionSmiley>
               <ReactionSmiley
                 onClick={() => handleButtonClick(5)}
-                name="very fair"
+                name={ProcessValues.VERY_FAIR}
                 value={5}
                 inputValue={inputValue}
               >

@@ -1,9 +1,10 @@
 import React from "react";
 import { Metadata } from "next";
 
-import { OverviewCard } from "@/components/molecules";
+// import { OverviewCard } from "@/components/molecules";
 import { ContainerII } from "@/components/templates";
 import { Button } from "@/components/atoms";
+import { OverviewGroup } from "@/components/organisms";
 
 export const metadata: Metadata = {
   title: "Overview",
@@ -20,18 +21,8 @@ export default function Overview() {
         center
         progress="95%"
       >
-        <div className="w-full flex flex-col gap-2 justify-center items-center mb-[2.12rem]">
-          <OverviewCard title="Cube's name" content="David" />
-          <OverviewCard
-            title="Reasoning"
-            content="David always goes above and beyond with all the work that he does. He’s also a lovey person to work with!"
-          />
-          <OverviewCard
-            title="Thoughts on Current Process"
-            content="Very Fair"
-          />
-        </div>
-        <div >
+        <OverviewGroup />
+        <div>
           <Button
             scheme="primary"
             type="button"
