@@ -158,8 +158,8 @@ export default function Rhf({
               width="w-[13.9375rem]"
               height="h-[3.125rem]"
               href={nextPage}
-              disable={!isDirty || !isValid}
-              inactive={!isDirty || !isValid}
+              disable={!isValid}
+              inactive={!isValid}
             >
               next
             </Button>
@@ -174,17 +174,21 @@ export default function Rhf({
             width="w-[6.25rem]"
             height="h-[3.08594rem]"
             textSize="text-[0.875rem]"
+            onClick={() => setShowModal(true)}
           >
             Back
           </Button>
           <Button
             scheme="primary"
-            type="button"
+            type="submit"
             width="w-[13.3125rem]"
             height="h-[3.0625rem]"
             textSize="text-[0.875rem]"
+            href={nextPage}
+              disable={!isValid}
+              inactive={!isValid}
           >
-            Submit
+            next
           </Button>
         </Sticker>
       </form>

@@ -1,8 +1,3 @@
-/**
- * 1. Form UI incomplete
- * 4. Select drop down fix
- * 5. Sticky button space issue
- */
 import { Metadata } from "next";
 
 import { Button } from "@/components/atoms";
@@ -44,7 +39,7 @@ export default function Home() {
               type="link"
               width="w-[17.875rem]"
               height="h-[3.125rem]"
-              href="/"
+              href="/select-nominee"
             >
               Get started
             </Button>

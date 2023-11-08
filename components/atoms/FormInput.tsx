@@ -214,8 +214,8 @@ export default function FormInput({
               step={1}
               className="w-full"
               {...register(name)}
-              value={inputValue}
-              onChange={(e) => setInputValue(parseInt(e.target.value))}
+              // value={inputValue}
+              // onChange={(e) => setInputValue(parseInt(e.target.value))}
             />
 
             <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
