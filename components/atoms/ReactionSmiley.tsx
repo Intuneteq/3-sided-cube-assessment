@@ -8,12 +8,18 @@ type Props = {
 
   /** Reaction Name */
   name: string;
+
+  onClick: () => void;
+
+  value: number;
+
+  inputValue: number;
 };
 
-export default function ReactionSmiley({ children, name }: Props) {
+export default function ReactionSmiley({ children, name, onClick, value, inputValue }: Props) {
   return (
-    <button type="button" className="flex flex-col justify-center items-center  cursor-pointer">
-      <div className="w-[3.75rem] h-[3.75rem] bg-light-grey flex justify-center items-center">
+    <button onClick={onClick} type="button" className="flex flex-col justify-center items-center  cursor-pointer">
+      <div className={`w-[3.75rem] h-[3.75rem] bg-light-grey flex justify-center items-center hover:bg-mid-grey ${value === inputValue && "bg-mid-grey"}`}>
         {children}
       </div>
       <p className={`text-center ${anonymous_Pro.className} text-base font-bold capitalize mt-3`}>{name}</p>

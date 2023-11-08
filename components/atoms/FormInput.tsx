@@ -59,7 +59,14 @@ export default function FormInput({
   errors,
 }: Props) {
   const [showDropDown, setShowDropDown] = useState(false);
+  const [inputValue, setInputValue] = useState(1);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  const handleButtonClick = (value: number) => {
+    console.log('value', value);
+    
+    setInputValue(value);
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -205,25 +212,53 @@ export default function FormInput({
               type={type}
               min={1}
               max={5}
-              // value={4}
               step={1}
               className="w-full"
+              // name={name} 
+              {...register(name)} 
+              value={inputValue}
+              onChange={(e) => setInputValue(parseInt(e.target.value))}
             />
 
             <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
-              <ReactionSmiley name="Very Unfair">
+              <ReactionSmiley
+                onClick={() => handleButtonClick(1)}
+                name="Very Unfair"
+                value={1}
+                inputValue={inputValue}
+              >
                 <VeryUnfair className="w-[2.18763rem] h-[2.18763rem]" />
               </ReactionSmiley>
-              <ReactionSmiley name="unfair">
+              <ReactionSmiley
+                onClick={() => handleButtonClick(2)}
+                name="unfair"
+                value={2}
+                inputValue={inputValue}
+              >
                 <Unfair className="w-[2.18763rem] h-[2.18763rem]" />
               </ReactionSmiley>
-              <ReactionSmiley name="not sure">
+              <ReactionSmiley
+                onClick={() => handleButtonClick(3)}
+                name="not sure"
+                value={3}
+                inputValue={inputValue}
+              >
                 <NotSure className="w-[2.18763rem] h-[2.18763rem]" />
               </ReactionSmiley>
-              <ReactionSmiley name="fair">
+              <ReactionSmiley
+                onClick={() => handleButtonClick(4)}
+                name="fair"
+                value={4}
+                inputValue={inputValue}
+              >
                 <Fair className="w-[2.18763rem] h-[2.18763rem]" />
               </ReactionSmiley>
-              <ReactionSmiley name="very fair">
+              <ReactionSmiley
+                onClick={() => handleButtonClick(5)}
+                name="very fair"
+                value={5}
+                inputValue={inputValue}
+              >
                 <VeryFair className="w-[2.18763rem] h-[2.18763rem]" />
               </ReactionSmiley>
             </div>
