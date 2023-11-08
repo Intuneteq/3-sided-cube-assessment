@@ -64,6 +64,8 @@ export default function Rhf({
     queryFn: getNominees,
   });
 
+  const preFormData = queryClient.getQueryData<FormValues>(["formData"]);
+
   if (error) throw new Error(error.message);
 
   if (!data) throw new Error("No data");
@@ -72,6 +74,11 @@ export default function Rhf({
 
   const form = useForm<FormValues>({
     resolver: createResolver(name),
+    defaultValues: {
+      nominee: preFormData?.nominee,
+      rating: preFormData?.rating,
+      reasoning: preFormData?.reasoning,
+    },
   });
 
   const { handleSubmit, formState, register, control } = form;

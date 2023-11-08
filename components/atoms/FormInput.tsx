@@ -213,7 +213,6 @@ export default function FormInput({
               max={5}
               step={1}
               className="w-full"
-              // name={name}
               {...register(name)}
               value={inputValue}
               onChange={(e) => setInputValue(parseInt(e.target.value))}

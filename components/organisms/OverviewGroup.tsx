@@ -18,11 +18,12 @@ export default function OverviewGroup() {
 
   return (
     <div className="w-full flex flex-col gap-2 justify-center items-center mb-[2.12rem]">
-      <OverviewCard title="Cube's name" content={nominee.first_name} />
-      <OverviewCard title="Reasoning" content={formValue.reasoning} />
+      <OverviewCard title="Cube's name" content={nominee.first_name} path='/select-nominee' />
+      <OverviewCard title="Reasoning" content={formValue.reasoning} path='/reason' />
       <OverviewCard
         title="Thoughts on Current Process"
         content={processValue(parseInt(formValue.rating))}
+        path='/rating'
       />
     </div>
   );
