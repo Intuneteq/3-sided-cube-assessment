@@ -7,7 +7,7 @@ import { ProgressBar } from "@/components/atoms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
 import { useQueryClient } from "@tanstack/react-query";
-import { decorateWord } from "@/lib/utility";
+import { decorateNominee } from "@/lib/utility";
 
 type Props = {
   children: React.ReactNode;
@@ -44,15 +44,15 @@ export default function ContainerII({
   toDecorate,
 }: Props) {
   const queryClient = useQueryClient();
-
-  // Retrieve the form data from the query key
+  
   const formData = queryClient.getQueryData<FormValues>(["formData"]);
-  // Now, you can use the formData object in your page
-  console.log("Form Data:", formData);
 
-  const decoratedContent = toDecorate
-    ? decorateWord(heading, toDecorate)
-    : heading;
+  const nominees = queryClient.getQueryData<Nominee[]>(["nominees"]);
+
+  const decoratedContent =
+    formData?.nominee && nominees && toDecorate
+      ? decorateNominee(heading, toDecorate, formData.nominee, nominees)
+      : heading;
 
   return (
     <>
