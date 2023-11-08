@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Cube Academy Cube of the Month Nomination Frontend
+
+This repository contains the Cube Academy Cube of the Month Nomination Frontend, a web application built as part of the 3SC Web Developer Task. The purpose of this project is to demonstrate my ability to build a web application that integrates with an API, follows provided designs, and adheres to best coding practices.
+
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Getting Started](#getting-started)
+- [Challenges and Solutions](#challenges-and-solutions)
+- [Technologies Used](#technologies-used)
+- [Future Enhancements](#future-enhancements)
+- [Questions](#questions)
+
+## Project Overview
+
+The Cube Academy Cube of the Month Nomination Frontend is a web application designed to allow users to nominate their favorite cube of the month. It follows the provided designs, which include a design system for theming and re-usable elements, as well as desktop and mobile layouts to ensure responsiveness.
 
 ## Getting Started
 
-First, run the development server:
+To run the project locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone this repository to your local machine:
+   ```
+   git clone https://github.com/intuneteq/3-sided-cube-assessment.git
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to the project directory:
+   ```
+   cd 3-sided-cube-assessment
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Install the project dependencies using npm or yarn:
+   ```
+   npm install
+   # or
+   yarn install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Start the development server:
+   ```
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-## Learn More
+The application should now be running at `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## Challenges and Solutions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Throughout the development of this project, I encountered some challenges and overcame them as follows:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Challenge: Understanding the API documentation.
+   Solution: I thoroughly reviewed the provided OpenAPI docs to understand how to interact with the API and make authenticated requests.
 
-## Deploy on Vercel
+2. Challenge: Integrating the API with the frontend.
+   Solution: While I did not use API code generation due to my lack of prior experience and time constraints, I successfully integrated the API by using Axios for making REST requests and Tanstack Query (useQuery) to manually generate hooks from the API documentation, as recommended. This approach allowed for seamless integration between the frontend and the API.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Challenge: Manipulating React Hook Form with the given input range.
+   Solution: I encountered challenges when working with React Hook Form to handle the input range. I addressed these issues through experimentation and online resources to achieve the desired functionality.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. Challenge: Implementing the delete and edit functionality in the nomination table and creating a responsive table.
+   Solution: Due to the time constraints, I was unable to implement the delete and edit features in the nomination table and make the table responsive. These features require more time and attention to detail, which I was unable to allocate in the given timeframe.
+
+## What I Did Right
+
+While there were challenges, there were also notable achievements in this project:
+
+- I ensured that I built the application following the design system, creating very reusable components for a cohesive and consistent user experience.
+- I made the most of the latest features in Next.js 14, including server actions, layouts, and SEO optimization, to enhance the project's performance and accessibility.
+- I adhered to the Atomic Design principle, structuring the project's components in a modular and efficient manner.
+- I successfully implemented Tanstack Query for state management, providing a robust and maintainable solution for managing API data.
+- The user interface was meticulously crafted and made fully responsive, offering a seamless experience across various devices and screen sizes.
+
+
+## Technologies Used
+
+In this project, I utilized the following technologies:
+
+- Language: Typescript
+- Framework: Next.js
+- Styling: Tailwind.css
+- Forms: React Hook Form with Yup validation
+- REST Requests: Axios for API requests
+- Authentication: Bearer token for authenticated requests
+
+## Additional Features
+
+I added the following additional features to enhance the user experience:
+
+- [Add the features you implemented, if any]
+
+## Future Enhancements
+
+Given more time, I would consider implementing the following enhancements:
+
+- Slide in Animations,
+- Data persistence using Tanstack
+
+## Questions
+
+If you have any questions or need further clarification about any aspect of this project, please feel free to reach out to me at tobiolanitori@gmail.com. I am more than happy to provide additional information and discuss any queries you may have.
+
+Thank you for considering my submission.
+
+Sincerely,
+Tobi Olanitori
