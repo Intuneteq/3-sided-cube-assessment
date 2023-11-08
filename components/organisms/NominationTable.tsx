@@ -7,7 +7,11 @@ import { DeleteIcon, EditIcon } from "../atoms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
 
-export default function NominationTable() {
+type Props = {
+  nomineeInfo: INomination[];
+};
+
+export default function NominationTable({ nomineeInfo }: Props) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -29,24 +33,28 @@ export default function NominationTable() {
           </tr>
         </thead>
         <tbody className={`${anonymous_Pro.className}`}>
-          <tr>
-            <td className="table-data">David Jones</td>
-            <td className="table-data">21/10/23</td>
-            <td className="table-data">29/10/23</td>
-            <td className="table-data max-w-[24.9rem] whitespace-nowrap">
-              Lorem ipsum dolor sit amet, consecet desu...
-            </td>
-            <td className="table-data">Fair</td>
-            <td className="w-[2.5rem]">
-              <DeleteIcon
-                onClick={() => setShowModal(true)}
-                className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
-              />
-            </td>
-            <td className="w-[2.5rem]">
-              <EditIcon className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey" />
-            </td>
-          </tr>
+          {nomineeInfo?.map((nomination) => (
+            <>
+              <tr key={nomination.nominee_id}>
+                <td className="table-data">{nomination.fullName}</td>
+                <td className="table-data">{nomination.date_submitted}</td>
+                <td className="table-data">{nomination.closing_date}</td>
+                <td className="table-data max-w-[24.9rem] whitespace-nowrap">
+                  {nomination.reason}
+                </td>
+                <td className="table-data">{nomination.process}</td>
+                <td className="w-[2.5rem]">
+                  <DeleteIcon
+                    onClick={() => setShowModal(true)}
+                    className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
+                  />
+                </td>
+                <td className="w-[2.5rem]">
+                  <EditIcon className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey" />
+                </td>
+              </tr>
+            </>
+          ))}
         </tbody>
       </table>
       {showModal && (

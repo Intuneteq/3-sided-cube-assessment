@@ -9,6 +9,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import { getNominations } from "./nominations/actions";
 
 export default async function RootLayout({
   children,
@@ -20,6 +21,11 @@ export default async function RootLayout({
   await queryClient.prefetchQuery({
     queryKey: ["nominees"],
     queryFn: getNominees,
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ["nominations"],
+    queryFn: getNominations,
   });
 
   return (

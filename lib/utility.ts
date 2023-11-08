@@ -82,3 +82,56 @@ export function processPayload(value: number) {
       return ProcessPayload.VERY_UNFAIR;
   }
 }
+
+function mapProcessValue(payloadValue: string): ProcessValues {
+  switch (payloadValue) {
+    case ProcessPayload.VERY_UNFAIR:
+      return ProcessValues.VERY_UNFAIR;
+    case ProcessPayload.UNFAIR:
+      return ProcessValues.UNFAIR;
+    case ProcessPayload.NOT_SURE:
+      return ProcessValues.NOT_SURE;
+    case ProcessPayload.FAIR:
+      return ProcessValues.FAIR;
+    case ProcessPayload.VERY_FAIR:
+      return ProcessValues.VERY_FAIR;
+    default:
+      return ProcessValues.FAIR; // Set a default value in case of an unknown value
+  }
+}
+
+export function getNomineesInfo(
+  nominations: Nomination[],
+  nominees: Nominee[]
+): INomination[] {
+  // Create a mapping of nominee_id to Nominee
+  const nomineeMap: Record<string, Nominee> = {};
+  nominees.forEach((nominee) => {
+    nomineeMap[nominee.nominee_id] = nominee;
+  });
+
+  // Transform the nominations into INomination
+  const nomineesInfo: INomination[] = nominations.map((nomination) => {
+    const nominee = nomineeMap[nomination.nominee_id];
+    if (nominee) {
+      return {
+        nominee_id: nomination.nominee_id,
+        fullName: `${nominee.first_name} ${nominee.last_name}`,
+        reason: nomination.reason,
+        process: mapProcessValue(nomination.process),
+        date_submitted: nomination.date_submitted,
+        closing_date: nomination.closing_date,
+      };
+    }
+    return {
+      nominee_id: "",
+      fullName: "Nominee not found",
+      reason: nomination.reason,
+      process: mapProcessValue(nomination.process),
+      date_submitted: nomination.date_submitted,
+      closing_date: nomination.closing_date,
+    };
+  });
+
+  return nomineesInfo;
+}
