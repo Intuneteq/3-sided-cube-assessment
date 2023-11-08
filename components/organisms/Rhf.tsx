@@ -83,7 +83,7 @@ export default function Rhf({
 
   const { handleSubmit, formState, register, control } = form;
 
-  const { errors } = formState;
+  const { errors, isSubmitting, isDirty, isValid } = formState;
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     console.log("Submitting data:", data);
@@ -158,6 +158,8 @@ export default function Rhf({
               width="w-[13.9375rem]"
               height="h-[3.125rem]"
               href={nextPage}
+              disable={!isDirty || !isValid}
+              inactive={!isDirty || !isValid}
             >
               next
             </Button>
