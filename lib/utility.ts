@@ -1,4 +1,6 @@
-import { ProcessValues } from "./constants";
+// import { ProcessValues } from "./constants";
+
+import { ProcessPayload, ProcessValues } from "./constants";
 
 export function isURL(str: string) {
   // Regular expression for a URL
@@ -56,5 +58,27 @@ export function processValue(value: number) {
 
     default:
       return ProcessValues.VERY_UNFAIR;
+  }
+}
+
+export function processPayload(value: number) {
+  switch (value) {
+    case 1:
+      return ProcessPayload.VERY_UNFAIR;
+
+    case 2:
+      return ProcessPayload.UNFAIR;
+
+    case 3:
+      return ProcessPayload.NOT_SURE;
+
+    case 4:
+      return ProcessPayload.FAIR;
+
+    case 5:
+      return ProcessPayload.VERY_FAIR;
+
+    default:
+      return ProcessPayload.VERY_UNFAIR;
   }
 }

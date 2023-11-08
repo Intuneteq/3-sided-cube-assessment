@@ -35,3 +35,13 @@ type Nominee = {
   first_name: string;
   last_name: string;
 };
+
+type CreateNomineeResponse = {
+  nomination_id: "string";
+  nominee_id: "string";
+  reason: "string";
+  process: "string";
+  date_submitted: "string";
+  closing_date: "string";
+};
+

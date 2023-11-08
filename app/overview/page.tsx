@@ -22,16 +22,7 @@ export default function Overview() {
         progress="95%"
       >
         <OverviewGroup />
-        <div>
-          <Button
-            scheme="primary"
-            type="button"
-            width="w-[13.9375rem]"
-            height="h-[3.125rem]"
-          >
-            Submit
-          </Button>
-        </div>
+       
       </ContainerII>
     </main>
   );
