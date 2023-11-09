@@ -54,9 +54,9 @@ export default function ContainerII({
 
   return (
     <>
-      <section className="w-full md:w-[50rem] min-h-[36.9375rem] md:py-10 bg-primary-white flex flex-col justify-start items-center">
+      <section className="w-full md:w-[50rem] min-h-[36.9375rem] py-0 md:py-10 bg-primary-white block md:flex flex-col justify-start items-center">
         {/* Progress bar */}
-        <div className="w-full mb-5 hidden md:block px-10">
+        <div className="w-full md:mb-5 md:h-0 py-3 md:py-0 px-4 md:px-10 bg-primary-black border md:border-none border-primary-black md:bg-none">
           <ProgressBar progress={progress} />
         </div>
 

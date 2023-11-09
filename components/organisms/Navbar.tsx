@@ -5,20 +5,14 @@ import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { anonymous_Pro } from "@/fonts";
-import {
-  DesktopLogo,
-  Logo,
-  PlusIcon,
-  InboxIcon,
-  ProgressBar,
-} from "@/components/atoms";
+import { DesktopLogo, Logo, PlusIcon, InboxIcon } from "@/components/atoms";
 
 export default function Navbar() {
   const queryClient = useQueryClient();
 
   const nominations = queryClient.getQueryData<Nomination[]>(["nominations"]);
   return (
-    <nav className="w-full min-h-[4.5rem] py-4 px-[1.31rem] md:px-9 flex items-center justify-center bg-primary-black">
+    <nav className="w-full min-h-[4.5rem] py-4 px-[1.31rem] md:px-9 flex items-center justify-center bg-primary-black border md:border-none border-primary-black">
       {/* Desktop View */}
       <div className="hidden md:flex justify-between items-center w-full h-full">
         <Link href={"/"}>
@@ -33,18 +27,13 @@ export default function Navbar() {
       </div>
 
       {/* Mobile view */}
-      <div className="flex flex-col gap-[2.12rem] items-start justify-between md:hidden w-full h-full">
-        <div className="w-full h-full flex items-center justify-between">
-          <Link href={"/"}>
-            <Logo className="w-[14.88706rem] h-[2.3125rem]" />
-          </Link>
-          <div className="flex justify-between items-center gap-[1rem]">
-            <PlusIcon className="w-[1.4375rem] h-[1.4375rem]" />
-            <InboxIcon className="w-[1.6875rem] h-[1.6875rem]" />
-          </div>
-        </div>
-        <div className="w-full">
-          <ProgressBar progress="25%" />
+      <div className="w-full h-full flex items-center md:hidden justify-between">
+        <Link href={"/"}>
+          <Logo className="w-[14.88706rem] h-[2.3125rem]" />
+        </Link>
+        <div className="flex justify-between items-center gap-[1rem]">
+          <PlusIcon className="w-[1.4375rem] h-[1.4375rem]" />
+          <InboxIcon className="w-[1.6875rem] h-[1.6875rem]" />
         </div>
       </div>
     </nav>

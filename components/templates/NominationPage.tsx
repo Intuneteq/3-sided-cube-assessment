@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { Button, EmptyContentIcon } from "@/components/atoms";
+import { Sticker } from "../molecules";
 import { NominationTable } from "@/components/organisms";
 
-import { anonymous_Pro, poppins } from "@/fonts";
 import { getNomineesInfo } from "@/lib/utility";
+import { anonymous_Pro, poppins } from "@/fonts";
 
 export default function NominationPage() {
   const queryClient = useQueryClient();
@@ -90,6 +91,20 @@ export default function NominationPage() {
         {/* Dynamic data should be passed here and default should be current */}
         <NominationTable nomineeInfo={isCurrent ? currentInfor : closedInfo} />
       </div>
+
+        {/* Action Buttons only visible on mobile */}
+        <Sticker stack="none">
+          <Button
+            scheme="secondary"
+            type="button"
+            width="w-[20.4375rem]"
+            height="h-[3.125rem]"
+            textSize="text-[0.875rem]"
+            // onClick={() => setShowModal(true)}
+          >
+            create new nomination
+          </Button>
+        </Sticker>
     </main>
   );
 }

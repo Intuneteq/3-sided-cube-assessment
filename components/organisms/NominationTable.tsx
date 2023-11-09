@@ -25,7 +25,7 @@ export default function NominationTable({ nomineeInfo }: Props) {
       return axiosClient.delete(`/nomination/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["nominations"] });
+      return queryClient.invalidateQueries({ queryKey: ["nominations"] });
     },
   });
 
