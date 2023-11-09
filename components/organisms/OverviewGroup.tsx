@@ -4,16 +4,15 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
+import { Button, LoaderIcon } from "../atoms";
 import { OverviewCard } from "../molecules";
 
-import { processPayload, processValue } from "@/lib/utility";
-import { Button, LoaderIcon } from "../atoms";
-import { nominate } from "@/app/overview/actions";
 import { axiosClient } from "@/api/axios";
+import { processPayload, processValue } from "@/lib/utility";
 
 export default function OverviewGroup() {
-  const queryClient = useQueryClient();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const nominee = queryClient.getQueryData<Nominee>(["nominee"]);
 

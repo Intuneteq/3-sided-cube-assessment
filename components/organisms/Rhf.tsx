@@ -86,8 +86,6 @@ export default function Rhf({
   const { errors, isValid } = formState;
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log("Submitting data:", data);
-
     if (data.nominee) {
       const nominees = queryClient.getQueryData<Nominee[]>(["nominees"]);
 
