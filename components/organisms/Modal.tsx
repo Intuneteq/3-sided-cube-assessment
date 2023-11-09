@@ -9,10 +9,11 @@ type Props = {
   heading: string;
   message: string;
   confirmation: string;
+  confirmationAction: (data?: any) => void;
   onClick: () => void;
 };
 
-export default function Modal({ heading, message, confirmation, onClick }: Props) {
+export default function Modal({ heading, message, confirmation, onClick, confirmationAction }: Props) {
   const router = useRouter();
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Modal({ heading, message, confirmation, onClick }: Props
         message={message}
         confirmation={confirmation}
         confirmationBtnType="button"
-        confirmationOnClick={() => router.back()}
+        confirmationOnClick={confirmationAction}
         revert="Cancel"
         revertBtnType="button"
         revertOnClick={onClick}

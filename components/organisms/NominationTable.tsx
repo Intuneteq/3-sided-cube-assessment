@@ -2,22 +2,29 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 import { Modal } from "./";
 import { DeleteIcon, EditIcon } from "../atoms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
+import { axiosClient } from "@/api/axios";
 
 type Props = {
   nomineeInfo: INomination[];
 };
 
 export default function NominationTable({ nomineeInfo }: Props) {
-  const [showModal, setShowModal] = useState(false);
+  const [nomination, setNomination] = useState("");
 
   const queryClient = useQueryClient();
   const router = useRouter();
+
+  const mutation = useMutation({
+    mutationFn: (id: string) => {
+      return axiosClient.delete(`/nomination/${id}`);
+    },
+  });
 
   const handleEditNomination = (id: string) => {
     const nominee = nomineeInfo.find((info) => info.nominee_id === id);
@@ -70,7 +77,7 @@ export default function NominationTable({ nomineeInfo }: Props) {
                 <td className="table-data">{nomination.process}</td>
                 <td className="w-[2.5rem]">
                   <DeleteIcon
-                    onClick={() => setShowModal(true)}
+                    onClick={() => setNomination(nomination.nomination_id)}
                     className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
                   />
                 </td>
@@ -85,12 +92,16 @@ export default function NominationTable({ nomineeInfo }: Props) {
           ))}
         </tbody>
       </table>
-      {showModal && (
+      {nomination && (
         <Modal
           confirmation="yes, delete"
           heading="Delete this nomination?"
           message="If you delete this nomination, the nominee will no longer be put forward by you."
-          onClick={() => setShowModal(false)}
+          confirmationAction={() => {
+            mutation.mutate(nomination);
+            setNomination("");
+          }}
+          onClick={() => setNomination("")}
         />
       )}
     </>
