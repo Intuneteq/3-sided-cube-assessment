@@ -96,6 +96,7 @@ export default function FormInput({
       ),
     },
   ];
+  
   const handleClickOutside = (event: MouseEvent) => {
     if (
       selectRef.current &&

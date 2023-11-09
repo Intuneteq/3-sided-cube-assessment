@@ -9,6 +9,12 @@ export function isURL(str: string) {
   return urlPattern.test(str);
 }
 
+/**
+ *
+ * @param text - Full text string
+ * @param toDecorate - string in text to be decorated i.e wrapped around a span and color #F70087
+ * @param nominee - 
+ */
 export const decorateNominee = (
   text: string,
   toDecorate: string,
@@ -28,6 +34,11 @@ export function findNominee(
   return nominees.find((item) => item.nominee_id === nominee_id);
 }
 
+/**
+ *
+ * @param nominees
+ * Group Nominee select drop down options
+ */
 export function groupOptions(nominees: Nominee[]): Option[] {
   const options = nominees.map((nominee) => {
     return {
@@ -100,17 +111,23 @@ function mapProcessValue(payloadValue: string): ProcessValues {
   }
 }
 
+/**
+ *
+ * @param nominations
+ * @param nominees
+ *
+ * Create a mapping of nominee_id to Nominee
+ * and transform the nominations into INomination
+ */
 export function getNomineesInfo(
   nominations: Nomination[],
   nominees: Nominee[]
 ): INomination[] {
-  // Create a mapping of nominee_id to Nominee
   const nomineeMap: Record<string, Nominee> = {};
   nominees.forEach((nominee) => {
     nomineeMap[nominee.nominee_id] = nominee;
   });
 
-  // Transform the nominations into INomination
   const nomineesInfo: INomination[] = nominations.map((nomination) => {
     const nominee = nomineeMap[nomination.nominee_id];
     if (nominee) {

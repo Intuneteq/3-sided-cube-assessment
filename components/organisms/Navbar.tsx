@@ -11,6 +11,7 @@ export default function Navbar() {
   const queryClient = useQueryClient();
 
   const nominations = queryClient.getQueryData<Nomination[]>(["nominations"]);
+  
   return (
     <nav className="w-full min-h-[4.5rem] py-4 px-[1.31rem] md:px-9 flex items-center justify-center bg-primary-black border md:border-none border-primary-black">
       {/* Desktop View */}
