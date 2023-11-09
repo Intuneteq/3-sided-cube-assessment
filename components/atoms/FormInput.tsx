@@ -63,41 +63,39 @@ export default function FormInput({
   errors,
 }: Props) {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [inputValue, setInputValue] = useState(1);
   const selectRef = useRef<HTMLDivElement>(null);
 
   const reactions = [
     {
       name: ProcessValues.VERY_UNFAIR,
       value: 1,
-      icon: <VeryUnfair className="w-[2.18763rem] h-[2.18763rem]" />,
+      icon: (
+        <VeryUnfair className="w-6 md:w-[2.18763rem] h-6 md:h-[2.18763rem]" />
+      ),
     },
     {
       name: ProcessValues.UNFAIR,
       value: 2,
-      icon: <Unfair className="w-[2.18763rem] h-[2.18763rem]" />,
+      icon: <Unfair className="w-6 md:w-[2.18763rem] h-6 md:h-[2.18763rem]" />,
     },
     {
       name: ProcessValues.NOT_SURE,
       value: 3,
-      icon: <NotSure className="w-[2.18763rem] h-[2.18763rem]" />,
+      icon: <NotSure className="w-6 md:w-[2.18763rem] h-6 md:h-[2.18763rem]" />,
     },
     {
       name: ProcessValues.FAIR,
       value: 4,
-      icon: <Fair className="w-[2.18763rem] h-[2.18763rem]" />,
+      icon: <Fair className="w-6 md:w-[2.18763rem] h-6 md:h-[2.18763rem]" />,
     },
     {
       name: ProcessValues.VERY_FAIR,
       value: 5,
-      icon: <VeryFair className="w-[2.18763rem] h-[2.18763rem]" />,
+      icon: (
+        <VeryFair className="w-6 md:w-[2.18763rem] h-6 md:h-[2.18763rem]" />
+      ),
     },
   ];
-
-  const handleButtonClick = (value: number) => {
-    setInputValue(value);
-  };
-
   const handleClickOutside = (event: MouseEvent) => {
     if (
       selectRef.current &&
@@ -272,79 +270,26 @@ export default function FormInput({
             )}
           />
 
-          {/* <div className="w-full hidden md:block">
-            <input
-              type={type}
-              min={1}
-              max={5}
-              step={1}
-              className="w-full"
-              {...register(name)}
-              // value={inputValue}
-              // onChange={(e) => setInputValue(parseInt(e.target.value))}
-            />
-
-            <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
-              <ReactionSmiley
-                onClick={() => handleButtonClick(1)}
-                name={ProcessValues.VERY_UNFAIR}
-                value={1}
-                inputValue={inputValue}
-              >
-                <VeryUnfair className="w-[2.18763rem] h-[2.18763rem]" />
-              </ReactionSmiley>
-              <ReactionSmiley
-                onClick={() => handleButtonClick(2)}
-                name={ProcessValues.UNFAIR}
-                value={2}
-                inputValue={inputValue}
-              >
-                <Unfair className="w-[2.18763rem] h-[2.18763rem]" />
-              </ReactionSmiley>
-              <ReactionSmiley
-                onClick={() => handleButtonClick(3)}
-                name={ProcessValues.NOT_SURE}
-                value={3}
-                inputValue={inputValue}
-              >
-                <NotSure className="w-[2.18763rem] h-[2.18763rem]" />
-              </ReactionSmiley>
-              <ReactionSmiley
-                onClick={() => handleButtonClick(4)}
-                name={ProcessValues.FAIR}
-                value={4}
-                inputValue={inputValue}
-              >
-                <Fair className="w-[2.18763rem] h-[2.18763rem]" />
-              </ReactionSmiley>
-              <ReactionSmiley
-                onClick={() => handleButtonClick(5)}
-                name={ProcessValues.VERY_FAIR}
-                value={5}
-                inputValue={inputValue}
-              >
-                <VeryFair className="w-[2.18763rem] h-[2.18763rem]" />
-              </ReactionSmiley>
-            </div>
-          </div>
-
           <div className="md:hidden flex flex-col items-center justify-center w-full gap-3">
-            <MobileRating rating="very unfair">
-              <VeryUnfair className="w-6 h-6" />
-            </MobileRating>
-            <MobileRating rating="unfair">
-              <Unfair className="w-6 h-6" />
-            </MobileRating>
-            <MobileRating rating="not sure">
-              <NotSure className="w-6 h-6" />
-            </MobileRating>
-            <MobileRating rating="fair">
-              <Fair className="w-6 h-6" />
-            </MobileRating>
-            <MobileRating rating="very fair">
-              <VeryFair className="w-6 h-6" />
-            </MobileRating>
-          </div> */}
+            {reactions.map((item) => (
+              <Controller
+                key={item.value}
+                name={`rating`}
+                control={control}
+                defaultValue={"1"}
+                render={({ field }) => (
+                  <MobileRating
+                    onChange={field.onChange}
+                    field={field}
+                    rating={item.name}
+                    value={item.value}
+                  >
+                    {item.icon}
+                  </MobileRating>
+                )}
+              />
+            ))}
+          </div>
         </>
       );
     }

@@ -59,7 +59,7 @@ export default function Rhf({
 
   const queryClient = useQueryClient();
 
-  const { data, error, isFetched } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["nominees"],
     queryFn: getNominees,
   });
@@ -83,7 +83,7 @@ export default function Rhf({
 
   const { handleSubmit, formState, register, control } = form;
 
-  const { errors, isSubmitting, isDirty, isValid } = formState;
+  const { errors, isValid } = formState;
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     console.log("Submitting data:", data);
@@ -185,8 +185,8 @@ export default function Rhf({
             height="h-[3.0625rem]"
             textSize="text-[0.875rem]"
             href={nextPage}
-              disable={!isValid}
-              inactive={!isValid}
+            disable={!isValid}
+            inactive={!isValid}
           >
             next
           </Button>
