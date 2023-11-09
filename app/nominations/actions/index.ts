@@ -7,18 +7,33 @@ export async function getNominations(): Promise<Nomination[]> {
   return res.data.data;
 }
 
-// export function createNomination(formValue: FormValues): MutationFunction<unknown, FormValues> | undefined {
-//   const payload = {
-//     nominee_id: formValue.nominee,
-//     reason: formValue.reasoning,
-//     process: processPayload(parseInt(formValue.rating)),
-//   };
+export async function createNomination(
+  formValue: FormValues
+): Promise<INomination> {
+  const payload = {
+    nominee_id: formValue.nominee,
+    reason: formValue.reasoning,
+    process: processPayload(parseInt(formValue.rating)),
+  };
 
-  
-// }
+  const res = axiosClient.post("/nomination", payload);
 
-// export function updateNomination(formValue: FormValues): MutationFunction<unknown, FormValues> | undefined {
+  return (await res).data.data;
+}
 
+export async function updateNomination(
+  formValue: FormValues
+): Promise<INomination> {
+  const payload = {
+    nomination_id: formValue.nomination_id,
+    nominee_id: formValue.nominee,
+    reason: formValue.reasoning,
+    process: processPayload(parseInt(formValue.rating)),
+  };
+  const res = await axiosClient.put(
+    `/nomination/${formValue.nomination_id}`,
+    payload
+  );
 
-//   return  as ;
-// }
+  return res.data.data;
+}

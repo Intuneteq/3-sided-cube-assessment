@@ -197,6 +197,7 @@ export default function Rhf({
           confirmation="Yes, leave page"
           heading="Are You sure?"
           message="If you leave this page, you will lose any progress made."
+          confirmationAction={() => router.back()}
           onClick={() => setShowModal(false)}
         />
       )}

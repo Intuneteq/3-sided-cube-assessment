@@ -24,6 +24,9 @@ export default function NominationTable({ nomineeInfo }: Props) {
     mutationFn: (id: string) => {
       return axiosClient.delete(`/nomination/${id}`);
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["nominations"] });
+    },
   });
 
   const handleEditNomination = (id: string) => {

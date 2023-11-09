@@ -7,8 +7,8 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { Button, LoaderIcon } from "../atoms";
 import { OverviewCard } from "../molecules";
 
-import { axiosClient } from "@/api/axios";
-import { processPayload, processValue } from "@/lib/utility";
+import { processValue } from "@/lib/utility";
+import { createNomination, updateNomination } from "@/app/nominations/actions";
 
 export default function OverviewGroup() {
   const router = useRouter();
@@ -21,20 +21,20 @@ export default function OverviewGroup() {
   if (!nominee || !formValue) throw new Error("Nominee not Found");
 
   const mutation = useMutation({
-    mutationFn: (formValue: FormValues) => {
-      const payload = {
-        nominee_id: formValue.nominee,
-        reason: formValue.reasoning,
-        process: processPayload(parseInt(formValue.rating)),
-      };
+    mutationFn: async (formValue: FormValues) => {
       if (formValue.nomination_id) {
-        return axiosClient.patch(
-          `/nomination/${formValue.nomination_id}`,
-          payload
-        );
+        return updateNomination(formValue);
       } else {
-        return axiosClient.post("/nomination", payload);
+        return createNomination(formValue);
       }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["nominations"] });
+    },
+
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["formData"] });
     },
   });
 
@@ -45,9 +45,6 @@ export default function OverviewGroup() {
   }
 
   if (isSuccess) {
-    // clear form value cache
-    queryClient.invalidateQueries({ queryKey: ["formData"] });
-
     router.push("/submitted");
   }
 
