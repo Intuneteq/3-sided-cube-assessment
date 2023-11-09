@@ -11,6 +11,7 @@ type BtnType = "button" | "submit" | "link" | "anchor";
 type Inputs = "nominee" | "reasoning" | "rating";
 
 type FormValues = {
+  nomination_id?: string;
   nominee: string;
   reasoning: string;
   rating: string;
@@ -37,7 +38,7 @@ type Nominee = {
 };
 
 type Nomination = {
-  nomination_id: "string";
+  nomination_id: string;
   nominee_id: "string";
   reason: "string";
   process: "string";
@@ -46,6 +47,7 @@ type Nomination = {
 };
 
 type INomination = {
+  nomination_id: string;
   nominee_id: string;
   fullName: string;
   reason: string;

@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { Modal } from "./";
 import { DeleteIcon, EditIcon } from "../atoms";
@@ -13,6 +15,29 @@ type Props = {
 
 export default function NominationTable({ nomineeInfo }: Props) {
   const [showModal, setShowModal] = useState(false);
+
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const handleEditNomination = (id: string) => {
+    const nominee = nomineeInfo.find((info) => info.nominee_id === id);
+
+    const data: FormValues = {
+      nomination_id: nominee?.nomination_id,
+      nominee: nominee?.nominee_id!,
+      reasoning: nominee?.reason!,
+      rating: nominee?.process!,
+    };
+
+    queryClient.setQueryData(["formData"], (cachedData: FormValues) => {
+      return {
+        ...cachedData,
+        ...data,
+      };
+    });
+
+    router.push("/select-nominee");
+  };
 
   return (
     <>
@@ -50,7 +75,10 @@ export default function NominationTable({ nomineeInfo }: Props) {
                   />
                 </td>
                 <td className="w-[2.5rem]">
-                  <EditIcon className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey" />
+                  <EditIcon
+                    onClick={() => handleEditNomination(nomination.nominee_id)}
+                    className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
+                  />
                 </td>
               </tr>
             </>

@@ -22,11 +22,19 @@ export default function OverviewGroup() {
 
   const mutation = useMutation({
     mutationFn: (formValue: FormValues) => {
-      return axiosClient.post("/nomination", {
+      const payload = {
         nominee_id: formValue.nominee,
         reason: formValue.reasoning,
         process: processPayload(parseInt(formValue.rating)),
-      });
+      };
+      if (formValue.nomination_id) {
+        return axiosClient.patch(
+          `/nomination/${formValue.nomination_id}`,
+          payload
+        );
+      } else {
+        return axiosClient.post("/nomination", payload);
+      }
     },
   });
 
@@ -37,6 +45,9 @@ export default function OverviewGroup() {
   }
 
   if (isSuccess) {
+    // clear form value cache
+    queryClient.invalidateQueries({ queryKey: ["formData"] });
+
     router.push("/submitted");
   }
 

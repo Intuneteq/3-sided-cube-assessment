@@ -75,13 +75,13 @@ export default function NominationPage() {
         <button
           onClick={() => setIsCurrent(!isCurrent)}
           type="button"
-          className="w-[8.5rem] h-[3.125rem] text-primary-black bg-primary-green flex justify-center items-center capitalize text-base font-normal shadow-light"
+          className={`w-[8.5rem] h-[3.125rem] text-primary-black bg-primary-green flex justify-center items-center capitalize text-base font-normal shadow-light hover:shadow-strong ${isCurrent && 'shadow-strong'}`}
         >
           current
         </button>
         <button
           onClick={() => setIsCurrent(!isCurrent)}
-          className="w-[8.5rem] h-[3.125rem] bg-light-grey text-primary-black flex justify-center items-center capitalize text-base font-bold shadow-strong"
+          className={`w-[8.5rem] h-[3.125rem] bg-light-grey text-primary-black flex justify-center items-center capitalize text-base font-bold shadow-light hover:shadow-strong ${!isCurrent && 'shadow-strong'}`}
         >
           closed
         </button>

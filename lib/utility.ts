@@ -115,6 +115,7 @@ export function getNomineesInfo(
     const nominee = nomineeMap[nomination.nominee_id];
     if (nominee) {
       return {
+        nomination_id: nomination.nomination_id,
         nominee_id: nomination.nominee_id,
         fullName: `${nominee.first_name} ${nominee.last_name}`,
         reason: nomination.reason,
@@ -125,6 +126,7 @@ export function getNomineesInfo(
     }
     return {
       nominee_id: "",
+      nomination_id: "",
       fullName: "Nominee not found",
       reason: nomination.reason,
       process: mapProcessValue(nomination.process),
