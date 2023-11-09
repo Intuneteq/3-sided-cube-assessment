@@ -5,16 +5,16 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { Button, EmptyContentIcon } from "@/components/atoms";
 import { Sticker } from "../molecules";
-import { NominationTable } from "@/components/organisms";
+import { NominationMobile, NominationTable } from "@/components/organisms";
 
 import { getNomineesInfo } from "@/lib/utility";
 import { anonymous_Pro, poppins } from "@/fonts";
 
 export default function NominationPage() {
   const queryClient = useQueryClient();
-  
+
   const today = new Date();
-  today.setHours(0, 0, 0, 0)
+  today.setHours(0, 0, 0, 0);
 
   const [isCurrent, setIsCurrent] = useState(true);
 
@@ -64,47 +64,53 @@ export default function NominationPage() {
     );
   }
   return (
-    <main className="flex justify-start items-start w-full md:min-h-screen flex-col md:py-5">
+    <main className="flex justify-start items-start w-full md:min-h-screen flex-col pt-[1.31rem] md:py-5 bg-primary-gradient">
       <h1
-        className={`${poppins.className} text-[2rem] font-bold text-primary-black uppercase mb-[2.12rem]`}
+        className={`${poppins.className} text-2xl md:text-[2rem] font-bold text-primary-black uppercase mb-[1.16rem] md:mb-[2.12rem] px-[1.25rem] md:px-0`}
       >
         YOUR Nominations
       </h1>
       <div
-        className={`${anonymous_Pro.className} flex justify-start items-center gap-3 mb-[1.19rem]`}
+        className={`${anonymous_Pro.className} flex justify-start items-center gap-3 mb-[1.19rem] px-[1.25rem] md:px-0`}
       >
         <button
           onClick={() => setIsCurrent(!isCurrent)}
           type="button"
-          className={`w-[8.5rem] h-[3.125rem] text-primary-black bg-primary-green flex justify-center items-center capitalize text-base font-normal shadow-light hover:shadow-strong ${isCurrent && 'shadow-strong'}`}
+          className={`w-[7rem] md:w-[8.5rem] h-[1.875rem] md:h-[3.125rem] text-primary-black bg-primary-green flex justify-center items-center capitalize text-base font-normal shadow-light hover:shadow-strong ${
+            isCurrent && "shadow-strong"
+          }`}
         >
           current
         </button>
         <button
           onClick={() => setIsCurrent(!isCurrent)}
-          className={`w-[8.5rem] h-[3.125rem] bg-light-grey text-primary-black flex justify-center items-center capitalize text-base font-bold shadow-light hover:shadow-strong ${!isCurrent && 'shadow-strong'}`}
+          className={`w-[7rem] md:w-[8.5rem] h-[1.875rem] md:h-[3.125rem] bg-light-grey text-primary-black flex justify-center items-center capitalize text-base font-bold shadow-light hover:shadow-strong ${
+            !isCurrent && "shadow-strong"
+          }`}
         >
           closed
         </button>
       </div>
-      <div className="w-full max-w-[76rem] h-[38.1875rem] shadow-strong bg-primary-white border border-primary-white">
-        {/* Dynamic data should be passed here and default should be current */}
-        <NominationTable nomineeInfo={isCurrent ? currentInfor : closedInfo} />
-      </div>
 
-        {/* Action Buttons only visible on mobile */}
-        <Sticker stack="none">
-          <Button
-            scheme="secondary"
-            type="button"
-            width="w-[20.4375rem]"
-            height="h-[3.125rem]"
-            textSize="text-[0.875rem]"
-            // onClick={() => setShowModal(true)}
-          >
-            create new nomination
-          </Button>
-        </Sticker>
+      {/* Desktop screen */}
+      <NominationTable nomineeInfo={isCurrent ? currentInfor : closedInfo} />
+
+      {/* Mobile screen */}
+      <NominationMobile nomineeInfo={isCurrent ? currentInfor : closedInfo} />
+
+      {/* Action Buttons only visible on mobile */}
+      <Sticker stack="none">
+        <Button
+          scheme="secondary"
+          type="link"
+          width="w-[20.4375rem]"
+          height="h-[3.125rem]"
+          textSize="text-[0.875rem]"
+          href="/select-nominee"
+        >
+          create new nomination
+        </Button>
+      </Sticker>
     </main>
   );
 }

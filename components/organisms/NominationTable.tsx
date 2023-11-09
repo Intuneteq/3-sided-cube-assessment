@@ -24,11 +24,13 @@ export default function NominationTable({ nomineeInfo }: Props) {
     mutationFn: (id: string) => {
       return axiosClient.delete(`/nomination/${id}`);
     },
-    onSuccess: () => {
-      return queryClient.invalidateQueries({ queryKey: ["nominations"] });
-    },
   });
 
+  /**
+   *
+   * @param id
+   * Converting this to a hook later on
+   */
   const handleEditNomination = (id: string) => {
     const nominee = nomineeInfo.find((info) => info.nominee_id === id);
 
@@ -50,7 +52,7 @@ export default function NominationTable({ nomineeInfo }: Props) {
   };
 
   return (
-    <>
+    <div className="hidden md:block w-full max-w-[76rem] h-[38.1875rem] shadow-strong bg-primary-white border border-primary-white">
       <table className="min-w-full">
         <thead>
           <tr className={`w-full bg-light-grey ${poppins.className}`}>
@@ -75,7 +77,9 @@ export default function NominationTable({ nomineeInfo }: Props) {
                 <td className="table-data">{nomination.date_submitted}</td>
                 <td className="table-data">{nomination.closing_date}</td>
                 <td className="table-data max-w-[24.9rem] whitespace-nowrap">
-                  {nomination.reason}
+                  {nomination.reason.length > 20
+                    ? `${nomination.reason.substring(0, 20)}...`
+                    : nomination.reason}
                 </td>
                 <td className="table-data">{nomination.process}</td>
                 <td className="w-[2.5rem]">
@@ -107,6 +111,6 @@ export default function NominationTable({ nomineeInfo }: Props) {
           onClick={() => setNomination("")}
         />
       )}
-    </>
+    </div>
   );
 }

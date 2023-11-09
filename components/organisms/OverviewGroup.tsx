@@ -29,12 +29,14 @@ export default function OverviewGroup() {
       }
     },
 
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["nominations"] });
-    },
-
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["formData"] });
+
+      queryClient.setQueryData<Nomination[]>(["nominations"], (prev) => {
+        return prev?.map((item) => {
+          return { ...item, data };
+        });
+      });
     },
   });
 

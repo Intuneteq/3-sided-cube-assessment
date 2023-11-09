@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 import { ModalCard } from "../molecules";
 
@@ -13,8 +12,13 @@ type Props = {
   onClick: () => void;
 };
 
-export default function Modal({ heading, message, confirmation, onClick, confirmationAction }: Props) {
-  const router = useRouter();
+export default function Modal({
+  heading,
+  message,
+  confirmation,
+  onClick,
+  confirmationAction,
+}: Props) {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -25,7 +29,7 @@ export default function Modal({ heading, message, confirmation, onClick, confirm
   }, []);
 
   return (
-    <div className="flex justify-center items-center top-0 right-0 left-0 bottom-0 z-[99] fixed inset-0 bg-primary-black bg-opacity-70 overflow-hidden">
+    <div className="flex justify-center items-end md:items-center md:top-0 right-0 left-0 bottom-0 z-[99] fixed inset-0 bg-primary-black bg-opacity-70 overflow-hidden">
       <ModalCard
         heading={heading}
         message={message}

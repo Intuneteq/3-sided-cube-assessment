@@ -32,8 +32,12 @@ export default function Navbar() {
           <Logo className="w-[14.88706rem] h-[2.3125rem]" />
         </Link>
         <div className="flex justify-between items-center gap-[1rem]">
-          <PlusIcon className="w-[1.4375rem] h-[1.4375rem]" />
-          <InboxIcon className="w-[1.6875rem] h-[1.6875rem]" />
+          <Link href={"/select-nominee"}>
+            <PlusIcon className="w-[1.4375rem] h-[1.4375rem]" />
+          </Link>
+          <Link href={"/nominations"}>
+            <InboxIcon className="w-[1.6875rem] h-[1.6875rem]" />
+          </Link>
         </div>
       </div>
     </nav>
