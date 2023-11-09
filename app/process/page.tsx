@@ -4,8 +4,8 @@ import { Rhf } from "@/components/organisms";
 import { ContainerII } from "@/components/templates";
 
 export const metadata: Metadata = {
-  title: "Select Fairness",
-  description: "What's your opinion on the method",
+  title: "Process",
+  description: "What's your opinion on the process method",
 };
 
 export default function Fair() {
