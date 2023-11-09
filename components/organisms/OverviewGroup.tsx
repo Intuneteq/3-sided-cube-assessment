@@ -57,7 +57,7 @@ export default function OverviewGroup() {
         <OverviewCard
           title="Thoughts on Current Process"
           content={processValue(parseInt(formValue.rating))}
-          path="/rating"
+          path="/process"
         />
       </div>
       <div>

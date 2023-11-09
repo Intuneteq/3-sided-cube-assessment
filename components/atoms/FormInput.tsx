@@ -41,10 +41,13 @@ type Props = {
   /** hide input label element */
   hideLabel?: boolean;
 
+  /** React hook form Register handler */
   register: UseFormRegister<FormValues>;
 
+  /** React hook form control instance */
   control: Control<FormValues, any>;
 
+  /** React hook form error instance */
   errors?: FieldErrors<FormValues>;
 };
 
@@ -62,6 +65,34 @@ export default function FormInput({
   const [showDropDown, setShowDropDown] = useState(false);
   const [inputValue, setInputValue] = useState(1);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  const reactions = [
+    {
+      name: ProcessValues.VERY_UNFAIR,
+      value: 1,
+      icon: <VeryUnfair className="w-[2.18763rem] h-[2.18763rem]" />,
+    },
+    {
+      name: ProcessValues.UNFAIR,
+      value: 2,
+      icon: <Unfair className="w-[2.18763rem] h-[2.18763rem]" />,
+    },
+    {
+      name: ProcessValues.NOT_SURE,
+      value: 3,
+      icon: <NotSure className="w-[2.18763rem] h-[2.18763rem]" />,
+    },
+    {
+      name: ProcessValues.FAIR,
+      value: 4,
+      icon: <Fair className="w-[2.18763rem] h-[2.18763rem]" />,
+    },
+    {
+      name: ProcessValues.VERY_FAIR,
+      value: 5,
+      icon: <VeryFair className="w-[2.18763rem] h-[2.18763rem]" />,
+    },
+  ];
 
   const handleButtonClick = (value: number) => {
     setInputValue(value);
@@ -206,7 +237,42 @@ export default function FormInput({
     if (type === "range") {
       return (
         <>
-          <div className="w-full hidden md:block">
+          <Controller
+            name={name}
+            control={control}
+            render={({ field }) => (
+              <div className="w-full hidden md:block">
+                <input
+                  type={type}
+                  min={0}
+                  max={5}
+                  step={1}
+                  className="w-full"
+                  defaultValue={1}
+                  {...field}
+                />
+                <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
+                  {reactions.map((reaction) => (
+                    <ReactionSmiley
+                      key={reaction.value}
+                      onClick={() => {
+                        field.onChange(reaction.value);
+                      }}
+                      name={reaction.name}
+                      value={reaction.value}
+                      inputValue={
+                        parseInt(field.value) ? parseInt(field.value) : 1
+                      }
+                    >
+                      {reaction.icon}
+                    </ReactionSmiley>
+                  ))}
+                </div>
+              </div>
+            )}
+          />
+
+          {/* <div className="w-full hidden md:block">
             <input
               type={type}
               min={1}
@@ -278,7 +344,7 @@ export default function FormInput({
             <MobileRating rating="very fair">
               <VeryFair className="w-6 h-6" />
             </MobileRating>
-          </div>
+          </div> */}
         </>
       );
     }
