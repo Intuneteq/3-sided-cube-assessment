@@ -21,19 +21,19 @@ export default function Submitted() {
         <div className="hidden md:flex justify-center items-center gap-3">
           <Button
             scheme="secondary"
-            type="button"
+            type="link"
             width="w-[13.9375rem]"
             height="h-[3.125rem]"
-            // textSize="text-[0.5rem]"
+            href="/nominations"
           >
             VIEW nominations
           </Button>
           <Button
             scheme="secondary"
-            type="button"
+            type="link"
             width="w-[13.9375rem]"
             height="h-[3.125rem]"
-            textSize="md:text-[0.875rem]"
+            href="/select-nominee"
           >
             CREATE NEW NOMINATION
           </Button>

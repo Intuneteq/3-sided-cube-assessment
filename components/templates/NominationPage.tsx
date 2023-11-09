@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { Button, EmptyContentIcon } from "@/components/atoms";
@@ -11,8 +11,11 @@ import { getNomineesInfo } from "@/lib/utility";
 
 export default function NominationPage() {
   const queryClient = useQueryClient();
+  
+  const today = new Date();
+  today.setHours(0, 0, 0, 0)
 
-  // const [info, setinfo] = useState(false);
+  const [isCurrent, setIsCurrent] = useState(true);
 
   const nominations = queryClient.getQueryData<Nomination[]>(["nominations"]);
 
@@ -24,20 +27,17 @@ export default function NominationPage() {
 
   const nomineeInfo = getNomineesInfo(nominations, nominees);
 
-  const data = nomineeInfo.filter((item) => {
+  const closedInfo = nomineeInfo.filter((item) => {
     const closing_date = new Date(item.closing_date);
-    const today = new Date();
 
     return closing_date < today;
   });
 
-  const handleSetClosed = () => {
-    // set data where closing_date > today
-  };
+  const currentInfor = nomineeInfo.filter((item) => {
+    const closing_date = new Date(item.closing_date);
 
-  const handleSetCurrent = () => {
-    // set data where closing_date < today
-  };
+    return closing_date >= today;
+  });
 
   if (!nominations || !nominations?.length) {
     return (
@@ -73,14 +73,14 @@ export default function NominationPage() {
         className={`${anonymous_Pro.className} flex justify-start items-center gap-3 mb-[1.19rem]`}
       >
         <button
-          onClick={() => handleSetCurrent()}
+          onClick={() => setIsCurrent(!isCurrent)}
           type="button"
           className="w-[8.5rem] h-[3.125rem] text-primary-black bg-primary-green flex justify-center items-center capitalize text-base font-normal shadow-light"
         >
           current
         </button>
         <button
-          onClick={() => handleSetClosed()}
+          onClick={() => setIsCurrent(!isCurrent)}
           className="w-[8.5rem] h-[3.125rem] bg-light-grey text-primary-black flex justify-center items-center capitalize text-base font-bold shadow-strong"
         >
           closed
@@ -88,7 +88,7 @@ export default function NominationPage() {
       </div>
       <div className="w-full max-w-[76rem] h-[38.1875rem] shadow-strong bg-primary-white border border-primary-white">
         {/* Dynamic data should be passed here and default should be current */}
-        <NominationTable nomineeInfo={data} />
+        <NominationTable nomineeInfo={isCurrent ? currentInfor : closedInfo} />
       </div>
     </main>
   );

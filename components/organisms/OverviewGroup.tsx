@@ -31,14 +31,14 @@ export default function OverviewGroup() {
     },
   });
 
-  const { data, isSuccess, isPending, isError, error } = mutation;
+  const { isSuccess, isPending, isError, error } = mutation;
 
   if (isError) {
     throw new Error(error.message);
   }
 
   if (isSuccess) {
-    router.push("/nominations");
+    router.push("/submitted");
   }
 
   return (
