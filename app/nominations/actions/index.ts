@@ -37,3 +37,8 @@ export async function updateNomination(
 
   return res.data.data;
 }
+
+export async function deleteNomination(id: string): Promise<string> {
+  const res = await axiosClient.delete(`/nomination/${id}`);
+  return res.data.data;
+}

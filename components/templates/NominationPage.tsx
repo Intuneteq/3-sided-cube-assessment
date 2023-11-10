@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Button, EmptyContentIcon } from "@/components/atoms";
 import { Sticker } from "../molecules";
@@ -9,6 +9,7 @@ import { NominationMobile, NominationTable } from "@/components/organisms";
 
 import { getNomineesInfo } from "@/lib/utility";
 import { anonymous_Pro, poppins } from "@/fonts";
+import { getNominations } from "@/app/nominations/actions";
 
 export default function NominationPage() {
   const queryClient = useQueryClient();
@@ -18,15 +19,26 @@ export default function NominationPage() {
 
   const [isCurrent, setIsCurrent] = useState(true);
 
-  const nominations = queryClient.getQueryData<Nomination[]>(["nominations"]);
+  const {
+    data: nominations,
+    error,
+    isError,
+  } = useQuery({
+    queryKey: ["nominations"],
+    queryFn: getNominations,
+  });
 
   const nominees = queryClient.getQueryData<Nominee[]>(["nominees"]);
 
-  if (!nominations || !nominees) {
-    throw new Error("Error Fecting Nominations");
+  if (isError) {
+    throw new Error(error?.message);
   }
 
-  const nomineeInfo = getNomineesInfo(nominations, nominees);
+  if (!nominees) {
+    throw new Error("Error Fetching Nominees");
+  }
+
+  const nomineeInfo = getNomineesInfo(nominations!, nominees);
 
   const closedInfo = nomineeInfo.filter((item) => {
     const closing_date = new Date(item.closing_date);

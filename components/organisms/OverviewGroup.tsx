@@ -29,26 +29,18 @@ export default function OverviewGroup() {
       }
     },
 
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["formData"] });
+    onSuccess: () => {
+      queryClient.invalidateQueries();
 
-      queryClient.setQueryData<Nomination[]>(["nominations"], (prev) => {
-        return prev?.map((item) => {
-          return { ...item, data };
-        });
-      });
+      router.push("/submitted");
+    },
+
+    onError: (error) => {
+      throw new Error(error.message);
     },
   });
 
-  const { isSuccess, isPending, isError, error } = mutation;
-
-  if (isError) {
-    throw new Error(error.message);
-  }
-
-  if (isSuccess) {
-    router.push("/submitted");
-  }
+  const { isPending } = mutation;
 
   return (
     <>

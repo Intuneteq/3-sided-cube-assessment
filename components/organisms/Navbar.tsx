@@ -2,16 +2,27 @@
 
 import React from "react";
 import Link from "next/link";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
-import { anonymous_Pro } from "@/fonts";
 import { DesktopLogo, Logo, PlusIcon, InboxIcon } from "@/components/atoms";
 
-export default function Navbar() {
-  const queryClient = useQueryClient();
+import { anonymous_Pro } from "@/fonts";
+import { getNominations } from "@/app/nominations/actions";
 
-  const nominations = queryClient.getQueryData<Nomination[]>(["nominations"]);
-  
+export default function Navbar() {
+  const {
+    data: nominations,
+    error,
+    isError,
+  } = useQuery({
+    queryKey: ["nominations"],
+    queryFn: getNominations,
+  });
+
+  if (isError) {
+    throw new Error(error.message);
+  }
+
   return (
     <nav className="w-full min-h-[4.5rem] py-4 px-[1.31rem] md:px-9 flex items-center justify-center bg-primary-black border md:border-none border-primary-black">
       {/* Desktop View */}

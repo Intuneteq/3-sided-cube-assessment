@@ -1,15 +1,19 @@
-import TanstackProvider from "@/util/TanstackProvider";
-import "./globals.css";
-
-import { Footer, Navbar } from "@/components/organisms";
-import { getNominees } from "./select-nominee/actions";
-
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+
+import { Footer, Navbar } from "@/components/organisms";
+import TanstackProvider from "@/util/TanstackProvider";
+
+import { getNominees } from "./select-nominee/actions";
 import { getNominations } from "./nominations/actions";
+
+import "./globals.css";
+
+/** Preventing NextJs from handling Cache */
+export const revalidate = 0;
 
 export default async function RootLayout({
   children,

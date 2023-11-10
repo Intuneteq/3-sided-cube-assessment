@@ -8,7 +8,7 @@ import { Modal } from "./";
 import { DeleteIcon, EditIcon } from "../atoms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
-import { axiosClient } from "@/api/axios";
+import { deleteNomination } from "@/app/nominations/actions";
 
 type Props = {
   nomineeInfo: INomination[];
@@ -21,8 +21,17 @@ export default function NominationTable({ nomineeInfo }: Props) {
   const router = useRouter();
 
   const mutation = useMutation({
-    mutationFn: (id: string) => {
-      return axiosClient.delete(`/nomination/${id}`);
+    mutationFn: async (id: string) => {
+      return await deleteNomination(id);
+    },
+
+    onSuccess: (data) => {
+      console.log("delete data", data);
+      queryClient.invalidateQueries({ queryKey: ["nominations"] });
+    },
+
+    onError: (error) => {
+      throw new Error(error.message);
     },
   });
 
@@ -71,31 +80,29 @@ export default function NominationTable({ nomineeInfo }: Props) {
         </thead>
         <tbody className={`${anonymous_Pro.className}`}>
           {nomineeInfo?.map((nomination) => (
-            <>
-              <tr key={nomination.nominee_id}>
-                <td className="table-data">{nomination.fullName}</td>
-                <td className="table-data">{nomination.date_submitted}</td>
-                <td className="table-data">{nomination.closing_date}</td>
-                <td className="table-data max-w-[24.9rem] whitespace-nowrap">
-                  {nomination.reason.length > 20
-                    ? `${nomination.reason.substring(0, 20)}...`
-                    : nomination.reason}
-                </td>
-                <td className="table-data">{nomination.process}</td>
-                <td className="w-[2.5rem]">
-                  <DeleteIcon
-                    onClick={() => setNomination(nomination.nomination_id)}
-                    className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
-                  />
-                </td>
-                <td className="w-[2.5rem]">
-                  <EditIcon
-                    onClick={() => handleEditNomination(nomination.nominee_id)}
-                    className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
-                  />
-                </td>
-              </tr>
-            </>
+            <tr key={nomination.nominee_id}>
+              <td className="table-data">{nomination.fullName}</td>
+              <td className="table-data">{nomination.date_submitted}</td>
+              <td className="table-data">{nomination.closing_date}</td>
+              <td className="table-data max-w-[24.9rem] whitespace-nowrap">
+                {nomination.reason.length > 20
+                  ? `${nomination.reason.substring(0, 20)}...`
+                  : nomination.reason}
+              </td>
+              <td className="table-data">{nomination.process}</td>
+              <td className="w-[2.5rem]">
+                <DeleteIcon
+                  onClick={() => setNomination(nomination.nomination_id)}
+                  className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
+                />
+              </td>
+              <td className="w-[2.5rem]">
+                <EditIcon
+                  onClick={() => handleEditNomination(nomination.nominee_id)}
+                  className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
+                />
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
