@@ -1,5 +1,3 @@
-// import { ProcessValues } from "./constants";
-
 import { ProcessPayload, ProcessValues } from "./constants";
 
 export function isURL(str: string) {
@@ -71,6 +69,29 @@ export function processValue(value: number) {
       return ProcessValues.VERY_UNFAIR;
   }
 }
+
+export function processValueToNumber(process: ProcessValues) {
+  switch (process) {
+    case ProcessValues.VERY_UNFAIR:
+      return 1;
+
+    case ProcessValues.UNFAIR:
+      return 2;
+
+    case ProcessValues.NOT_SURE:
+      return 3;
+
+    case ProcessValues.FAIR:
+      return 4;
+
+    case ProcessValues.VERY_FAIR:
+      return 5;
+
+    default:
+      return 1; // You can set a default value if needed
+  }
+}
+
 
 export function processPayload(value: number) {
   switch (value) {

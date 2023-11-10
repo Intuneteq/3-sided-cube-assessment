@@ -29,9 +29,8 @@ type Props = {
   /** Path url for next button */
   nextPage: string;
 
+  /** Hide form label */
   hideLabel?: boolean;
-
-  // formAction: any;
 };
 
 // Dynamic resolver function based on the name
@@ -68,7 +67,7 @@ export default function Rhf({
 
   if (error) throw new Error(error.message);
 
-  if (!data) throw new Error("No data");
+  if (!data) throw new Error("Error Fetching Nominee");
 
   const nominees = groupOptions(data);
 

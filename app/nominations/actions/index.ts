@@ -1,6 +1,5 @@
 import { axiosClient } from "@/api/axios";
 import { processPayload } from "@/lib/utility";
-import { MutationFunction } from "@tanstack/react-query";
 
 export async function getNominations(): Promise<Nomination[]> {
   const res = await axiosClient.get("/nomination");

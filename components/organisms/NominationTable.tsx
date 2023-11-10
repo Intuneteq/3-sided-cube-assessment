@@ -61,7 +61,7 @@ export default function NominationTable({ nomineeInfo }: Props) {
   };
 
   return (
-    <div className="hidden md:block w-full max-w-[76rem] h-[38.1875rem] shadow-strong bg-primary-white border border-primary-white">
+    <div className="hidden md:block w-full max-w-[76rem] min-h-[38.1875rem] shadow-strong bg-primary-white border border-primary-white">
       <table className="min-w-full">
         <thead>
           <tr className={`w-full bg-light-grey ${poppins.className}`}>
@@ -79,8 +79,8 @@ export default function NominationTable({ nomineeInfo }: Props) {
           </tr>
         </thead>
         <tbody className={`${anonymous_Pro.className}`}>
-          {nomineeInfo?.map((nomination) => (
-            <tr key={nomination.nominee_id}>
+          {nomineeInfo?.map((nomination, i) => (
+            <tr key={nomination.nominee_id + i}>
               <td className="table-data">{nomination.fullName}</td>
               <td className="table-data">{nomination.date_submitted}</td>
               <td className="table-data">{nomination.closing_date}</td>

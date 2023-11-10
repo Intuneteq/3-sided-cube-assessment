@@ -21,6 +21,7 @@ import { MobileRating } from "../molecules";
 
 import { poppins, anonymous_Pro, roboto } from "@/fonts";
 import { ProcessValues } from "@/lib/constants";
+import { processValueToNumber } from "@/lib/utility";
 
 type Props = {
   /** Form type */
@@ -96,7 +97,8 @@ export default function FormInput({
       ),
     },
   ];
-  
+
+  /** Select Dropdown Exit Controller */
   const handleClickOutside = (event: MouseEvent) => {
     if (
       selectRef.current &&
@@ -130,6 +132,7 @@ export default function FormInput({
     "outline-none",
   ];
 
+  /** Render form Input based on it's type */
   const renderInput = () => {
     if (type === "textarea") {
       inputClasses = [
@@ -247,7 +250,11 @@ export default function FormInput({
                   max={5}
                   step={1}
                   className="w-full"
-                  defaultValue={1}
+                  defaultValue={
+                    field.value
+                      ? processValueToNumber(field.value as ProcessValues).toString()
+                      : "1"
+                  }
                   {...field}
                 />
                 <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
