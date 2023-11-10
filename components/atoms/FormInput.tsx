@@ -250,9 +250,12 @@ export default function FormInput({
                   max={5}
                   step={1}
                   className="w-full"
+                  // IF field is being prepopulated, map the data back to number value else set default as 1
                   defaultValue={
                     field.value
-                      ? processValueToNumber(field.value as ProcessValues).toString()
+                      ? processValueToNumber(
+                          field.value as ProcessValues
+                        ).toString()
                       : "1"
                   }
                   {...field}
