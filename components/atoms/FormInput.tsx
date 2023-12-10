@@ -6,6 +6,8 @@ import {
   UseFormRegister,
   Controller,
   FieldErrors,
+  FieldValues,
+  Path,
 } from "react-hook-form";
 
 import {
@@ -13,6 +15,7 @@ import {
   Fair,
   NotSure,
   ReactionSmiley,
+  SelectInput,
   Unfair,
   VeryFair,
   VeryUnfair,
@@ -23,7 +26,7 @@ import { poppins, anonymous_Pro, roboto } from "@/fonts";
 import { ProcessValues } from "@/lib/constants";
 import { processValueToNumber } from "@/lib/utility";
 
-type Props = {
+type Props<T extends FieldValues> = {
   /** Form type */
   type: FormType;
 
@@ -34,7 +37,7 @@ type Props = {
   label: string;
 
   /** Input name */
-  name: Inputs;
+  name: Path<T>;
 
   /** Select options */
   options?: Array<Option>;
@@ -43,16 +46,16 @@ type Props = {
   hideLabel?: boolean;
 
   /** React hook form Register handler */
-  register: UseFormRegister<FormValues>;
+  register: UseFormRegister<T>;
 
   /** React hook form control instance */
-  control: Control<FormValues, any>;
+  control: Control<T>;
 
   /** React hook form error instance */
-  errors?: FieldErrors<FormValues>;
+  errors?: FieldErrors<T>;
 };
 
-export default function FormInput({
+export default function FormInput<T extends FieldValues>({
   type,
   placeholder,
   label,
@@ -62,7 +65,7 @@ export default function FormInput({
   register,
   control,
   errors,
-}: Props) {
+}: Props<T>) {
   const [showDropDown, setShowDropDown] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -191,46 +194,11 @@ export default function FormInput({
 
       return (
         <div className="w-full">
-          <Controller
+          <SelectInput<T>
             name={name}
             control={control}
-            rules={{ required: `${name} is required` }}
-            render={({ field }) => (
-              <div
-                ref={selectRef}
-                className="h-auto w-full max-w-[25.6875rem] bg-primary-white relative"
-              >
-                <input
-                  type="text"
-                  placeholder="Select Options"
-                  onClick={() => setShowDropDown(!showDropDown)}
-                  className={inputClasses.join(" ")}
-                  value={
-                    field.value
-                      ? options.find((opt) => opt.value === field.value)?.label
-                      : ""
-                  }
-                  readOnly
-                />
-                {showDropDown && (
-                  <div className="w-full max-h-[10.68rem] overflow-y-auto flex items-start flex-col justify-start gap-[0.06rem] absolute bg-primary-white">
-                    {options.map((option, ind) => (
-                      <button
-                        key={ind}
-                        type="button"
-                        onClick={() => {
-                          field.onChange(option.value);
-                          setShowDropDown(false);
-                        }}
-                        className={`${anonymous_Pro.className} text-normal text-base w-full h-[2.625rem] bg-light-grey text-left py-[0.375rem] px-[0.75rem]`}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
+            placeholder={placeholder}
+            options={options}
           />
         </div>
       );
@@ -285,9 +253,9 @@ export default function FormInput({
             {reactions.map((item) => (
               <Controller
                 key={item.value}
-                name={`rating`}
+                name={name}
                 control={control}
-                defaultValue={"1"}
+                // defaultValue={defaultValue}
                 render={({ field }) => (
                   <MobileRating
                     onChange={field.onChange}
@@ -334,7 +302,7 @@ export default function FormInput({
         <small
           className={`${poppins.className} mt-[0.25rem] text-[0.875rem] text-error`}
         >
-          {errors[name]?.message}
+          {/* {errors[name]?.message} */}
         </small>
       )}
     </div>

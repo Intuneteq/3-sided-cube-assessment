@@ -2,26 +2,30 @@
 
 import * as yup from "yup";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import {
+  useForm,
+  SubmitHandler,
+  FieldValues,
+  DefaultValues,
+  Path,
+} from "react-hook-form";
 
 import { Modal } from "./";
 import { Button, FormInput } from "../atoms";
 import { Sticker } from "../molecules";
 
-import { getNominees } from "@/app/select-nominee/actions";
-import { findNominee, groupOptions } from "@/lib/utility";
-
-type Props = {
+type Props<T extends FieldValues> = {
   type: FormType;
 
   placeholder: string;
 
   label: string;
 
-  name: Inputs;
+  name: Path<T>;
+
+  defaultValues: DefaultValues<T>;
 
   /** Single Button conatiner */
   singleBtn?: boolean;
@@ -31,79 +35,40 @@ type Props = {
 
   /** Hide form label */
   hideLabel?: boolean;
+
+  // children: ReactNode;
+
+  validationSchema: yup.AnyObjectSchema;
+
+  options?: SelectOption[];
 };
 
-// Dynamic resolver function based on the name
-const createResolver = (name: keyof FormValues) => {
-  const schema = yup
-    .object({
-      [name]: yup.string().required(),
-    })
-    .required();
-
-  return yupResolver(schema) as any;
-};
-
-export default function Rhf({
+export default function Rhf<T extends FieldValues>({
   type,
   placeholder,
   label,
   name,
+  validationSchema,
+  defaultValues,
+  options,
   singleBtn,
-  nextPage,
   hideLabel,
-}: Props) {
+  nextPage,
+}: Props<T>) {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
-  const queryClient = useQueryClient();
-
-  const { data, error } = useQuery({
-    queryKey: ["nominees"],
-    queryFn: getNominees,
-  });
-
-  const preFormData = queryClient.getQueryData<FormValues>(["formData"]);
-
-  if (error) throw new Error(error.message);
-
-  if (!data) throw new Error("Error Fetching Nominee");
-
-  const nominees = groupOptions(data);
-
-  const form = useForm<FormValues>({
-    resolver: createResolver(name),
-    defaultValues: {
-      nominee: preFormData?.nominee,
-      rating: preFormData?.rating,
-      reasoning: preFormData?.reasoning,
-    },
+  const form = useForm<T>({
+    resolver: yupResolver(validationSchema),
+    defaultValues,
   });
 
   const { handleSubmit, formState, register, control } = form;
 
   const { errors, isValid } = formState;
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    if (data.nominee) {
-      const nominees = queryClient.getQueryData<Nominee[]>(["nominees"]);
-
-      if (!nominees) return;
-
-      const nominee = findNominee(nominees, data.nominee);
-
-      queryClient.setQueryData(["nominee"], (cachedData: Nominee) => {
-        return { ...cachedData, ...nominee };
-      });
-    }
-
-    // Set the form data in a query key
-    queryClient.setQueryData(["formData"], (cachedData: FormValues) => {
-      return {
-        ...cachedData,
-        ...data,
-      };
-    });
+  const onSubmit: SubmitHandler<T> = async (data) => {
+    console.log("data", data);
 
     router.push(`/${nextPage}`, { scroll: false });
   };
@@ -117,9 +82,9 @@ export default function Rhf({
             placeholder={placeholder}
             label={label}
             name={name}
+            options={options}
             hideLabel={hideLabel}
             register={register}
-            options={nominees}
             control={control}
             errors={errors}
           />
@@ -133,7 +98,6 @@ export default function Rhf({
               type="submit"
               width="w-[13.9375rem]"
               height="h-[3.125rem]"
-              href={nextPage}
             >
               Submit
             </Button>
@@ -154,7 +118,6 @@ export default function Rhf({
               type="submit"
               width="w-[13.9375rem]"
               height="h-[3.125rem]"
-              href={nextPage}
               disable={!isValid}
               inactive={!isValid}
             >
@@ -163,7 +126,6 @@ export default function Rhf({
           </div>
         )}
 
-        {/* Action Buttons only visible on mobile */}
         <Sticker stack="horizontal">
           <Button
             scheme="secondary"
@@ -181,7 +143,6 @@ export default function Rhf({
             width="w-[13.3125rem]"
             height="h-[3.0625rem]"
             textSize="text-[0.875rem]"
-            href={nextPage}
             disable={!isValid}
             inactive={!isValid}
           >
@@ -189,9 +150,7 @@ export default function Rhf({
           </Button>
         </Sticker>
       </form>
-
-      {/* Leave Page Modal */}
-      {showModal && (
+      {showModal ? (
         <Modal
           confirmation="Yes, leave page"
           heading="Are You sure?"
@@ -199,7 +158,7 @@ export default function Rhf({
           confirmationAction={() => router.back()}
           onClick={() => setShowModal(false)}
         />
-      )}
+      ) : null}
     </>
   );
 }

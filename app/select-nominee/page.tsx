@@ -1,8 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
 
-import { Rhf } from "@/components/organisms";
 import { ContainerII } from "@/components/templates";
+import { NomineeForm } from "@/components/molecules";
 
 export const metadata: Metadata = {
   title: "Select Nominee",
@@ -19,13 +19,7 @@ export default async function SelectNominee() {
         progress="25%"
       >
         <div className="flex-start w-full">
-          <Rhf
-            nextPage="reason"
-            type="select"
-            placeholder="Nominee"
-            label="Cube&rsquo;s name"
-            name="nominee"
-          />
+          <NomineeForm />
         </div>
       </ContainerII>
     </main>

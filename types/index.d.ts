@@ -56,4 +56,7 @@ type INomination = {
   closing_date: string;
 };
 
-
+type SelectOption = {
+  value: string;
+  label: string;
+}

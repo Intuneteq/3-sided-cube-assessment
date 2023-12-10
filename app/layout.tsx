@@ -7,8 +7,8 @@ import {
 import { Footer, Navbar } from "@/components/organisms";
 import TanstackProvider from "@/util/TanstackProvider";
 
-import { getNominees } from "./select-nominee/actions";
-import { getNominations } from "./nominations/actions";
+// import { getNominees } from "./select-nominee/actions";
+// import { getNominations } from "./nominations/actions";
 
 import "./globals.css";
 
@@ -22,15 +22,15 @@ export default async function RootLayout({
 }) {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ["nominees"],
-    queryFn: getNominees,
-  });
+  // await queryClient.prefetchQuery({
+  //   queryKey: ["nominees"],
+  //   queryFn: getNominees,
+  // });
 
-  await queryClient.prefetchQuery({
-    queryKey: ["nominations"],
-    queryFn: getNominations,
-  });
+  // await queryClient.prefetchQuery({
+  //   queryKey: ["nominations"],
+  //   queryFn: getNominations,
+  // });
 
   return (
     <html lang="en">

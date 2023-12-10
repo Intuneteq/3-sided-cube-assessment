@@ -3,6 +3,7 @@ export { default as FormInput } from "./FormInput";
 export { default as ProgressBar } from "./ProgressBar";
 export { default as Address } from "./Address";
 export { default as ReactionSmiley } from "./ReactionSmiley";
+export { default as SelectInput } from "./SelectInput";
 
 export { default as LoaderIcon } from "./svg/LoaderIcon";
 export { default as EyeClosedIcon } from "./svg/EyeClosedIcon";

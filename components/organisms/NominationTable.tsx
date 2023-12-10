@@ -85,9 +85,9 @@ export default function NominationTable({ nomineeInfo }: Props) {
               <td className="table-data">{nomination.date_submitted}</td>
               <td className="table-data">{nomination.closing_date}</td>
               <td className="table-data max-w-[24.9rem] whitespace-nowrap">
-                {nomination.reason.length > 20
+                {/* {nomination.reason.length > 20
                   ? `${nomination.reason.substring(0, 20)}...`
-                  : nomination.reason}
+                  : nomination.reason} */}
               </td>
               <td className="table-data">{nomination.process}</td>
               <td className="w-[2.5rem]">
