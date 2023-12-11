@@ -12,52 +12,55 @@ import { createNomination, updateNomination } from "@/app/nominations/actions";
 
 export default function OverviewGroup() {
   const router = useRouter();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  const nominee = queryClient.getQueryData<Nominee>(["nominee"]);
+  // const nominee = queryClient.getQueryData<Nominee>(["nominee"]);
 
-  const formValue = queryClient.getQueryData<FormValues>(["formData"]);
+  // const formValue = queryClient.getQueryData<FormValues>(["formData"]);
 
-  if (!nominee || !formValue) throw new Error("Nominee not Found");
+  // if (!nominee || !formValue) throw new Error("Nominee not Found");
 
-  const mutation = useMutation({
-    mutationFn: async (formValue: FormValues) => {
-      if (formValue.nomination_id) {
-        return updateNomination(formValue);
-      } else {
-        return createNomination(formValue);
-      }
-    },
+  // const mutation = useMutation({
+  //   mutationFn: async (formValue: FormValues) => {
+  //     if (formValue.nomination_id) {
+  //       return updateNomination(formValue);
+  //     } else {
+  //       return createNomination(formValue);
+  //     }
+  //   },
 
-    onSuccess: () => {
-      queryClient.invalidateQueries();
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries();
 
-      router.push("/submitted");
-    },
+  //     router.push("/submitted");
+  //   },
 
-    onError: (error) => {
-      throw new Error(error.message);
-    },
-  });
+  //   onError: (error) => {
+  //     throw new Error(error.message);
+  //   },
+  // });
 
-  const { isPending } = mutation;
+  // const { isPending } = mutation;
 
   return (
     <>
       <div className="w-full flex flex-col gap-2 justify-center items-center mb-[2.12rem]">
         <OverviewCard
           title="Cube's name"
-          content={nominee.first_name}
+          content="food"
+          // content={nominee.first_name}
           path="/select-nominee"
         />
         <OverviewCard
           title="Reasoning"
-          content={formValue.reasoning}
+          content="food"
+          // content={formValue.reasoning}
           path="/reason"
         />
         <OverviewCard
           title="Thoughts on Current Process"
-          content={processValue(parseInt(formValue.rating))}
+          content="food"
+          // content={processValue(parseInt(formValue.rating))}
           path="/process"
         />
       </div>
@@ -67,17 +70,18 @@ export default function OverviewGroup() {
           type="button"
           width="w-[13.9375rem]"
           height="h-[3.125rem]"
-          onClick={() => mutation.mutate(formValue)}
-          disable={isPending}
+          // onClick={() => mutation.mutate(formValue)}
+          // disable={isPending}
         >
-          {isPending ? (
+          submit
+          {/* {isPending ? (
             <LoaderIcon
               className="w-[24px] h-[26px] animate-spin-slow"
               stroke="white"
             />
           ) : (
             "Submit"
-          )}
+          )} */}
         </Button>
       </div>
     </>

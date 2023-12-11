@@ -3,7 +3,7 @@
 import * as yup from "yup";
 import React, { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   useForm,
   SubmitHandler,
@@ -57,6 +57,7 @@ export default function Rhf<T extends FieldValues>({
 }: Props<T>) {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const form = useForm<T>({
     resolver: yupResolver(validationSchema),
@@ -68,9 +69,15 @@ export default function Rhf<T extends FieldValues>({
   const { errors, isValid } = formState;
 
   const onSubmit: SubmitHandler<T> = async (data) => {
-    console.log("data", data);
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    
+    current.set(name, encodeURIComponent(data[Object.keys(data)[0]]));
+    
+    const search = current.toString();
 
-    router.push(`/${nextPage}`, { scroll: false });
+    const query = search ? `?${search}` : "";
+
+    router.push(`/${nextPage}${query}`, { scroll: false });
   };
 
   return (
