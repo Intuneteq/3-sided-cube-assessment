@@ -13,12 +13,12 @@ const schema = yup
   .required();
 
 type Process = {
-  process: string;
+  process: number;
 };
 
 export default function ProcessForm() {
   const defaultValues: Process = {
-    process: "",
+    process: 1,
   };
 
   return (

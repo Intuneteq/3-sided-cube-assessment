@@ -63,7 +63,27 @@ const useAppStyling = () => {
     };
   };
 
-  return { setSelectStyle };
+  const sliderStyle = {
+    color: "#C3C3C3",
+    height: "0.5rem",
+    border: "none",
+    borderRadius: 0,
+    "& .MuiSlider-track": {
+      backgroundColor: "#F70087",
+      borderRadius: "none",
+      height: "0.5rem",
+    },
+    "& .MuiSlider-thumb": {
+      height: "1.5rem",
+      width: "1.5rem",
+      backgroundColor: "#F70087",
+      "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
+        boxShadow: "inherit",
+      },
+    },
+  };
+
+  return { setSelectStyle, sliderStyle };
 };
 
 export default useAppStyling;
