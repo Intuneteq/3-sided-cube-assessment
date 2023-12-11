@@ -34,7 +34,7 @@ type Props<T extends FieldValues> = {
   placeholder: string;
 
   /** Input Label */
-  label: string;
+  label?: string;
 
   /** Input name */
   name: Path<T>;

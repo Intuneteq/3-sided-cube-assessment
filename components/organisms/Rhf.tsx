@@ -21,7 +21,7 @@ type Props<T extends FieldValues> = {
 
   placeholder: string;
 
-  label: string;
+  label?: string;
 
   name: Path<T>;
 

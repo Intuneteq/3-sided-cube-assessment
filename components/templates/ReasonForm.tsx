@@ -22,7 +22,7 @@ export default function ReasonForm() {
   };
 
   return (
-    <Rhf
+    <Rhf<Reason>
       nextPage="process"
       type="textarea"
       placeholder="Reasoning"
