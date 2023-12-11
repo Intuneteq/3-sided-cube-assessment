@@ -1,9 +1,15 @@
-import { QueryCache } from '@tanstack/react-query'
+import { useQuery } from "@tanstack/react-query";
+
+import { getNominees } from "@/app/select-nominee/actions";
 
 const keys = {
-   cache: ['cache']
-}
+  cache: ["cache"],
+  getNominees: ["nominees"],
+};
 
-export function useStoreCache() {
-
+export function useGetNominees() {
+  return useQuery({
+    queryFn: getNominees,
+    queryKey: keys.getNominees,
+  });
 }

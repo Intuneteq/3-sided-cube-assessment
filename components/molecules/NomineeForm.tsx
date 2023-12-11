@@ -5,6 +5,7 @@ import * as yup from "yup";
 
 import { DefaultValues } from "react-hook-form";
 import { Rhf } from "../organisms";
+import { useGetNominees } from "@/lib/useNominees";
 
 const schema = yup
   .object({
@@ -21,19 +22,23 @@ export default function NomineeForm() {
     nominee: "",
   };
 
-  const options: SelectOption[] = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "vanilla1", label: "Vanilla" },
-    { value: "vanilla2", label: "Vanilla" },
-    { value: "vanilla3", label: "Vanilla" },
-    { value: "vanilla4", label: "Vanilla" },
-    { value: "vanilla4", label: "Vanilla" },
-    { value: "vanilla4", label: "Vanilla" },
-    { value: "vanilla4", label: "Vanilla" },
-    { value: "vanilla4", label: "Vanilla" },
-  ];
+  const { data, error, isError } = useGetNominees();
+
+  if (isError && error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error("Error Fetching Nominees");
+  }
+
+  const options: SelectOption[] = data.map((option) => {
+    return {
+      value: option.nominee_id,
+      label: option.first_name + " " + option.last_name,
+    };
+  });
+
   return (
     <Rhf<Nominee>
       nextPage="reason"
