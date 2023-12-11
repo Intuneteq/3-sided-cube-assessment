@@ -1,66 +1,56 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button, LoaderIcon } from "../atoms";
 import { OverviewCard } from "../molecules";
 
-import { processValue } from "@/lib/utility";
-import { createNomination, updateNomination } from "@/app/nominations/actions";
+import { processPayload, processValue } from "@/lib/utility";
+import { useGetQueryData, keys } from "@/lib/useNominees";
+import { useCreateNomination } from "@/lib/useNominations";
 
 export default function OverviewGroup() {
   const router = useRouter();
-  // const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const nominees = useGetQueryData(keys.getNominees);
 
-  // const nominee = queryClient.getQueryData<Nominee>(["nominee"]);
+  const nominee_id = decodeURIComponent(searchParams.get("nominee") as string);
+  const val = decodeURIComponent(searchParams.get("process") as string);
+  const reason = decodeURIComponent(searchParams.get("reason") as string);
 
-  // const formValue = queryClient.getQueryData<FormValues>(["formData"]);
+  const nominee = nominees?.find((item) => item.nominee_id === nominee_id);
+  const process = processPayload(parseInt(val));
 
-  // if (!nominee || !formValue) throw new Error("Nominee not Found");
+  if (!nominees || !nominee) {
+    throw new Error("no nominee");
+  }
 
-  // const mutation = useMutation({
-  //   mutationFn: async (formValue: FormValues) => {
-  //     if (formValue.nomination_id) {
-  //       return updateNomination(formValue);
-  //     } else {
-  //       return createNomination(formValue);
-  //     }
-  //   },
+  const data = { nominee_id, process, reason };
 
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries();
+  const options: NominationOptions = {
+    data,
+    onSuccess: router.push("/submitted"),
+  };
 
-  //     router.push("/submitted");
-  //   },
+  const { mutate, error, isError, isPending } = useCreateNomination(options);
 
-  //   onError: (error) => {
-  //     throw new Error(error.message);
-  //   },
-  // });
-
-  // const { isPending } = mutation;
+  if (isError) {
+    throw new Error(error.message);
+  }
 
   return (
     <>
       <div className="w-full flex flex-col gap-2 justify-center items-center mb-[2.12rem]">
         <OverviewCard
           title="Cube's name"
-          content="food"
-          // content={nominee.first_name}
+          content={nominee.first_name}
           path="/select-nominee"
         />
-        <OverviewCard
-          title="Reasoning"
-          content="food"
-          // content={formValue.reasoning}
-          path="/reason"
-        />
+        <OverviewCard title="Reasoning" content={reason} path="/reason" />
         <OverviewCard
           title="Thoughts on Current Process"
-          content="food"
-          // content={processValue(parseInt(formValue.rating))}
+          content={processValue(parseInt(val))}
           path="/process"
         />
       </div>
@@ -70,18 +60,17 @@ export default function OverviewGroup() {
           type="button"
           width="w-[13.9375rem]"
           height="h-[3.125rem]"
-          // onClick={() => mutation.mutate(formValue)}
-          // disable={isPending}
+          onClick={() => mutate()}
+          disable={isPending}
         >
-          submit
-          {/* {isPending ? (
+          {isPending ? (
             <LoaderIcon
               className="w-[24px] h-[26px] animate-spin-slow"
               stroke="white"
             />
           ) : (
             "Submit"
-          )} */}
+          )}
         </Button>
       </div>
     </>

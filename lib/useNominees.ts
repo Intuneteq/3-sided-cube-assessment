@@ -1,9 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { getNominees } from "@/app/select-nominee/actions";
 
-const keys = {
-  cache: ["cache"],
+export const keys = {
   getNominees: ["nominees"],
 };
 
@@ -12,4 +11,9 @@ export function useGetNominees() {
     queryFn: getNominees,
     queryKey: keys.getNominees,
   });
+}
+
+export function useGetQueryData(key: string[]) {
+  const queryClient = useQueryClient();
+  return queryClient.getQueryData<Nominee[]>(key);
 }

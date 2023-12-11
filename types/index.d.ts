@@ -13,8 +13,8 @@ type Inputs = "nominee" | "reasoning" | "rating";
 type FormValues = {
   nomination_id?: string;
   nominee: string;
-  reasoning: string;
-  rating: string;
+  reason: string;
+  process: string;
 };
 
 type FormType =
@@ -39,11 +39,16 @@ type Nominee = {
 
 type Nomination = {
   nomination_id: string;
-  nominee_id: "string";
-  reason: "string";
-  process: "string";
-  date_submitted: "string";
-  closing_date: "string";
+  nominee_id: string;
+  reason: string;
+  process: string;
+  date_submitted: string;
+  closing_date: string;
+};
+
+type NominationOptions = {
+  data: Partial<Nomination>;
+  onSuccess: void;
 };
 
 type INomination = {
@@ -59,4 +64,4 @@ type INomination = {
 type SelectOption = {
   value: string;
   label: string;
-}
+};
