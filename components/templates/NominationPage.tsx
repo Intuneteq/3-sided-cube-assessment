@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Button, EmptyContentIcon } from "@/components/atoms";
 import { Sticker } from "../molecules";
@@ -10,47 +9,36 @@ import { NominationMobile, NominationTable } from "@/components/organisms";
 import { getNomineesInfo } from "@/lib/utility";
 import { anonymous_Pro, poppins } from "@/fonts";
 import { getNominations } from "@/app/nominations/actions";
+import { useGetNomiations } from "@/lib/useNominations";
 
 export default function NominationPage() {
-  const queryClient = useQueryClient();
-
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   const [isCurrent, setIsCurrent] = useState(true);
 
-  const {
-    data: nominations,
-    error,
-    isError,
-  } = useQuery({
-    queryKey: ["nominations"],
-    queryFn: getNominations,
-  });
+  const { data: nominations, error, isError } = useGetNomiations();
 
-  const nominees = queryClient.getQueryData<Nominee[]>(["nominees"]);
-
-  if (isError) {
-    throw new Error(error?.message);
+  if (isError && error) {
+    throw new Error(error.message);
   }
 
-  if (!nominees) {
-    throw new Error("Error Fetching Nominees");
+  if (!nominations) {
+    throw new Error("Error Fetching Nominations");
   }
 
-  const nomineeInfo = getNomineesInfo(nominations!, nominees);
-
-  const closedInfo = nomineeInfo.filter((item) => {
-    const closing_date = new Date(item.closing_date);
-
-    return closing_date < today;
-  });
-
-  const currentInfor = nomineeInfo.filter((item) => {
-    const closing_date = new Date(item.closing_date);
-
-    return closing_date >= today;
-  });
+  const { closed, current } = nominations.reduce(
+    (acc, nomination) => {
+      const closing_date = new Date(nomination.closing_date);
+      if (closing_date < today) {
+        acc.closed.push(nomination);
+      } else {
+        acc.current.push(nomination);
+      }
+      return acc;
+    },
+    { closed: [] as Nomination[], current: [] as Nomination[] }
+  );
 
   if (!nominations || !nominations?.length) {
     return (
@@ -86,7 +74,7 @@ export default function NominationPage() {
         className={`${anonymous_Pro.className} flex justify-start items-center gap-3 mb-[1.19rem] px-[1.25rem] md:px-0`}
       >
         <button
-          onClick={() => setIsCurrent(!isCurrent)}
+          onClick={() => setIsCurrent(true)}
           type="button"
           className={`w-[7rem] md:w-[8.5rem] h-[1.875rem] md:h-[3.125rem] text-primary-black bg-primary-green flex justify-center items-center capitalize text-base font-normal shadow-light hover:shadow-strong ${
             isCurrent && "shadow-strong"
@@ -95,7 +83,7 @@ export default function NominationPage() {
           current
         </button>
         <button
-          onClick={() => setIsCurrent(!isCurrent)}
+          onClick={() => setIsCurrent(false)}
           className={`w-[7rem] md:w-[8.5rem] h-[1.875rem] md:h-[3.125rem] bg-light-grey text-primary-black flex justify-center items-center capitalize text-base font-bold shadow-light hover:shadow-strong ${
             !isCurrent && "shadow-strong"
           }`}
@@ -105,10 +93,10 @@ export default function NominationPage() {
       </div>
 
       {/* Desktop screen */}
-      <NominationTable nomineeInfo={isCurrent ? currentInfor : closedInfo} />
+      <NominationTable nominations={isCurrent ? current : closed} />
 
       {/* Mobile screen */}
-      <NominationMobile nomineeInfo={isCurrent ? currentInfor : closedInfo} />
+      {/* <NominationMobile nomineeInfo={isCurrent ? currentInfor : closedInfo} /> */}
 
       {/* Action Buttons only visible on mobile */}
       <Sticker stack="none">

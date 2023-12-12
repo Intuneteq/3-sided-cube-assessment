@@ -2,26 +2,22 @@
 
 import React from "react";
 import Link from "next/link";
-// import { useQuery } from "@tanstack/react-query";
 
 import { DesktopLogo, Logo, PlusIcon, InboxIcon } from "@/components/atoms";
 
 import { anonymous_Pro } from "@/fonts";
-// import { getNominations } from "@/app/nominations/actions";
+import { useGetNomiations } from "@/lib/useNominations";
 
 export default function Navbar() {
-  // const {
-  //   data: nominations,
-  //   error,
-  //   isError,
-  // } = useQuery({
-  //   queryKey: ["nominations"],
-  //   queryFn: getNominations,
-  // });
+  const { data, error, isError } = useGetNomiations();
 
-  // if (isError) {
-  //   throw new Error(error.message);
-  // }
+  if (isError && error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error("Error Fetching Nominees");
+  }
 
   return (
     <nav className="w-full min-h-[4.5rem] py-4 px-[1.31rem] md:px-9 flex items-center justify-center bg-primary-black border md:border-none border-primary-black">
@@ -34,7 +30,7 @@ export default function Navbar() {
           href={"/nominations"}
           className={`${anonymous_Pro.className} text-base font-bold tracking-[0.02rem] underline text-primary-white `}
         >
-          {`Your Nominations (${0})`}
+          {`Your Nominations (${data.length})`}
         </Link>
       </div>
 
