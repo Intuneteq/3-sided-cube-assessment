@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import {
   Control,
   UseFormRegister,
@@ -55,27 +55,6 @@ export default function FormInput<T extends FieldValues>({
   control,
   errors,
 }: Props<T>) {
-  const [showDropDown, setShowDropDown] = useState(false);
-  const selectRef = useRef<HTMLDivElement>(null);
-
-  /** Select Dropdown Exit Controller */
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      selectRef.current &&
-      !selectRef.current.contains(event.target as Node)
-    ) {
-      setShowDropDown(false);
-    }
-  };
-
-  useEffect(() => {
-    if (type === "select") {
-      window.addEventListener("click", handleClickOutside);
-      return () => {
-        window.removeEventListener("click", handleClickOutside);
-      };
-    }
-  }, [type]);
 
   let inputClasses = [
     "placeholder:text-mid-grey",
@@ -141,13 +120,6 @@ export default function FormInput<T extends FieldValues>({
 
     if (type === "select") {
       if (!options || !options.length) throw new Error("Nominee not populated");
-
-      inputClasses = [
-        ...inputClasses,
-        "w-full",
-        "custom-select",
-        "max-w-[25.6875rem]",
-      ];
 
       return (
         <div className="w-full">

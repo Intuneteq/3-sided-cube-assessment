@@ -11,8 +11,11 @@ const useAppStyling = () => {
         height: "2.75rem",
         cursor: "pointer",
         fontSize: "1rem",
-        borderColor: "#C3C3C3",
-        boxShadow: state.isFocused ? "none" : "none",
+        borderColor: state.isFocused ? "#5B5B5B" : "#C3C3C3",
+        boxShadow: "none",
+        "&:hover": {
+          borderColor: "none",
+        },
       }),
       menu: (base) => ({
         ...base,
@@ -40,10 +43,23 @@ const useAppStyling = () => {
         height: "10.3rem",
         scrollbarWidth: "none",
         overflowY: "scroll",
+
+        "::-webkit-scrollbar": {
+          width: "4px",
+          height: "0px",
+        },
+        "::-webkit-scrollbar-track": {
+          background: "#f1f1f1",
+        },
+        "::-webkit-scrollbar-thumb": {
+          background: "#888",
+        },
+        "::-webkit-scrollbar-thumb:hover": {
+          background: "#555",
+        },
       }),
       placeholder: (base) => ({
         ...base,
-        // color: color,
         textTransform: "capitalize",
         fontSize: "1rem",
       }),
