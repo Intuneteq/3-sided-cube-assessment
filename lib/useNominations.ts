@@ -5,6 +5,7 @@ import {
   getNominations,
   createNomination,
   deleteNomination,
+  editNomination,
 } from "@/app/nominations/actions";
 import { mapProcessValue } from "@/lib/utility";
 
@@ -29,6 +30,7 @@ export function useGetNomiations() {
           full_name: nominee
             ? nominee.first_name + " " + nominee.last_name
             : "",
+          nominee_id: nominee?.nominee_id,
           reason: item.reason,
           process: mapProcessValue(item.process),
           date_submitted: item.date_submitted,
@@ -55,9 +57,25 @@ export function useCreateNomination(options: NominationOptions) {
   });
 }
 
+export function useEditNomination(options: NominationOptions) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async () => {
+      return await editNomination(options.data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: keys.getNominations,
+      });
+      options.onSuccess();
+    },
+  });
+}
+
 export function useDeleteNomination(options: NominationOptions) {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async () => {
       return await deleteNomination(options.data.nomination_id!);

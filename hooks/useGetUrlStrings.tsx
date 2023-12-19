@@ -8,6 +8,7 @@ export default function useGetUrlStrings() {
   const nominees = useGetQueryData(keys.getNominees);
 
   const nominee_id = decodeURIComponent(searchParams.get("nominee") as string);
+  const nomination_id = decodeURIComponent(searchParams.get("nomination_id") as string);
   const value = decodeURIComponent(searchParams.get("process") as string);
   const reason = decodeURIComponent(searchParams.get("reason") as string);
 
@@ -21,5 +22,5 @@ export default function useGetUrlStrings() {
 
   const state = `nominee=${nominee?.nominee_id}&reason=${reason}&process=${process.value}`;
 
-  return { reason, nominee, process, state };
+  return { reason, nominee, process, state, nomination_id };
 }

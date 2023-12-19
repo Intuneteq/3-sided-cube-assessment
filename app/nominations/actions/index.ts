@@ -14,22 +14,13 @@ export async function createNomination(
   return (await res).data.data;
 }
 
-// export async function updateNomination(
-//   formValue: FormValues
-// ): Promise<INomination> {
-//   const payload = {
-//     nomination_id: formValue.nomination_id,
-//     nominee_id: formValue.nominee,
-//     reason: formValue.reasoning,
-//     process: processPayload(parseInt(formValue.rating)),
-//   };
-//   const res = await axiosClient.put(
-//     `/nomination/${formValue.nomination_id}`,
-//     payload
-//   );
+export async function editNomination(
+  data: Partial<Nomination>
+): Promise<Nomination> {
+  const res = await axiosClient.put(`/nomination/${data.nomination_id}`, data);
 
-//   return res.data.data;
-// }
+  return res.data.data;
+}
 
 export async function deleteNomination(id: string): Promise<string> {
   const res = await axiosClient.delete(`/nomination/${id}`);

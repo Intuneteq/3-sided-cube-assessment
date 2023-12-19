@@ -8,6 +8,8 @@ import { DeleteIcon, EditIcon } from "../atoms";
 
 import { anonymous_Pro, poppins } from "@/fonts";
 import { useDeleteNomination } from "@/lib/useNominations";
+import { processValueToNumber } from "@/lib/utility";
+import { ProcessValues } from "@/lib/constants";
 
 type Props = {
   nominations: INomination[];
@@ -33,21 +35,11 @@ export default function NominationTable({ nominations }: Props) {
    * @param id
    * Converting this to a hook later on
    */
-  const handleEditNomination = (id: string) => {
-    // const nominee = nomineeInfo.find((info) => info.nominee_id === id);
-    // const data: FormValues = {
-    //   nomination_id: nominee?.nomination_id,
-    //   nominee: nominee?.nominee_id!,
-    //   reasoning: nominee?.reason!,
-    //   rating: nominee?.process!,
-    // };
-    // queryClient.setQueryData(["formData"], (cachedData: FormValues) => {
-    //   return {
-    //     ...cachedData,
-    //     ...data,
-    //   };
-    // });
-    // router.push("/select-nominee");
+  const handleEditNomination = (nomination: INomination) => {
+    const process = processValueToNumber(nomination.process as ProcessValues);
+    router.push(
+      `/select-nominee?nominee=${nomination.nominee_id}&reason=${nomination.reason}&process=${process}&nomination_id=${nomination.nomination_id}`
+    );
   };
 
   return (
@@ -88,7 +80,7 @@ export default function NominationTable({ nominations }: Props) {
               </td>
               <td className="w-[2.5rem]">
                 <EditIcon
-                  onClick={() => handleEditNomination(nomination.nominee_id)}
+                  onClick={() => handleEditNomination(nomination)}
                   className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
                 />
               </td>
