@@ -1,32 +1,29 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { Button, LoaderIcon } from "../atoms";
 import { OverviewCard } from "../molecules";
 
-import { processPayload, processValue } from "@/lib/utility";
-import { useGetQueryData, keys } from "@/lib/useNominees";
 import { useCreateNomination } from "@/lib/useNominations";
+import useGetUrlStrings from "@/hooks/useGetUrlStrings";
 
 export default function OverviewGroup() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const nominees = useGetQueryData(keys.getNominees);
+  const { reason, nominee, process } = useGetUrlStrings();
 
-  const nominee_id = decodeURIComponent(searchParams.get("nominee") as string);
-  const val = decodeURIComponent(searchParams.get("process") as string);
-  const reason = decodeURIComponent(searchParams.get("reason") as string);
+  const state = `nominee=${nominee?.nominee_id}&reason=${reason}&process=${process.value}`;
 
-  const nominee = nominees?.find((item) => item.nominee_id === nominee_id);
-  const process = processPayload(parseInt(val));
-
-  if (!nominees || !nominee) {
+  if (!nominee) {
     throw new Error("no nominee");
   }
 
-  const data = { nominee_id, process, reason };
+  const data = {
+    nominee_id: nominee.nominee_id,
+    process: process.payload,
+    reason,
+  };
 
   const options: NominationOptions = {
     data,
@@ -45,13 +42,17 @@ export default function OverviewGroup() {
         <OverviewCard
           title="Cube's name"
           content={nominee.first_name}
-          path="/select-nominee"
+          path={`/select-nominee?${state}`}
         />
-        <OverviewCard title="Reasoning" content={reason} path="/reason" />
+        <OverviewCard
+          title="Reasoning"
+          content={reason}
+          path={`/reason?${state}`}
+        />
         <OverviewCard
           title="Thoughts on Current Process"
-          content={processValue(parseInt(val))}
-          path="/process"
+          content={process.label}
+          path={`/process?${state}`}
         />
       </div>
       <div>

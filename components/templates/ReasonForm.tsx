@@ -1,10 +1,12 @@
-'use client'
+"use client";
 
 import React from "react";
 import * as yup from "yup";
 import { DefaultValues } from "react-hook-form";
 
 import { Rhf } from "../organisms";
+
+import useGetUrlStrings from "@/hooks/useGetUrlStrings";
 
 const schema = yup
   .object({
@@ -17,8 +19,10 @@ type Reason = {
 };
 
 export default function ReasonForm() {
+  const { reason } = useGetUrlStrings();
+
   const defaultValues: Reason = {
-    reason: "",
+    reason: reason ?? "",
   };
 
   return (

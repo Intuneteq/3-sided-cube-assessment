@@ -2,10 +2,12 @@
 
 import React from "react";
 import * as yup from "yup";
-
 import { DefaultValues } from "react-hook-form";
+
 import { Rhf } from "../organisms";
+
 import { useGetNominees } from "@/lib/useNominees";
+import useGetUrlStrings from "@/hooks/useGetUrlStrings";
 
 const schema = yup
   .object({
@@ -18,8 +20,10 @@ type Nominee = {
 };
 
 export default function NomineeForm() {
+  const { nominee } = useGetUrlStrings();
+  
   const defaultValues: Nominee = {
-    nominee: "",
+    nominee: nominee?.nominee_id ?? "",
   };
 
   const { data, error, isError } = useGetNominees();

@@ -1,21 +1,15 @@
 "use client";
 
 import React from "react";
-import { useSearchParams } from "next/navigation";
 
 import { ContainerII, ReasonForm } from "./";
 
-import { keys, useGetQueryData } from "@/lib/useNominees";
+import useGetUrlStrings from "@/hooks/useGetUrlStrings";
 
 export default function ReasonPage() {
-  const searchParams = useSearchParams();
-  const nominees = useGetQueryData(keys.getNominees);
+  const { nominee } = useGetUrlStrings();
 
-  const nominee_id = decodeURIComponent(searchParams.get("nominee") as string);
-
-  const nominee = nominees?.find((item) => item.nominee_id === nominee_id);
-
-  if (!nominees || !nominee) {
+  if (!nominee) {
     throw new Error("no nominee");
   }
 
