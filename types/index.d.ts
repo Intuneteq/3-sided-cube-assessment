@@ -47,14 +47,14 @@ type Nomination = {
 };
 
 type NominationOptions = {
-  data: Partial<Nomination>;
+  data: Partial<Nomination> | Partial<INomination>;
   onSuccess: () => void;
 };
 
 type INomination = {
   nomination_id: string;
   nominee_id: string;
-  fullName: string;
+  full_name: string;
   reason: string;
   process: string;
   date_submitted: string;

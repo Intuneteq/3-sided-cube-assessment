@@ -6,9 +6,7 @@ import { Button, EmptyContentIcon } from "@/components/atoms";
 import { Sticker } from "../molecules";
 import { NominationMobile, NominationTable } from "@/components/organisms";
 
-import { getNomineesInfo } from "@/lib/utility";
 import { anonymous_Pro, poppins } from "@/fonts";
-import { getNominations } from "@/app/nominations/actions";
 import { useGetNomiations } from "@/lib/useNominations";
 
 export default function NominationPage() {
@@ -26,6 +24,7 @@ export default function NominationPage() {
   if (!nominations) {
     throw new Error("Error Fetching Nominations");
   }
+  
 
   const { closed, current } = nominations.reduce(
     (acc, nomination) => {
@@ -37,7 +36,7 @@ export default function NominationPage() {
       }
       return acc;
     },
-    { closed: [] as Nomination[], current: [] as Nomination[] }
+    { closed: [] as any , current: [] as any }
   );
 
   if (!nominations || !nominations?.length) {

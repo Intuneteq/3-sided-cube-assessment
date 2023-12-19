@@ -109,7 +109,7 @@ export function processPayload(value: number) {
   }
 }
 
-function mapProcessValue(payloadValue: string): ProcessValues {
+export function mapProcessValue(payloadValue: string): ProcessValues {
   switch (payloadValue) {
     case ProcessPayload.VERY_UNFAIR:
       return ProcessValues.VERY_UNFAIR;
@@ -124,48 +124,4 @@ function mapProcessValue(payloadValue: string): ProcessValues {
     default:
       return ProcessValues.FAIR; // Set a default value in case of an unknown value
   }
-}
-
-/**
- *
- * @param nominations
- * @param nominees
- *
- * Create a mapping of nominee_id to Nominee
- * and transform the nominations into INomination
- */
-export function getNomineesInfo(
-  nominations: Nomination[],
-  nominees: Nominee[]
-): INomination[] {
-  const nomineeMap: Record<string, Nominee> = {};
-  nominees.forEach((nominee) => {
-    nomineeMap[nominee.nominee_id] = nominee;
-  });
-
-  const nomineesInfo: INomination[] = nominations.map((nomination) => {
-    const nominee = nomineeMap[nomination.nominee_id];
-    if (nominee) {
-      return {
-        nomination_id: nomination.nomination_id,
-        nominee_id: nomination.nominee_id,
-        fullName: `${nominee.first_name} ${nominee.last_name}`,
-        reason: nomination.reason,
-        process: mapProcessValue(nomination.process),
-        date_submitted: nomination.date_submitted,
-        closing_date: nomination.closing_date,
-      };
-    }
-    return {
-      nominee_id: "",
-      nomination_id: "",
-      fullName: "Nominee not found",
-      reason: nomination.reason,
-      process: mapProcessValue(nomination.process),
-      date_submitted: nomination.date_submitted,
-      closing_date: nomination.closing_date,
-    };
-  });
-
-  return nomineesInfo;
 }
