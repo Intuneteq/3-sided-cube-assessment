@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { useQueryClient } from "@tanstack/react-query";
 
 import { ProgressBar } from "@/components/atoms";
 
@@ -43,14 +42,9 @@ export default function ContainerII({
   progress,
   toDecorate,
 }: Props) {
-  const queryClient = useQueryClient();
-
-  const nominee = queryClient.getQueryData<Nominee>(["nominee"]);
-
-  const decoratedContent =
-    nominee && toDecorate
-      ? decorateNominee(heading, toDecorate, nominee)
-      : heading;
+  const decoratedContent = toDecorate
+    ? decorateNominee(heading, toDecorate)
+    : heading;
 
   return (
     <>

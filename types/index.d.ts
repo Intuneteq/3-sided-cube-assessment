@@ -48,7 +48,7 @@ type Nomination = {
 
 type NominationOptions = {
   data: Partial<Nomination>;
-  onSuccess: void;
+  onSuccess: () => void;
 };
 
 type INomination = {

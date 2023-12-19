@@ -23,7 +23,7 @@ export function useCreateNomination(options: NominationOptions) {
       queryClient.invalidateQueries({
         queryKey: keys.getNominations,
       });
-      options.onSuccess;
+      options.onSuccess();
     },
   });
 }

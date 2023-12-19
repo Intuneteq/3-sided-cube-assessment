@@ -30,7 +30,7 @@ export default function OverviewGroup() {
 
   const options: NominationOptions = {
     data,
-    onSuccess: router.push("/submitted"),
+    onSuccess: () => router.push("/submitted"),
   };
 
   const { mutate, error, isError, isPending } = useCreateNomination(options);

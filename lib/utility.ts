@@ -11,17 +11,12 @@ export function isURL(str: string) {
  *
  * @param text - Full text string
  * @param toDecorate - string in text to be decorated i.e wrapped around a span and color #F70087
- * @param nominee - 
  */
-export const decorateNominee = (
-  text: string,
-  toDecorate: string,
-  nominee: Nominee
-) => {
+export const decorateNominee = (text: string, toDecorate: string) => {
   const regex = new RegExp(`\\b${toDecorate}\\b`, "g");
   return text.replace(
     regex,
-    `<span style="color: #F70087">${nominee.first_name}</span>`
+    `<span style="color: #F70087">${toDecorate}</span>`
   );
 };
 
@@ -91,7 +86,6 @@ export function processValueToNumber(process: ProcessValues) {
       return 1; // You can set a default value if needed
   }
 }
-
 
 export function processPayload(value: number) {
   switch (value) {
