@@ -11,9 +11,7 @@ import useGetUrlStrings from "@/hooks/useGetUrlStrings";
 
 export default function OverviewGroup() {
   const router = useRouter();
-  const { reason, nominee, process } = useGetUrlStrings();
-
-  const state = `nominee=${nominee?.nominee_id}&reason=${reason}&process=${process.value}`;
+  const { reason, nominee, process, state } = useGetUrlStrings();
 
   if (!nominee) {
     throw new Error("no nominee");

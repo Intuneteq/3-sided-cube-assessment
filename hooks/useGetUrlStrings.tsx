@@ -19,5 +19,7 @@ export default function useGetUrlStrings() {
 
   const process = { payload, value, label };
 
-  return { reason, nominee, process };
+  const state = `nominee=${nominee?.nominee_id}&reason=${reason}&process=${process.value}`;
+
+  return { reason, nominee, process, state };
 }
