@@ -22,7 +22,7 @@ export default function ProcessForm() {
   const { process } = useGetUrlStrings();
 
   const defaultValues: Process = {
-    process: +process.value ?? 1,
+    process: process.value ? parseInt(process.value) : 1,
   };
 
   return (

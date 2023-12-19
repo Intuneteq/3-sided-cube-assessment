@@ -24,7 +24,6 @@ export default function ReactionSmiley({
   value,
   inputValue,
 }: Props) {
-
   return (
     <button
       onClick={onClick}
