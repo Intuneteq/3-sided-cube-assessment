@@ -5,9 +5,9 @@ import { NominationPage } from "@/components/templates";
 
 export const metadata: Metadata = {
   title: "Nominations",
-  description: "Your Nominations List",
+  description: "Your Closed Nominations",
 };
 
-export default function Nominations() {
-  return <NominationPage page="current" />;
+export default function ClosedNominations() {
+  return <NominationPage page="closed" />;
 }

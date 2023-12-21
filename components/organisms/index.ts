@@ -5,3 +5,4 @@ export { default as Rhf } from "./Rhf";
 export { default as OverviewGroup } from "./OverviewGroup";
 export { default as NominationTable } from "./NominationTable";
 export { default as NominationMobile } from "./NominationMobile";
+export { default as EmptyNominations } from "./EmptyNominations";

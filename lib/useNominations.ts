@@ -8,6 +8,7 @@ import {
   editNomination,
 } from "@/app/nominations/actions";
 import { mapProcessValue } from "@/lib/utility";
+import Error from "next/error";
 
 export const keys = {
   getNominations: ["nominations"],
