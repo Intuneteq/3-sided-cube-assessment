@@ -1,6 +1,6 @@
-import { poppins } from "@/fonts";
 import React from "react";
-import { ControllerRenderProps } from "react-hook-form";
+
+import { poppins } from "@/fonts";
 
 type Props = {
   rating: string;

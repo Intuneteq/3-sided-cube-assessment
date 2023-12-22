@@ -20,29 +20,6 @@ export const decorateNominee = (text: string, toDecorate: string) => {
   );
 };
 
-export function findNominee(
-  nominees: Nominee[],
-  nominee_id: string
-): Nominee | undefined {
-  return nominees.find((item) => item.nominee_id === nominee_id);
-}
-
-/**
- *
- * @param nominees
- * Group Nominee select drop down options
- */
-export function groupOptions(nominees: Nominee[]): Option[] {
-  const options = nominees.map((nominee) => {
-    return {
-      label: nominee.first_name + " " + nominee.last_name,
-      value: nominee.nominee_id,
-    };
-  });
-
-  return options;
-}
-
 export function processValue(value: number) {
   switch (value) {
     case 1:
