@@ -7,9 +7,9 @@ type Props = {
   /** Emoji expected */
   children: React.ReactNode;
 
-  field: any;
+  inputValue: number;
 
-  onChange: (value: any) => void;
+  onChange: (value: number) => void;
 
   value: number;
 };
@@ -17,7 +17,7 @@ type Props = {
 export default function MobileRating({
   rating,
   children,
-  field,
+  inputValue,
   onChange,
   value,
 }: Props) {
@@ -32,8 +32,8 @@ export default function MobileRating({
       <input
         type="radio"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        checked={field.value == value}
+        onChange={(e) => onChange(parseInt(e.target.value))}
+        checked={inputValue === value}
       />
     </div>
   );

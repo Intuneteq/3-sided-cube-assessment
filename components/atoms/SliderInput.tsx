@@ -16,6 +16,7 @@ import {
 
 import { ProcessValues } from "@/lib/constants";
 import useAppStyling from "@/hooks/useAppStyling";
+import { MobileRating } from "../molecules";
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
@@ -69,35 +70,51 @@ export default function SliderInput<T extends FieldValues>({
         name={name}
         control={control}
         render={({ field: { onChange, value, name } }) => (
-          <div className="w-full hidden md:block">
-            <StyledSlider
-              valueLabelDisplay="auto"
-              value={value}
-              aria-label={name}
-              defaultValue={1}
-              onChange={(_, value) => {
-                onChange(value);
-              }}
-              step={1}
-              max={5}
-              min={1}
-            />
-            <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
+          <>
+            <div className="w-full hidden md:block">
+              <StyledSlider
+                valueLabelDisplay="auto"
+                value={value}
+                aria-label={name}
+                defaultValue={1}
+                onChange={(_, value) => {
+                  onChange(value);
+                }}
+                step={1}
+                max={5}
+                min={1}
+              />
+              <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
+                {JSON.stringify(value)}
+                {reactions.map((reaction) => (
+                  <ReactionSmiley
+                    key={reaction.value}
+                    onClick={() => {
+                      onChange(reaction.value);
+                    }}
+                    name={reaction.name}
+                    value={reaction.value}
+                    inputValue={value}
+                  >
+                    {reaction.icon}
+                  </ReactionSmiley>
+                ))}
+              </div>
+            </div>
+            <div className="md:hidden flex flex-col justify-start items-start gap-[0.75rem]">
               {reactions.map((reaction) => (
-                <ReactionSmiley
+                <MobileRating
                   key={reaction.value}
-                  onClick={() => {
-                    onChange(reaction.value);
-                  }}
-                  name={reaction.name}
                   value={reaction.value}
+                  onChange={onChange}
+                  rating={reaction.name}
                   inputValue={value}
                 >
                   {reaction.icon}
-                </ReactionSmiley>
+                </MobileRating>
               ))}
             </div>
-          </div>
+          </>
         )}
       />
     </div>
