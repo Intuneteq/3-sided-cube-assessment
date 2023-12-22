@@ -55,7 +55,7 @@ export default function NominationPage({ page }: Props) {
       <NominationTable nominations={content as INomination[]} />
 
       {/* Mobile screen */}
-      <NominationMobile nomineeInfo={content as INomination[]} />
+      <NominationMobile nominations={content as INomination[]} />
 
       {/* Action Buttons only visible on mobile */}
       <Sticker stack="none">

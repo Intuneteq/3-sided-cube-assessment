@@ -2,49 +2,40 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 import { Modal } from "./";
 import { DeleteIcon, EditIcon } from "../atoms";
 
-import { axiosClient } from "@/api/axios";
 import { anonymous_Pro, poppins } from "@/fonts";
+import { useDeleteNomination } from "@/lib/useNominations";
+import { processValueToNumber } from "@/lib/utility";
+import { ProcessValues } from "@/lib/constants";
 
 type Props = {
-  nomineeInfo: INomination[];
+  nominations: INomination[];
 };
 
-export default function NominationMobile({ nomineeInfo }: Props) {
-  const [nomination, setNomination] = useState("");
-
-  const queryClient = useQueryClient();
+export default function NominationMobile({ nominations }: Props) {
+  const [nomination, setNomination] = useState<INomination | null>(null);
   const router = useRouter();
 
-  const handleEditNomination = (id: string) => {
-    const nominee = nomineeInfo.find((info) => info.nominee_id === id);
-
-    const data: FormValues = {
-      nomination_id: nominee?.nomination_id,
-      nominee: nominee?.nominee_id!,
-      reasoning: nominee?.reason!,
-      rating: nominee?.process!,
-    };
-
-    queryClient.setQueryData(["formData"], (cachedData: FormValues) => {
-      return {
-        ...cachedData,
-        ...data,
-      };
-    });
-
-    router.push("/select-nominee");
+  const options = {
+    data: nomination as INomination,
+    onSuccess: () => setNomination(null),
   };
 
-  const mutation = useMutation({
-    mutationFn: (id: string) => {
-      return axiosClient.delete(`/nomination/${id}`);
-    },
-  });
+  const { mutate, error, isError } = useDeleteNomination(options);
+
+  if (isError) {
+    throw new Error(error.message);
+  }
+
+  const handleEditNomination = (nomination: INomination) => {
+    const process = processValueToNumber(nomination.process as ProcessValues);
+    router.push(
+      `/select-nominee?nominee=${nomination.nominee_id}&reason=${nomination.reason}&process=${process}&nomination_id=${nomination.nomination_id}`
+    );
+  };
 
   return (
     <div className="md:hidden w-full bg-light-grey">
@@ -55,7 +46,7 @@ export default function NominationMobile({ nomineeInfo }: Props) {
           </h2>
         </div>
         <div className="w-full border border-primary-white">
-          {nomineeInfo?.map((nomination) => (
+          {nominations.map((nomination) => (
             <div
               className="w-full py-4 px-6 bg-primary-white h-[5.4375rem] mb-[1px] flex items-center justify-between"
               key={nomination.nomination_id}
@@ -64,7 +55,7 @@ export default function NominationMobile({ nomineeInfo }: Props) {
                 <h6
                   className={`${anonymous_Pro.className} text-base font-bold`}
                 >
-                  {nomination.fullName}
+                  {nomination.full_name}
                 </h6>
                 <p
                   className={`${anonymous_Pro.className} text-base font-normal`}
@@ -76,11 +67,11 @@ export default function NominationMobile({ nomineeInfo }: Props) {
               </div>
               <div className="flex justify-between items-center gap-[0.62rem]">
                 <DeleteIcon
-                  onClick={() => setNomination(nomination.nomination_id)}
+                  onClick={() => setNomination(nomination)}
                   className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
                 />
                 <EditIcon
-                  onClick={() => handleEditNomination(nomination.nominee_id)}
+                  onClick={() => handleEditNomination(nomination)}
                   className="w-5 h-5 cursor-pointer stroke-primary-black hover:stroke-dark-grey"
                 />
               </div>
@@ -95,10 +86,9 @@ export default function NominationMobile({ nomineeInfo }: Props) {
           heading="Delete this nomination?"
           message="If you delete this nomination, the nominee will no longer be put forward by you."
           confirmationAction={() => {
-            mutation.mutate(nomination);
-            setNomination("");
+            mutate();
           }}
-          onClick={() => setNomination("")}
+          onClick={() => setNomination(null)}
         />
       )}
     </div>
