@@ -85,7 +85,6 @@ export default function SliderInput<T extends FieldValues>({
                 min={1}
               />
               <div className="flex mt-7 w-full justify-center items-center gap-[5.25rem] mb-[1.88rem]">
-                {JSON.stringify(value)}
                 {reactions.map((reaction) => (
                   <ReactionSmiley
                     key={reaction.value}
